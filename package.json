@@ -1,0 +1,37 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "react-scripts": "3.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "a\u001b\u001b[C\u001b\u001b[3~\u001b[3~\u001b[D\u001b[C\u001b[C\u001b[C\u001b[Cpp\u001b[Cjs\u001b[D\u001b[D\u001b[D\u001b[D\u001b: \u001b[3\u001b[3~\u001b[3~\u001b[3~\u001b[C\u001b[6~\u001b[C\u001b[C\u001b[3~",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
