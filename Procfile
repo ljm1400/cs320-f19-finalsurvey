@@ -1,1 +1,1 @@
-web: node src/App.js
+web: react-scripts start
