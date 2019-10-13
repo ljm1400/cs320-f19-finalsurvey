@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+const express = require('express');
+const app = express();
+const path = require('path');
+const router = express.Router();
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+router.get('/',function(req,res){
+  res.sendFile(path.join(__dirname+'/html/manager_home.html'));
+});
+
+router.get('/home',function(req,res){
+  res.sendFile(path.join(__dirname+'/html/manager_home.html'));
+});
+
+
+router.get('/createSurvey',function(req,res){
+  res.sendFile(path.join(__dirname+'/html/create_survey.html'));
+});
+
+
+app.use("/css", express.static(__dirname +'/css'));
+app.use("/res", express.static(__dirname + '/res'))
+app.use('/', router);
+app.listen(process.env.port || 3000);
+
+console.log('Running at Port 3000');
