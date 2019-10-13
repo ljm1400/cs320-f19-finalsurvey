@@ -33,5 +33,13 @@
   "main": "a\u001b\u001b[C\u001b\u001b[3~\u001b[3~\u001b[D\u001b[C\u001b[C\u001b[C\u001b[Cpp\u001b[Cjs\u001b[D\u001b[D\u001b[D\u001b[D\u001b: \u001b[3\u001b[3~\u001b[3~\u001b[3~\u001b[C\u001b[6~\u001b[C\u001b[C\u001b[3~",
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljm1400/cs320-f19-group1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ljm1400/cs320-f19-group1/issues"
+  },
+  "homepage": "https://github.com/ljm1400/cs320-f19-group1#readme"
 }

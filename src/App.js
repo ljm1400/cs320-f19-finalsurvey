@@ -17,6 +17,10 @@ router.get('/createSurvey',function(req,res){
   res.sendFile(path.join(__dirname+'/html/create_survey.html'));
 });
 
+router.get('/givenSurveys',function(req,res){
+  res.sendFile(path.join(__dirname+'/html/givenSurveys.html'));
+});
+
 
 app.use("/css", express.static(__dirname +'/css'));
 app.use("/res", express.static(__dirname + '/res'))
