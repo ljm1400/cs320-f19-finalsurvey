@@ -1,1 +1,1 @@
-router: npm start
+web: npm start 3000
