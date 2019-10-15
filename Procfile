@@ -1,1 +1,1 @@
-web: npm start
+router: npm start
