@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "final-surveys",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "express": "^4.17.1",
@@ -9,10 +9,7 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node src/App.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,7 +29,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "a\u001b\u001b[C\u001b\u001b[3~\u001b[3~\u001b[D\u001b[C\u001b[C\u001b[C\u001b[Cpp\u001b[Cjs\u001b[D\u001b[D\u001b[D\u001b[D\u001b: \u001b[3\u001b[3~\u001b[3~\u001b[3~\u001b[C\u001b[6~\u001b[C\u001b[C\u001b[3~",
   "devDependencies": {},
-  "author": "",
+  "author": "final-software",
   "license": "ISC",
   "repository": {
     "type": "git",
