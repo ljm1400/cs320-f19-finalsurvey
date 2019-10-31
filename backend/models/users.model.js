@@ -11,9 +11,17 @@ const userSchema = new Schema({
     minlength: 3
   },
   password: {
-      type: String,
-      required: true
+    type: String,
+    required: true
   },
+  manager_ID: {
+    type: Array,
+    required: true
+  },
+  is_manager: {
+    type: Boolean,
+    required: true
+  }
 }, {
   timestamps: true,
 });

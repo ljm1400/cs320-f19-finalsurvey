@@ -12,10 +12,12 @@ const surveySchema = new Schema({
       type: String,
   },
   questions: {
-      type: Array
+      type: Array,
+      required: true
   },
   close_date: {
-      type: Date
+      type: Date,
+      required: true
   },
   issued_by: {
       type: Number,

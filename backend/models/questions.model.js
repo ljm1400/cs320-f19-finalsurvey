@@ -16,6 +16,10 @@ const questionSchema = new Schema({
       type: String
   },
   question_answers: {
+      type: Array,
+      required: true
+  },
+  question_tags:{
       type: Array
   }
 }, {
