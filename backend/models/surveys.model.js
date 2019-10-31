@@ -15,6 +15,10 @@ const surveySchema = new Schema({
       type: Array,
       required: true
   },
+  issue_date: {
+      type: Date,
+      requried: true
+  },
   close_date: {
       type: Date,
       required: true
