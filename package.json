@@ -8,7 +8,7 @@
     "react-dom": "^16.10.1"
   },
   "scripts": {
-    "start": "node ./backend/server.js && node ./src/app.js"
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
