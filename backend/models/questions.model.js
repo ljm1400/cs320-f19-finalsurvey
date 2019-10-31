@@ -13,7 +13,8 @@ const questionSchema = new Schema({
       type: String,
   },
   question_type: {
-      type: String
+      type: String,
+      required: true
   },
   question_answers: {
       type: Array,
