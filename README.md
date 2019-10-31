@@ -1,12 +1,11 @@
 # Final Survey Documentation
 
 ## Setup
-* Express documentation: https://expressjs.com/en/api.html#router.use
 * Pull down code or download as zip
-* Download node
-* Install express: **npm install express --save**
-
-* **TO RUN APP**: npm start
+* Download node: https://nodejs.org/en/download/
+* Node modules are not included because its size is too large for github
+  * Download node modules that is tracked through package.json: **npm install**
+* **To run app: npm start**
   * Backend express serves data through routes to front end react
   
 ## Dev Team notes
