@@ -32,6 +32,6 @@ const surveySchema = new Schema({
   timestamps: true,
 });
 
-const Survey = mongoose.model('User', userSchema);
+const Survey = mongoose.model('User', surveySchema);
 
 module.exports = Survey;
