@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './Main.js';
-import Manager_Home from './pages/Manager_Home.js'
+import ManagerHome from './pages/ManagerHome.js'
+import CreateSurvey from './pages/CreateSurvey.js'
+import { Switch, Route, Link } from 'react-router-dom';
 
-ReactDOM.render(<Manager_Home />, document.getElementById('root'));
+const createSurv = () => (
+    <Switch>
+      <Route exact path='/CreateSurveys' component={CreateSurvey} />
+    </Switch>
+  )
+
+ReactDOM.render(<ManagerHome />, document.getElementById('root'));
