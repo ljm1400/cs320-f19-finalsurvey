@@ -2,13 +2,10 @@
 import React from 'react'
 import Question from './Question'
 
-export default function QuestionList({ questions}) {
+export default function QuestionList({ questions, toggleQuestion}) {
   return (
-    // todos.map(todo => {
-    //   return <Todo key={todo.id} toggleTodo={toggleTodo} todo={todo} />
-    // })
     questions.map(question => {
-      return <Question key={question.key} question={question}/>
+      return <Question key={question.id} toggleQuestion={toggleQuestion} question={question} />
     })
   )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Question({ question }) {
+export default function Question({ question,toggleQuestion }) {
   
-  // function handleTodoClick() {
-  //   toggleTodo(todo.id)
-  // }
+  function handleQuestionClick() {
+    toggleQuestion(question.id)
+  }
   
   return (
     <div>
@@ -14,7 +14,7 @@ export default function Question({ question }) {
       </label> */}
       {question.name}
       <input type="text"/>
-      <input type="checkbox"/>
+      <input type="checkbox" checked={question.complete} onChange={handleQuestionClick} />
     </div>
   )
 }
