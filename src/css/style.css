@@ -65,14 +65,22 @@ body {
   color: #0F9D58;
 }
 
-.main {
+.header {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 0px;
   margin-left: 160px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 10px 10px;
 }
-.main .borders {
+
+.createSurvey {
+  text-align: center;
+  margin-top: 0px;
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 10px 10px;
+}
+.borders {
   background-color: #0F9D58;
   color: white;
   padding: 20px;

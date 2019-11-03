@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import '../css/style.css';
 
-
-class GivenSurvey extends Component {
+class YourSurveys extends Component {
   render() {
     return (
         <>
         <div className="header">
-            <h2>Given Surveys</h2>
+            <h2>Your Surveys</h2>
             <p className="borders">Survey 1</p>
         </div> 
         </>
     );
   }
 }
-export default GivenSurvey;
+export default YourSurveys;
