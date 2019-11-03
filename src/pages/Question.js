@@ -1,16 +1,20 @@
 import React from 'react'
 
-export default function Question({ todo, toggleTodo }) {
-  function handleTodoClick() {
-    toggleTodo(todo.id)
-  }
+export default function Question({ question }) {
+  
+  // function handleTodoClick() {
+  //   toggleTodo(todo.id)
+  // }
   
   return (
     <div>
-      <label>
+      {/* <label>
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
         {todo.name}
-      </label>
+      </label> */}
+      {question.name}
+      <input type="text"/>
+      <input type="checkbox"/>
     </div>
   )
 }
