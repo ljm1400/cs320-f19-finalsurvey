@@ -8,7 +8,7 @@ class GivenSurvey extends Component {
         <>
         <div className="header">
             <h2>Given Surveys</h2>
-            <p className="borders">Survey 1</p>
+            <p className="surveyResults">Survey 1</p>
         </div> 
         </>
     );

@@ -16,6 +16,7 @@ class Manager_Home extends Component {
         
         <BrowserRouter>
           <Switch>
+            <Route exact path='/' component={YourSurveys} />
             <Route exact path='/Home' component={YourSurveys} />
             <Route exact path='/CreateSurvey' component={CreateSurvey} />
             <Route exact path='/GivenSurveys' component={GivenSurveys} />

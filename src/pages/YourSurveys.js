@@ -7,7 +7,7 @@ class YourSurveys extends Component {
         <>
         <div className="header">
             <h2>Your Surveys</h2>
-            <p className="borders">Survey 1</p>
+            <p className="surveyResults">Survey 1</p>
         </div> 
         </>
     );
