@@ -41,28 +41,30 @@ export default function MainContent(){
         setQuestions(newQuestions)
     }
 
+
     return(
         <>
             <div className='createSurvey'>
                 <label style={{fontSize:20}}>Question
-                    <input ref={questionNameRef} type="text" style={{margin:10}}/>
+                    <input ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
                 </label>
                 <label style={{fontSize:20}}>Multiple choice
-                    <input type="radio" style={{margin:10}} />
+                    <input type="radio" value="option1" style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>True/False
-                    <input type="radio" style={{margin:10}} />
+                    <input type="radio" value="option2" style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>Text
-                    <input type="radio" style={{margin:10}} />
+                    <input type="radio" value="option3" style={{margin:10, fontSize:20}} />
                 </label>
                 <label style={{fontSize:20}}>Slider
-                    <input type="radio" style={{margin:10}} />
+                    <input type="radio" value="option4" style={{margin:10}} />
                 </label>
 
                 <button style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
                 <button style={{fontSize:20}} onClick={handleClearQuestions}>Remove Selected Question</button>
                 <QuestionList questions={questions} toggleQuestion={toggleQuestion}/>
+                <button style={{fontSize:20}} >Submit Survey</button>
             </div>
         </>
     )

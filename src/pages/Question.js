@@ -22,15 +22,15 @@ export default function Question({ question,toggleQuestion }) {
   }
   
   return (
-    <div style={{margin:20}}>
+    <div style={{margin:10}}>
       {/* <label>
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
         {todo.name}
       </label> */}
       {question.name}
-      <input style={{margin:20, fontSize:20}} type="text"/>
-      Delete <input style={{margin:20}} type="checkbox" checked={question.complete} onChange={handleQuestionClick} />
+      <input style={{margin:20, fontSize:15}} type="text"/>
       <Question a={1}></Question>
+      Delete question<input style={{margin:20}} type="checkbox" checked={question.complete} onChange={handleQuestionClick} />
     </div>
   )
 }
