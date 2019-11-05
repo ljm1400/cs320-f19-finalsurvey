@@ -40,6 +40,9 @@ export default function MainContent(){
         const newQuestions = questions.filter(question => !question.complete)
         setQuestions(newQuestions)
     }
+    this.state = {
+        size: ''
+    };
 
 
     return(
@@ -49,16 +52,16 @@ export default function MainContent(){
                     <input ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
                 </label>
                 <label style={{fontSize:20}}>Multiple choice
-                    <input type="radio" value="option1" style={{margin:10}} />
+                    <input type="radio" value="option1" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>True/False
-                    <input type="radio" value="option2" style={{margin:10}} />
+                    <input type="radio" value="option2" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>Text
-                    <input type="radio" value="option3" style={{margin:10, fontSize:20}} />
+                    <input type="radio" value="option3" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10, fontSize:20}} />
                 </label>
                 <label style={{fontSize:20}}>Slider
-                    <input type="radio" value="option4" style={{margin:10}} />
+                    <input type="radio" value="option4" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10}} />
                 </label>
 
                 <button style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
