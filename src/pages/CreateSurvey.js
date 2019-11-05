@@ -8,7 +8,7 @@ const LOCAL_STORAGE_KEY = 'ultimate.questions'
 export default function CreateSurvey(){
 
     const [questions,setQuestions] = useState([{id:1, name:'question', complete:false}])
-    const [size, setRadio] = useState(0);
+    const [radio, setRadio] = useState(0);
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
     // the first argument is the state, and the second is the function we will call on that state
     // so the first will be the questions and the second will be the function which we can call to do something with the questions
@@ -46,7 +46,7 @@ export default function CreateSurvey(){
     function c(){
         alert('Thank you for submitting the survey');
     }
-    function h(e){
+    function handleRadio(e){
         setRadio(e.target.value)
     }
     
@@ -57,21 +57,21 @@ export default function CreateSurvey(){
                     <input ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
                 </label>
                 <label style={{fontSize:20}}>Multiple choice
-                    <input type="radio" value="m" onChange={h} checked={size === 'm'} style={{margin:10}} />
+                    <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>True/False
-                    <input type="radio" value="tr" onChange={h} checked={size === 'tr'} style={{margin:10}} />
+                    <input type="radio" value="tr" onChange={handleRadio} checked={radio === 'tr'} style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>Text
-                    <input type="radio" value="t" onChange={h} checked={size === 't'} style={{margin:10, fontSize:20}} />
+                    <input type="radio" value="t" onChange={handleRadio} checked={radio === 't'} style={{margin:10, fontSize:20}} />
                 </label>
                 <label style={{fontSize:20}}>Slider
-                    <input type="radio" value="s" onChange={h} checked={size === 's'} style={{margin:10}} />
+                    <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{margin:10}} />
                 </label>
 
                 <button style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
                 <button style={{fontSize:20}} onClick={handleClearQuestions}>Remove Selected Question</button>
-                <QuestionList questions={questions} toggleQuestion={toggleQuestion}/>
+                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
                 <button style={{fontSize:20}} onClick={c}>Submit Survey</button>
             </div>
         </>
