@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 
 export default function Question({ question,toggleQuestion, radio }) {
   
+  // var [a,b] = useState('radio');
+  // a = radio;
   function handleQuestionClick() {
     toggleQuestion(question.id)
   }
