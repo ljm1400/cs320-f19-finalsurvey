@@ -3,9 +3,9 @@
 ## Setup
 * Pull down code or download as zip
 * Download node: https://nodejs.org/en/download/
-* **npm install** Need to download any new node modules everytime through new code changes: 
-  * Node modules are not included because its size is too large for github
-* **To run app: npm start**
+1. **npm install** Need to download any new node modules everytime through new code changes: 
+   * Node modules are not included because its size is too large for github
+2. **To run app: npm start**
 
   
 ## Dev Team notes
