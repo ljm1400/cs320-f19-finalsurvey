@@ -28,7 +28,7 @@ const surveySchema = new Schema({
   },
   issued_by: {
       type: Number,
-      required: true,
+      required: false,
   },
 
 }, {

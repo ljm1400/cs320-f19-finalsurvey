@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/style.css';
+import axios from 'axios'
 
 
 class GivenSurvey extends Component {
