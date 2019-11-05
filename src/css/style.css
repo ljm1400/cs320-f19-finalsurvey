@@ -6,7 +6,7 @@
 
 body {
   font-family: "Lato", sans-serif;
-  background-color: 	#dfe3ee;
+  background-color:   #dfe3ee;
 }
 
 .links {
@@ -19,25 +19,28 @@ body {
 }
 
 .sidenav {
+  border-radius: 10px;
   height: 100%;
-  width: 250px;
+  width: 170px;
   position: fixed;
   z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
+  top: 0px;
+  left: -15px;
+  background-color: #272c33;
   overflow-x: hidden;
   padding-top: 20px;
 
 }
 
+
 .sidenav p {
+  font-family: Arial;
   text-align: center;
   font-weight: bold;
   height:10px;
-  padding: 6px 8px 5x 16px;
+  padding: 5px 8px 6x 16px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 10px;
   color: #0F9D58;
   display: block;
 }
@@ -53,16 +56,22 @@ body {
   border-radius: 50%;
 } 
 .sidenav a {
+  background-size: 144px 56px;
+  font-family: Arial;
   text-align: center;
-  padding: 6px 8px 6px 16px;
+  padding: 16px 5px 16px 16px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 15px;
   color: #818181;
   display: block;
-}
+ }
 
 .sidenav a:hover {
-  color: #0F9D58;
+  background-color: #4CAF50;
+  color: #fff;
+  margin-left: 15px;
+
+
 }
 
 .header {
@@ -90,7 +99,7 @@ body {
   border-radius:10px;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
+@media screen and (max-height: 45px) {
+  .sidenav {padding-top: 1v ffffffffffffffcccfffffffffc5px;}
   .sidenav a {font-size: 18px;}
 }
