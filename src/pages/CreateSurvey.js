@@ -8,17 +8,13 @@ const LOCAL_STORAGE_KEY = 'ultimate.questions'
 export default function CreateSurvey(){
 
     const [questions,setQuestions] = useState([{id:1, name:'question', complete:false}])
+    const [count, setCount] = useState(0);
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
     // the first argument is the state, and the second is the function we will call on that state
     // so the first will be the questions and the second will be the function which we can call to do something with the questions
 
-    // this.state = {
-    //     size: ''
-    // };
     function handleChange(event) {
-        this.setState({
-          size: event.target.value
-        });
+        setCount(count + 1)
     }
     useEffect(() => {
         const storedQuestions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
@@ -48,9 +44,6 @@ export default function CreateSurvey(){
         const newQuestions = questions.filter(question => !question.complete)
         setQuestions(newQuestions)
     }
-    // this.state = {
-    //     size: ''
-    // };
 
 
     return(
