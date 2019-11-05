@@ -9,16 +9,18 @@ class Sidenav extends Component {
   render() {
     return (
         <div className="sidenav">
-                <img src={profile_pic} alt="profile_pic"></img>
-                <p>John Smith</p>
-                <p>Manager</p>
-         
+            <img src={profile_pic} alt="profile_pic"></img>
+            <p>John Smith</p>
+            <p>Manager</p>
       
-                <div className="links">
-                  <a href="/Home">Home</a>
-                  <a href="/CreateSurvey">Create Survey</a>
-                  <a href="/GivenSurveys">Given Surveys</a>  
-                </div>             
+  
+            <div className="links">
+              <a href="/Home">Home</a>
+              <a href="/Home">Take Surveys</a>
+              <a href="/CreateSurvey">Create Survey</a>
+              <a href="/GivenSurveys">Given Surveys</a>  
+              <a href="/GivenSurveys">Dashboard</a>  
+            </div>             
         </div>
     );
   }
