@@ -5,13 +5,21 @@ import uuidv4 from 'uuid/v4';
 
 const LOCAL_STORAGE_KEY = 'ultimate.questions'
 
-export default function MainContent(){
+export default function CreateSurvey(){
 
     const [questions,setQuestions] = useState([{id:1, name:'question', complete:false}])
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
     // the first argument is the state, and the second is the function we will call on that state
     // so the first will be the questions and the second will be the function which we can call to do something with the questions
 
+    // this.state = {
+    //     size: ''
+    // };
+    function handleChange(event) {
+        this.setState({
+          size: event.target.value
+        });
+    }
     useEffect(() => {
         const storedQuestions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
         if (storedQuestions) setQuestions(storedQuestions)
@@ -40,9 +48,9 @@ export default function MainContent(){
         const newQuestions = questions.filter(question => !question.complete)
         setQuestions(newQuestions)
     }
-    this.state = {
-        size: ''
-    };
+    // this.state = {
+    //     size: ''
+    // };
 
 
     return(
@@ -52,16 +60,16 @@ export default function MainContent(){
                     <input ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
                 </label>
                 <label style={{fontSize:20}}>Multiple choice
-                    <input type="radio" value="option1" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10}} />
+                    <input type="radio" value="option1"  style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>True/False
-                    <input type="radio" value="option2" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10}} />
+                    <input type="radio" value="option2"  style={{margin:10}} />
                 </label>
                 <label style={{fontSize:20}}>Text
-                    <input type="radio" value="option3" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10, fontSize:20}} />
+                    <input type="radio" value="option3" style={{margin:10, fontSize:20}} />
                 </label>
                 <label style={{fontSize:20}}>Slider
-                    <input type="radio" value="option4" checked={this.state.size === "large"} onChange={this.handleChange} style={{margin:10}} />
+                    <input type="radio" value="option4"  style={{margin:10}} />
                 </label>
 
                 <button style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
