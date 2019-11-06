@@ -13,7 +13,8 @@ const surveySchema = new Schema({
   },
   questions: {
       type: Array,
-      required: true
+      required: true,
+      default: []
   },
   answers: {
       type: Array,

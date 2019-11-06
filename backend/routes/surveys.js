@@ -8,13 +8,19 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const title_survey = req.body.title_survey;
-  const description_survey = req.body.description_survey;
+  // const title_survey = req.body.title_survey;
+  // const description_survey = req.body.description_survey;
+  // const close_date = Date.parse(req.body.close_date);
+  // const issued_date = Date.parse(req.body.issued_date);
+  // const issued_by = Number (req.body.issued_by)
+  // const answers = req.body.questions;
+  const title_survey = "Survey1";
+  const description_survey = ""
+  const close_date = "2015-03-25" 
+  const issued_date = "2015-03-25" 
+  const issued_by = 1;
+  const answers = [1,2];
   const questions = req.body.questions;
-  const answers = req.body.questions;
-  const close_date = Date.parse(req.body.close_date);
-  const issued_date = Date.parse(req.body.issued_date);
-  const issued_by = Number (req.body.issued_by)
 
   const newSurvey = new Survey({
     title_survey,
@@ -27,7 +33,7 @@ router.route('/add').post((req, res) => {
   });
 
   newSurvey.save()
-  .then(() => res.json('Survey added!'))
+  .then(() => ('Survey added' + res.json(questions)))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -43,7 +49,7 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route('/:id').post((req, res) => {
   Survey.findById(req.params.id)
     .then(survey => {
       survey.title_survey = req.body.title_survey,
