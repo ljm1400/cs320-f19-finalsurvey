@@ -8,13 +8,12 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  // const title_survey = req.body.title_survey;
   // const description_survey = req.body.description_survey;
   // const close_date = Date.parse(req.body.close_date);
   // const issued_date = Date.parse(req.body.issued_date);
   // const issued_by = Number (req.body.issued_by)
   // const answers = req.body.questions;
-  const title_survey = "Survey1";
+  const title_survey = req.body.title_survey;
   const description_survey = ""
   const close_date = "2015-03-25" 
   const issued_date = "2015-03-25" 

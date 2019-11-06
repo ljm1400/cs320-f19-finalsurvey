@@ -29,9 +29,7 @@ body {
   background-color: #272c33;
   overflow-x: hidden;
   padding-top: 20px;
-
 }
-
 
 .sidenav p {
   font-family: Arial;
@@ -40,7 +38,7 @@ body {
   height:10px;
   padding: 5px 8px 6x 16px;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 15px;
   color: #0F9D58;
   display: block;
 }
@@ -87,37 +85,40 @@ body {
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 10px 10px;
 }
+
 .surveyResults {
   background-color: #0F9D58;
+  font-size: 20px;
   color: white;
   padding: 20px;
+  margin-bottom: 5px;
   width: 80%;
-  border-style: solid;
+
   border-width: 1px;
   border-radius:10px;
-}
-
-.collapsible {
-  background-color: #777;
-  color: white;
   cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
 }
 
-.active, .collapsible:hover {
-  background-color: #555;
+.active, .surveyResults:hover {
+  background-color: rgb(98, 182, 42);
 }
 
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
+h3{
+  margin: 1px;
+}
+.surveyQuestions{
+  cursor: pointer;
+  background-color: #afcdf5;
+  font-family: verdana;
+  color: black;
+  font-size: 14px;  
+  padding: 2px;
+  width: 80%;
+
+  border-width: 1px;
+  border-radius:10px;
+  margin-bottom: 5px;
+  
 }
 
 @media screen and (max-height: 45px) {

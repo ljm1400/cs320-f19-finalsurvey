@@ -57,10 +57,9 @@ export default function CreateSurvey(){
             questionList.push(questions[key].name);
         })
   
-        state.title_survey = surveyTitle
+        state.title_survey = surveyTitle.current.value;
         state.questions = questionList;
         
-
         console.log(state);
 
         axios.post("http://localhost:5000/surveys/add", state)
