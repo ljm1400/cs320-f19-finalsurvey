@@ -13,13 +13,12 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },
-  "dev": "nodemon survey.js",
+  "dev": "nodemon server.js",
   "proxy": "http://localhost:5000/",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
-    "webpack": "webpack",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "webpack": "webpack"
   },
   "eslintConfig": {
     "extends": "react-app"
