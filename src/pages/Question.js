@@ -34,7 +34,10 @@ export default function Question({ question,toggleQuestion, radio }) {
       }
       else{
         // text
-        return <input style={{margin:20, fontSize:15}} type="text"/>
+        // need to return label for the question type
+        return <></>
+        //return <p style={{margin:20, fontSize:15}}>Text Question</p>
+        //<input style={{margin:20, fontSize:15}} type="text"/>
       }
   }
 
@@ -46,7 +49,7 @@ export default function Question({ question,toggleQuestion, radio }) {
       </label> */}
       <label style={{margin:20}} >{question.name}</label>
       <Question></Question>
-      <label style={{margin:20}} >Delete Question</label>
+      <label style={{margin:20, fontSize: 20}} >(Delete)</label>
       <input style={{marginLeft:20}} type="checkbox" checked={question.complete} onChange={handleQuestionClick} />
     </div>
   )
