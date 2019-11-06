@@ -1,12 +1,17 @@
 import React, {useState, useRef, useEffect} from 'react';
 import QuestionList from './QuestionList';
 import uuidv4 from 'uuid/v4';
+import axios from 'axios';
+
 
 
 const LOCAL_STORAGE_KEY = 'ultimate.questions'
 
 export default function CreateSurvey(){
-
+    var state = {
+        title_survey: "",
+        questions: []
+    }
     const [questions,setQuestions] = useState([{id:1, name:'question', complete:false}])
     const [radio, setRadio] = useState(0);
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
@@ -22,6 +27,7 @@ export default function CreateSurvey(){
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(questions))
     }, [questions])
 
+    const surveyTitle = useRef()
     const questionNameRef = useRef()
     function handleAddQuestion(e){
         const name = questionNameRef.current.value
@@ -45,6 +51,20 @@ export default function CreateSurvey(){
 
     function c(){
         alert('You have submitted the survey');
+        
+        let questionList = [];
+        Object.keys(questions).forEach(function(key) {
+            questionList.push(questions[key].name);
+        })
+  
+        state.title_survey = surveyTitle.current.value;
+        state.questions = questionList;
+        
+        console.log(state);
+
+        axios.post("http://localhost:5000/surveys/add", state)
+        .then(res => console.log(res.data));
+
         questions.map(q => q.complete = true)
         handleClearQuestions();
     }
@@ -55,6 +75,10 @@ export default function CreateSurvey(){
     return(
         <>
             <div className='createSurvey'>
+                <label style={{fontSize:20}}>Survey Title
+                    <input ref={surveyTitle} type="text" style={{margin:10, fontSize:20}}/>
+                    <br></br>
+                </label>
                 <label style={{fontSize:20}}>Question
                     <input ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
                 </label>
