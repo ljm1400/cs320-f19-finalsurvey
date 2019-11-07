@@ -7,7 +7,7 @@
 ## Running the app
 1. **npm install** 
 2. **Run front end: npm start**
-3. **Run back end: cd backend, nodemon server.js**
+3. **Run back end: cd backend, node server.js**
 
   
 ## Dev Team notes
