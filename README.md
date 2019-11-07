@@ -5,10 +5,9 @@
 * Download node just once: https://nodejs.org/en/download/
 
 ## Running the app
-1. **npm install** Need to download any new node modules everytime through new code changes: 
-   * Node modules are not included because its size is too large for github
-2. **Run front end:npm start**
-3. **Run back end: cd into backend: nodemon server.js**
+1. **npm install** 
+2. **Run front end: npm start**
+3. **Run back end: cd backend, nodemon server.js**
 
   
 ## Dev Team notes

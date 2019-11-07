@@ -98,7 +98,7 @@ export default function CreateSurvey(){
                     </label>
                 </form>
                 <button style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
-                <button style={{fontSize:20}} onClick={handleClearQuestions}>Remove Selected Question</button>
+                <button style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
                 <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
                 <button style={{fontSize:20}} onClick={c}>Submit Survey</button>
             </div>

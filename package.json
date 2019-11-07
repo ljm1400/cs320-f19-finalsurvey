@@ -16,7 +16,7 @@
   "dev": "nodemon server.js",
   "proxy": "http://localhost:5000/",
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "webpack": "webpack"
   },
