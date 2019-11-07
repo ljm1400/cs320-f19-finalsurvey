@@ -5,8 +5,8 @@
 * Download node just once: https://nodejs.org/en/download/
 
 ## Running the app
-1. **npm install** 
-2. **Run front end: npm start**
+1. **npm install** in the root dir and backend dir  
+2. **Run front end: npm start** in the root dir
 3. **Run back end: cd backend, node server.js**
 
   

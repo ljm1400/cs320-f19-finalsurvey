@@ -75,6 +75,7 @@ export default function CreateSurvey(){
     return(
         <>
             <div className='createSurvey'>
+                <h2>Create a Survey</h2>
                 <label style={{fontSize:20}}>Survey Title
                     <input ref={surveyTitle} type="text" style={{margin:10, fontSize:20}}/>
                     <br></br>
