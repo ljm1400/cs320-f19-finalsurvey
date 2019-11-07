@@ -2,10 +2,12 @@
 
 ## Setup
 * Pull down code or download as zip
-* Download node: https://nodejs.org/en/download/
-1. **npm install** Need to download any new node modules everytime through new code changes: 
-   * Node modules are not included because its size is too large for github
-2. **To run app: npm start**
+* Download node just once: https://nodejs.org/en/download/
+
+## Running the app
+1. **npm install** in the root dir and backend dir  
+2. **Run front end: npm start** in the root dir
+3. **Run back end: cd backend, node server.js**
 
   
 ## Dev Team notes
