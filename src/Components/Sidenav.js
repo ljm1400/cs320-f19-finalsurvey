@@ -13,13 +13,11 @@ class Sidenav extends Component {
             <p>John Smith</p>
             <p>Manager</p>
       
-  
             <div className="links">
-              <a href="/Home">Home</a>
-              <a href="/Home">Take Surveys</a>
+              <a href="/Home">Your Surveys</a>
               <a href="/CreateSurvey">Create Survey</a>
               <a href="/GivenSurveys">Given Surveys</a>  
-              <a href="/GivenSurveys">Dashboard</a>  
+              <a href="/GivenSurveys">Analytics</a>  
             </div>             
         </div>
     );
