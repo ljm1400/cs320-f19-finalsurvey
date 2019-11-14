@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../css/style.css';
-import Sidenav from '../Components/Sidenav';
+import Sidenav from './Sidenav.component';
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import CreateSurvey from './CreateSurvey.js';
+import CreateSurvey from "./CreateSurvey.js";
 import GivenSurveys from './GivenSurveys.js';
 import YourSurveys from './YourSurveys';
 

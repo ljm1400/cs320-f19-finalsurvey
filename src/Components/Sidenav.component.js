@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../css/style.css';
 import profile_pic from '../res/img_profile_pic.png';
-import '../pages/CreateSurvey.js';
-import '../pages/ManagerHome.js';
-import '../pages/GivenSurveys.js';
+import './CreateSurvey.js';
+import './ManagerHome.js';
+import './GivenSurveys.js';
 
 class Sidenav extends Component {
   render() {

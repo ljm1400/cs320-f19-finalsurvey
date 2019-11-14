@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/style.css';
 import axios from 'axios';
-import Collapsible from '../Components/Collapsible';
+import Collapsible from './Collapsible';
 
 
 export default class GivenSurvey extends Component {

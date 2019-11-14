@@ -1,30 +1,23 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const router = express.Router();
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
+import Navbar from "./Components/Sidenav.component"
+import ManagerHome from "./Components/ManagerHome"
+import CreateSurvey from "./Components/CreateSurvey"
+import GivenSurveys from "./Components/GivenSurveys"
 
-router.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/html/manager_home.html'));
-});
-
-router.get('/home',function(req,res){
-  res.sendFile(path.join(__dirname+'/html/manager_home.html'));
-});
-
-
-router.get('/createSurvey',function(req,res){
-  res.sendFile(path.join(__dirname+'/html/create_survey.html'));
-});
-
-router.get('/givenSurveys',function(req,res){
-  res.sendFile(path.join(__dirname+'/html/givenSurveys.html'));
-});
-
-
-app.use("/css", express.static(__dirname +'/css'));
-app.use("/res", express.static(__dirname + '/res'))
-app.use('/', router);
-app.listen(process.env.PORT || 3000);
-
-console.log('Running at Port 3000');
+function App() {
+  return (
+    <Router>
+      <div className="container">
+      <Navbar />
+      <br/>
+      <Route path="/" exact component={ManagerHome} />
+      <Route path="/createsurvey" component={CreateSurvey} />
+      <Route path="/GivenSurveys" component={GivenSurveys} />
+      </div>
+    </Router>
+  );
+}
+export default App;
