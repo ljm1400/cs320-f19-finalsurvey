@@ -6,8 +6,7 @@
 
 ## Running the app
 1. **npm install** in the root dir and backend dir  
-2. **Run front end: npm start** in the root dir
-3. **Run back end: cd backend, node server.js**
+2. **npm run dev** this command will now run both the frontend and backend concurrently
 
   
 ## Dev Team notes
