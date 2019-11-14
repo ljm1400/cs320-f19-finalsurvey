@@ -5,10 +5,12 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "concurrently": "^5.0.0",
     "express": "^4.17.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.2.0",
     "uuid": "^3.3.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
@@ -19,6 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "heroku-postbuild": "npm install && npm run build",
     "webpack": "webpack",
     "client": "npm run start",
     "server": "node ./backend/server.js",
@@ -44,10 +47,8 @@
   "devDependencies": {
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
-    "concurrently": "^5.0.0",
     "css-loader": "^3.2.0",
     "nodemon": "^1.19.4",
-    "react-scripts": "^3.2.0",
     "style-loader": "^1.0.0"
   },
   "author": "final-software",
