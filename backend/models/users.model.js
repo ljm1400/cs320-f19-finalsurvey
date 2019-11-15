@@ -16,13 +16,8 @@ const userSchema = new Schema({
     required: true
   },
   manager_ID: {
-    type: Array,
-    required: [true, "ID is required"],
-    unique: true
-  },
-  is_manager: {
-    type: Boolean,
-    required: true
+    type: Number,
+    required: [true, "ID is required"]
   },
   email: {
     type: String,

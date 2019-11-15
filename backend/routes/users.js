@@ -3,7 +3,13 @@ let User = require('../models/user.model');
 
 router.route('/').get((req, res) => {
   User.find()
-    .then(users => res.json(users))
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').get((req, res) => {
+  User.findById(req.params.id)
+    .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -12,11 +18,17 @@ router.route('/add').post((req, res) => {
   const midName  = req.body.midName;
   const lastName = req.body.lastName;
   const manager_ID = req.body.manager_ID;
-  const isManager = req.body.isManager;
   const email = req.body.email;
   const startDate = req.body.startDate;
 
-  const newUser = new User({email});
+  const newUser = new User({
+    firstName,
+    midName,
+    lastName,
+    manager_ID,
+    email,
+    startDate
+  });
 
   newUser.save()
     .then(() => res.json('User added!'))
