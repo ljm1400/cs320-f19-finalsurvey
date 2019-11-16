@@ -4,15 +4,17 @@ import React, { Component } from 'react';
 
 import '../css/style.css';
 
-class YourSurveys extends Component {
+export default class Analytics extends Component {
   render() {
     return (
+        <>
         <div className="header">
-            <h2>Your Surveys</h2>
+            <h2>Analytics</h2>
+            <p className="surveyResults">Results Summary</p>
             <p className="surveyResults">Survey 1</p>
             {/* <ExpansionPanel TransitionProps={{ unmountOnExit: true }} /> */}
         </div> 
+        </>
     );
   }
 }
-export default YourSurveys;

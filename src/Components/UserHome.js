@@ -5,9 +5,15 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import CreateSurvey from "./CreateSurvey.js";
 import GivenSurveys from './GivenSurveys.js';
 import YourSurveys from './YourSurveys';
+import Analytics from './Analytics';
 
 
-class Manager_Home extends Component {
+export default class UserHome extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
   render() {
     return (
         <>
@@ -16,14 +22,11 @@ class Manager_Home extends Component {
         
         <BrowserRouter>
           <Switch>
-            <Route exact path='/' component={YourSurveys} />
-            <Route exact path='/Home' component={YourSurveys} />
-            <Route exact path='/CreateSurvey' component={CreateSurvey} />
-            <Route exact path='/GivenSurveys' component={GivenSurveys} />
+             <Route path="/" exact component={YourSurveys} />
+             <Route path="/Home" exact component={YourSurveys} />
           </Switch>
         </BrowserRouter>
         </>
     );
   }
 }
-export default Manager_Home;
