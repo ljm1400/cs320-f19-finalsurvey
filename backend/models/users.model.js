@@ -48,6 +48,10 @@ const userSchema = new Schema({
   startDate: {
     type: Date,
     required: [true, "Start date is required"]
+  },
+  surveysIssued: {
+    type: Array,
+    required: false
   }
 }, {
   timestamps: true

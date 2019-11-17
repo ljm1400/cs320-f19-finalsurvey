@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://finalsoftwareuser:finalsoftware@finalsoftware-o2c5h.mongodb.net/final-software?retryWrites=true&w=majority",
+    "jwtSecret": "fs_myJwtSecret"
+}

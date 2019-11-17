@@ -8,6 +8,7 @@ import GivenSurveys from "./Components/GivenSurveys"
 import Analytics from "./Components/Analytics"
 import YourSurveys from './Components/YourSurveys';
 import TakingSurvey from './Components/TakingSurvey';
+import login from './Components/login';
 
 export default class App extends Component {
   constructor(props) {
@@ -21,15 +22,17 @@ export default class App extends Component {
   render() {
     return (
       <Router>
+
         <div className="container">
           <Sidenav isManager={true} />
           <br/>
-          <Route path="/" exact component={YourSurveys} />
-          <Route path="/Home" exact component={YourSurveys} />
-          <Route path="/createsurvey" component={CreateSurvey} />
+          <Route path="/" exact component={login} />
+          <Route path="/YourSurveys" exact component={YourSurveys} />
+          <Route path="/CreateSurvey" component={CreateSurvey} />
           <Route path="/GivenSurveys" component={GivenSurveys} />
           <Route path="/Analytics" component={Analytics} />
           <Route path="/TakingSurvey" component={TakingSurvey} />
+          <Route path="/login" component={login} />
         </div>
       </Router>
     );

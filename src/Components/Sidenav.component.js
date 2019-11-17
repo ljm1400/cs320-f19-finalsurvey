@@ -12,11 +12,11 @@ class Sidenav extends Component {
     return (
         <div className="sidenav">
             <img src={profile_pic} alt="profile_pic"></img>
-            <p>John Smith</p>
+            <p>User</p>
             <p>{this.props.isManager?'Manager' : 'Employee'}</p>
       
             <div className="links">
-              <a href="/Home">Your Surveys</a>
+              <a href="/YourSurveys">Your Surveys</a>
               {this.props.isManager ? <a href="/CreateSurvey">Create Survey</a> : null}
               {this.props.isManager ?<a href="/GivenSurveys">Given Surveys</a> : null}
               {this.props.isManager ?<a href="/Analytics">Analytics</a> : null}
