@@ -23,7 +23,12 @@ class YourSurveys extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/TakingSurvey' />
+      return <Redirect to={
+          {
+            pathname: '/TakingSurvey',
+            state: {surveyId: 1}    
+          }}
+          />
     }
   }
 
