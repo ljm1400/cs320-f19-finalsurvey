@@ -7,12 +7,14 @@ import CreateSurvey from "./Components/CreateSurvey"
 import GivenSurveys from "./Components/GivenSurveys"
 import Analytics from "./Components/Analytics"
 import YourSurveys from './Components/YourSurveys';
+import TakingSurvey from './Components/TakingSurvey';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isManager: false
+      isManager: false,
+      firstName: "John"
     }
   }
 
@@ -27,6 +29,7 @@ export default class App extends Component {
           <Route path="/createsurvey" component={CreateSurvey} />
           <Route path="/GivenSurveys" component={GivenSurveys} />
           <Route path="/Analytics" component={Analytics} />
+          <Route path="/TakingSurvey" component={TakingSurvey} />
         </div>
       </Router>
     );
