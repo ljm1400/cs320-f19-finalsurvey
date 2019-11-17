@@ -1,5 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 router.route('/').get((req, res) => {
   User.find()
@@ -9,6 +11,7 @@ router.route('/').get((req, res) => {
 
 router.route('/:id').get((req, res) => {
   User.findById(req.params.id)
+
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -24,6 +27,7 @@ router.route('/add').post((req, res) => {
   const managerID = req.body.managerID;
   const email = req.body.email;
   const startDate = req.body.startDate;
+  const surveysIssued = req.body.surveysIssued;
 
   const newUser = new User({
     firstName,
@@ -35,12 +39,25 @@ router.route('/add').post((req, res) => {
     employeeID,
     managerID,
     email,
-    startDate
+    startDate,
+    surveysIssued
   });
 
   newUser.save()
     .then(() => res.json('User added!'))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+  User.findById(req.params.id)
+  .then(user =>{
+    user.surveysIssued = req.body.surveysIssued;
+
+    user.save()
+      .then(() => res.json('User updated!'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  })
+  .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-require('dotenv').config();
+const config = require('config');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri= "mongodb+srv://finalsoftwareuser:finalsoftware@finalsoftware-o2c5h.mongodb.net/final-software?retryWrites=true&w=majority";
+const uri= config.get('mongoURI');
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
