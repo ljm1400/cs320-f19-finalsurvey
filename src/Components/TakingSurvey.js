@@ -4,6 +4,7 @@ import '../css/style.css';
 export default class TakingSurvey extends Component {
   constructor(props) {
       super(props);
+      console.log(this.props.location.state.surveyId);
   }
 
   render() {
