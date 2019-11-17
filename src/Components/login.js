@@ -29,34 +29,56 @@ export default class login extends Component {
     
     constructor(props) {
         super(props);
+        this.state ={
+          redirect: false,
+          surveyIds: []
+        }
     }
 
-    
+    setRedirect = () => {
+      console.log("clickS")
+      this.setState({
+        redirect: true
+      })
+      console.log(this.state.redirect)
+    }
+
+    renderRedirect() {
+      if (this.state.redirect) {
+        return <Redirect to={
+            {
+              pathname: '/YourSurveys',
+              state: {surveyId: 1}    
+            }} />
+      }
+    }
     render() {
         return (
             <div>
                 <div className="header">
-                <h2>Log In</h2> 
-                <p></p>
-                <TextField
-                required
-                id="standard-required"
-                label="Enter Email"
-                Value="Email@Email.com"
-                margin="normal"
-                />
-                <p></p>
-                <TextField
-                required
-                id="standard-required"
-                label="Enter Password"
-                Value="password"
-                 margin="normal"
-                />
-                <p></p>
-                <Button variant="outlined">
-                Log In
-                </Button>
+                  <h2>Log In</h2> 
+                  <p></p>
+                  <TextField
+                    required
+                    id="standard-required"
+                    label="Enter Email"
+                    Value="Email@Email.com"
+                    margin="normal"
+                  />
+                  <p></p>
+                  <TextField
+                    required
+                    id="standard-required"
+                    label="Enter Password"
+                    Value="password"
+                    margin="normal"
+                  />
+                  <p></p>
+                  {this.renderRedirect()}
+                  <Button variant="outlined" onClick={this.setRedirect}>
+                    Log In
+                    
+                  </Button>
                 </div> 
             </div> 
         );

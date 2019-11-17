@@ -27,8 +27,7 @@ class YourSurveys extends Component {
           {
             pathname: '/TakingSurvey',
             state: {surveyId: 1}    
-          }}
-          />
+          }} />
     }
   }
 
