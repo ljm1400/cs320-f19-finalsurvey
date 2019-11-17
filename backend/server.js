@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri= "mongodb+srv://finalsoftwareuser:finalsoftware@finalsoftware-o2c5h.mongodb.net/test?retryWrites=true&w=majority";
+const uri= "mongodb+srv://finalsoftwareuser:finalsoftware@finalsoftware-o2c5h.mongodb.net/final-software?retryWrites=true&w=majority";
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;

@@ -17,7 +17,11 @@ router.route('/add').post((req, res) => {
   const firstName = req.body.firstName;
   const midName  = req.body.midName;
   const lastName = req.body.lastName;
-  const manager_ID = req.body.manager_ID;
+  const companyID = req.body.companyID;
+  const positionTitle = req.body.positionTitle;
+  const companyName = req.body.companyName;
+  const employeeID = req.body.employeeID;
+  const managerID = req.body.managerID;
   const email = req.body.email;
   const startDate = req.body.startDate;
 
@@ -25,7 +29,11 @@ router.route('/add').post((req, res) => {
     firstName,
     midName,
     lastName,
-    manager_ID,
+    companyID,
+    positionTitle,
+    companyName,
+    employeeID,
+    managerID,
     email,
     startDate
   });

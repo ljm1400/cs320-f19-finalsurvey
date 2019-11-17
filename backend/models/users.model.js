@@ -15,9 +15,25 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  manager_ID: {
+  companyID: {
     type: Number,
-    required: [true, "ID is required"]
+    required: true
+  },
+  positionTitle:{
+    type: String,
+    required: true
+  },
+  companyName: {
+    type: String,
+    required: true
+  },
+  employeeID:{
+    type: Number,
+    required: true
+  },
+  managerID: {
+    type: Number,
+    required: false
   },
   email: {
     type: String,
@@ -37,6 +53,6 @@ const userSchema = new Schema({
   timestamps: true
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('employees', userSchema);
 
 module.exports = User;
