@@ -12,7 +12,7 @@ class Sidenav extends Component {
     return (
         <div className="sidenav">
             <img src={profile_pic} alt="profile_pic"></img>
-            <p>User</p>
+            <p>John</p>
             <p>{this.props.isManager?'Manager' : 'Employee'}</p>
       
             <div className="links">

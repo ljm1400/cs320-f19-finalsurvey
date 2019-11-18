@@ -1,45 +1,44 @@
 import React, { Component} from 'react';
 import { Redirect } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 import '../css/style.css';
 
-const useStyles = makeStyles(theme => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200,
-    },
-    button: {
-        margin: theme.spacing(1),
-      },
-      input: {
-        display: 'Logged In',
-      },
-  }));
 
 export default class login extends Component {
     
     constructor(props) {
         super(props);
         this.state ={
+          email: "",
+          password: "",
           redirect: false,
           surveyIds: []
         }
+    }
+    _handleEmailChange= (e) => {
+      this.setState({
+          email: e.target.value
+      });
+    }
+
+    _handlePasswordChange= (e) => {
+      this.setState({
+          password: e.target.value
+      });
     }
 
     setRedirect = () => {
       console.log("clickS")
       this.setState({
-        redirect: true
+        email: TextField.email,
+        password: TextField.password,
+        redirect:true
       })
+      //axios.post("http://localhost:5000/auth/", this.state)
+
       console.log(this.state.redirect)
     }
 
@@ -60,18 +59,20 @@ export default class login extends Component {
                   <p></p>
                   <TextField
                     required
-                    id="standard-required"
+                    id="email"
                     label="Enter Email"
                     Value="Email@Email.com"
                     margin="normal"
+                    onChange = {this._handleEmailChange}
                   />
                   <p></p>
                   <TextField
                     required
-                    id="standard-required"
+                    id="password"
                     label="Enter Password"
                     Value="password"
                     margin="normal"
+                    onChange = {this._handlePasswordChange}
                   />
                   <p></p>
                   {this.renderRedirect()}

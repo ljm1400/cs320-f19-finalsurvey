@@ -12,6 +12,7 @@ export default function CreateSurvey(){
         title_survey: "",
         questions: []
     }
+    
     const [questions,setQuestions] = useState([{id:1, name:'question', complete:false}])
     const [radio, setRadio] = useState(0);
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
