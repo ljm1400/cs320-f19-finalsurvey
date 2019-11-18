@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-
+import auth from '../../middleware/auth'
 import '../css/style.css';
 
 
@@ -35,9 +35,18 @@ export default class login extends Component {
       this.setState({
         email: TextField.email,
         password: TextField.password,
-        redirect:true
       })
-      //axios.post("http://localhost:5000/auth/", this.state)
+      axios.post("http://localhost:5000/auth/", this.state)
+        .then(axios.get("http://localhost:5000/auth/user/", auth)
+                .then(response => {
+                  if(response.user.email != this.state.email) alert("User not found!");
+                  if(response.user.email == this.state.email) {
+                    this.setState({
+                      redirect:true
+                    })
+                  }}
+        ));
+
 
       console.log(this.state.redirect)
     }
