@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { Redirect } from 'react-router'
-
+import store from './store'
 import Sidenav from "./Components/Sidenav.component"
 import CreateSurvey from "./Components/CreateSurvey"
 import GivenSurveys from "./Components/GivenSurveys"
 import Analytics from "./Components/Analytics"
 import YourSurveys from './Components/YourSurveys';
 import TakingSurvey from './Components/TakingSurvey';
-import login from './Components/login';
+import loginPage from './Components/login';
+import { Provider } from 'react-redux';
+import {loadUser} from './actions/authActions'
 
 export default class App extends Component {
   constructor(props) {
@@ -20,6 +22,9 @@ export default class App extends Component {
     }
   }
 
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
  
   render() {
     const mySidenav = (props) => {
@@ -29,6 +34,7 @@ export default class App extends Component {
     }
 
     return (
+      <Provider store={store}>
       <Router>
           <div>
           <Route exact path="/" render={() => (
@@ -41,7 +47,7 @@ export default class App extends Component {
           </Switch>
            
           <Switch>
-            <Route path="/login" component={login} />
+            <Route path="/login" component={loginPage} />
             <Route path="/YourSurveys" exact component={YourSurveys} />
             <Route path="/CreateSurvey" component={CreateSurvey} />
             <Route path="/GivenSurveys" component={GivenSurveys} />
@@ -50,6 +56,7 @@ export default class App extends Component {
           </Switch>         
           </div>      
       </Router>
+      </Provider>
 
     );
   }

@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
+import {Button} from 'reactstrap';
 import '../css/style.css';
 import profile_pic from '../res/img_profile_pic.png';
 import './CreateSurvey.js';
 import './GivenSurveys.js';
+import {Logout} from './logout';
+import { Redirect } from 'react-router'
 
 class Sidenav extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
         <div className="sidenav">
             <img src={profile_pic} alt="profile_pic"></img>
             <p>John</p>
             <p>{this.props.isManager?'Manager' : 'Employee'}</p>
-      
+            <p><Button onClick = {Logout, Redirect('http://localhost:3000/login')}>Logout</Button></p>
             <div className="links">
               <a href="/YourSurveys">Your Surveys</a>
+              
               {this.props.isManager ? <a href="/CreateSurvey">Create Survey</a> : null}
               {this.props.isManager ?<a href="/GivenSurveys">Given Surveys</a> : null}
               {this.props.isManager ?<a href="/Analytics">Analytics</a> : null}
