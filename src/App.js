@@ -14,7 +14,9 @@ import { Provider } from 'react-redux';
 import {loadUser} from './actions/authActions'
 
 export default class App extends Component {
-
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
   constructor(props) {
     super(props);
     this.state = {

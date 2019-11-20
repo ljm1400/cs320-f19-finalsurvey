@@ -23,7 +23,7 @@ class Sidenav extends Component {
     return (
         <div className="sidenav">
             <img src={profile_pic} alt="profile_pic"></img>
-            <p><strong>{user ? `${user.name}` : ''}</strong></p>
+            <p><strong>{user ? `${user.firstName}` : ''}</strong></p>
             <p>{this.props.isManager?'Manager' : 'Employee'}</p>
             <NavItem>
             <Logout />
