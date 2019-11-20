@@ -49,7 +49,11 @@ const userSchema = new Schema({
     type: Date,
     required: [true, "Start date is required"]
   },
-  surveysIssued: {
+  openSurveys: {
+    type: Array,
+    required: false
+  },
+  openSurveys: {
     type: Array,
     required: false
   }

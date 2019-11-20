@@ -24,7 +24,8 @@ router.route('/add').post((req, res) => {
   const managerID = req.body.managerID;
   const email = req.body.email;
   const startDate = req.body.startDate;
-  const surveysIssued = req.body.surveysIssued;
+  const openSurveys = req.body.openSurveys;
+  const closeSurveys = req.body.closedSurveys
 
   const newUser = new User({
     firstName,
@@ -37,7 +38,8 @@ router.route('/add').post((req, res) => {
     managerID,
     email,
     startDate,
-    surveysIssued
+    openSurveys,
+    closeSurveys
   });
 
   newUser.save()

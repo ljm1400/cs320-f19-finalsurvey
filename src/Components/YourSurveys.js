@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import '../css/style.css';
 
@@ -12,6 +14,9 @@ class YourSurveys extends Component {
       surveyIds: []
     }
   }
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
 
   setRedirect = () => {
     console.log("clickS")
@@ -57,4 +62,11 @@ class YourSurveys extends Component {
     );
   }
 }
-export default YourSurveys;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(YourSurveys);

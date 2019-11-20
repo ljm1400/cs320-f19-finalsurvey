@@ -30,7 +30,6 @@ class Sidenav extends Component {
             </NavItem>
             <div className="links">
               <a href="/YourSurveys">Your Surveys</a>
-              
               {this.props.isManager ? <a href="/CreateSurvey">Create Survey</a> : null}
               {this.props.isManager ?<a href="/GivenSurveys">Given Surveys</a> : null}
               {this.props.isManager ?<a href="/Analytics">Analytics</a> : null}
