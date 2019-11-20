@@ -40,7 +40,11 @@ router.post('/', (req, res) => {
                 user: {
                     id: user.id,
                     name: user.firstName,
-                    email: user.email
+                    email: user.email,
+                    companyID: user.companyID,
+                    employeeID: user.employeeID,
+                    managerID: user.managerID,
+                    companyID: user.companyID,
                 }
             });
         }

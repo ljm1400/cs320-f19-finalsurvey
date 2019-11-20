@@ -9,21 +9,18 @@ import GivenSurveys from "./Components/GivenSurveys"
 import Analytics from "./Components/Analytics"
 import YourSurveys from './Components/YourSurveys';
 import TakingSurvey from './Components/TakingSurvey';
-import loginPage from './Components/login';
+import loginModal from './Components/login';
 import { Provider } from 'react-redux';
 import {loadUser} from './actions/authActions'
 
 export default class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       isManagerVal: true,
       firstName: "John"
     }
-  }
-
-  componentDidMount() {
-    store.dispatch(loadUser());
   }
  
   render() {
@@ -47,7 +44,7 @@ export default class App extends Component {
           </Switch>
            
           <Switch>
-            <Route path="/login" component={loginPage} />
+            <Route path="/login" component={loginModal} />
             <Route path="/YourSurveys" exact component={YourSurveys} />
             <Route path="/CreateSurvey" component={CreateSurvey} />
             <Route path="/GivenSurveys" component={GivenSurveys} />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import {
   Button,
   Modal,
@@ -8,7 +9,6 @@ import {
   FormGroup,
   Label,
   Input,
-  NavLink,
   Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -21,7 +21,8 @@ class LoginModal extends Component {
     modal: false,
     email: '',
     password: '',
-    msg: null
+    msg: null,
+    redirect: false
   };
 
   static propTypes = {
@@ -41,12 +42,23 @@ class LoginModal extends Component {
         this.setState({ msg: null });
       }
     }
-
     // If authenticated, close modal
     if (this.state.modal) {
       if (isAuthenticated) {
         this.toggle();
+        this.setRedirect();
       }
+    }
+  }
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/YourSurveys' />
     }
   }
 
@@ -79,6 +91,7 @@ class LoginModal extends Component {
   render() {
     return (
       <div className="header">
+        {this.renderRedirect()}
         <h2>
           Welcome to Final-Surveys
         </h2>
@@ -106,7 +119,7 @@ class LoginModal extends Component {
 
                 <Label for='password'>Password</Label>
                 <Input
-                  type='password'
+                  type='current-password'
                   name='password'
                   id='password'
                   placeholder='Password'

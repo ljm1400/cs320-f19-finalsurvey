@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import {Button} from 'reactstrap';
+import {NavItem} from 'reactstrap';
+import PropTypes from 'prop-types';
 import '../css/style.css';
 import profile_pic from '../res/img_profile_pic.png';
+import { connect } from 'react-redux';
 import './CreateSurvey.js';
 import './GivenSurveys.js';
-import {Logout} from './logout';
+import Logout from './logout';
 import { Redirect } from 'react-router'
 
 class Sidenav extends Component {
-  constructor(props) {
-    super(props);
-  }
 
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
+
+  renderRedirect = () => {
+    return <Redirect to='/YourSurveys' />
+  }
   render() {
+    const { isAuthenticated, user } = this.props.auth;
     return (
         <div className="sidenav">
             <img src={profile_pic} alt="profile_pic"></img>
-            <p>John</p>
+            <p><strong>{user ? `${user.name}` : ''}</strong></p>
             <p>{this.props.isManager?'Manager' : 'Employee'}</p>
-            <p><Button onClick = {Logout, Redirect('http://localhost:3000/login')}>Logout</Button></p>
+            <NavItem>
+            <Logout />
+            </NavItem>
             <div className="links">
               <a href="/YourSurveys">Your Surveys</a>
               
@@ -30,4 +39,11 @@ class Sidenav extends Component {
     );
   }
 }
-export default Sidenav;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Sidenav);
