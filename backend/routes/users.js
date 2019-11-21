@@ -25,7 +25,7 @@ router.route('/add').post((req, res) => {
   const email = req.body.email;
   const startDate = req.body.startDate;
   const openSurveys = req.body.openSurveys;
-  const closeSurveys = req.body.closedSurveys
+  const closedSurveys = req.body.closedSurveys
 
   const newUser = new User({
     firstName,
@@ -39,7 +39,7 @@ router.route('/add').post((req, res) => {
     email,
     startDate,
     openSurveys,
-    closeSurveys
+    closedSurveys
   });
 
   newUser.save()

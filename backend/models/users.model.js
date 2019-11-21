@@ -53,7 +53,7 @@ const userSchema = new Schema({
     type: Array,
     required: false
   },
-  openSurveys: {
+  closedSurveys: {
     type: Array,
     required: false
   }
