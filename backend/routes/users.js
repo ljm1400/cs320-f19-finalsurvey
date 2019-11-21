@@ -1,13 +1,10 @@
 const router = require('express').Router();
-let User = require('../models/user.model');
 const config = require('config');
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 
-router.route('/').get((req, res) => {
-  User.find()
-    .then(user => res.json(user))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+//user model
+let User = require('../models/users.model');
 
 router.route('/:id').get((req, res) => {
   User.findById(req.params.id)
@@ -27,7 +24,8 @@ router.route('/add').post((req, res) => {
   const managerID = req.body.managerID;
   const email = req.body.email;
   const startDate = req.body.startDate;
-  const surveysIssued = req.body.surveysIssued;
+  const openSurveys = req.body.openSurveys;
+  const closedSurveys = req.body.closedSurveys
 
   const newUser = new User({
     firstName,
@@ -40,7 +38,8 @@ router.route('/add').post((req, res) => {
     managerID,
     email,
     startDate,
-    surveysIssued
+    openSurveys,
+    closedSurveys
   });
 
   newUser.save()

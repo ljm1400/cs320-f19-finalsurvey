@@ -1,24 +1,33 @@
 import React, { Component} from 'react';
 import { Redirect } from 'react-router-dom'
+import {ListGroupItem} from 'reactstrap';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getSurveys, deleteSurvey } from '../actions/surveyActions';
 
 import '../css/style.css';
 
 class YourSurveys extends Component {
-  constructor(props) {
-    super(props);
-    this.state ={
-      redirect: false,
-      surveyIds: []
-    }
+
+  static propTypes = {
+    getSurveys: PropTypes.func.isRequired,
+    survey: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool,
+    redirect: PropTypes.bool
+  };
+  state ={
+    redirect: false,
+    survey: this.props.survey
   }
 
+  componentDidMount() {
+    this.props.getSurveys();
+  }
   setRedirect = () => {
-    console.log("clickS")
     this.setState({
       redirect: true
     })
-    console.log(this.state.redirect)
   }
 
   renderRedirect = () => {
@@ -26,35 +35,34 @@ class YourSurveys extends Component {
       return <Redirect to={
           {
             pathname: '/TakingSurvey',
-            state: {surveyId: 1}    
+            state: {surveyID: 1}    
           }} />
     }
   }
-
-  componentDidMount() {
-    axios.get('http://localhost:5000/surveys/')
-      .then(response => {
-        if(response.data.length > 0) {
-          this.setState({
-            surveyIds: response.data
-          })
-        }
-        console.log(this.state.surveyIds);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
+  
  
   render() {
+    const {_id, surveys } = this.props.survey;
     return (
         <div className="header">
-            <h2>Your Surveys</h2>
+          <h2>Your Surveys</h2>
             {this.renderRedirect()}
-            <button onClick={this.setRedirect} className="surveyResults" >Survey 1</button>
+          {surveys.map(({_id, title_survey }) => (
+                  <button key={_id}onClick={this.setRedirect} className="surveyResults" > {title_survey} </button>
+            ))}
+            
+            
         </div> 
     );
   }
 }
-export default YourSurveys;
+const mapStateToProps = state => ({
+  survey: state.survey,
+  isAuthenticated: state.auth.isAuthenticated,
+  redirect: state.redirect
+});
+
+export default connect(
+  mapStateToProps,
+  { getSurveys, deleteSurvey }
+)(YourSurveys);
