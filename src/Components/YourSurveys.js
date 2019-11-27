@@ -4,29 +4,29 @@ import {ListGroupItem} from 'reactstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getSurveys, deleteSurvey } from '../actions/surveyActions';
+import {loadSurveys } from '../actions/surveyActions';
 
 import '../css/style.css';
+import login from './login';
 
 class YourSurveys extends Component {
 
   static propTypes = {
-    getSurveys: PropTypes.func.isRequired,
-    survey: PropTypes.object.isRequired,
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.object.isRequired,
     redirect: PropTypes.bool
   };
+
   state ={
     redirect: false,
-    survey: this.props.survey
+    taking: null,
+    surveys: [],
+    manager: null
   }
 
-  componentDidMount() {
-    this.props.getSurveys();
-  }
-  setRedirect = () => {
+  setRedirect = ({id}) => {
     this.setState({
-      redirect: true
+      redirect: true,
+      taking: id
     })
   }
 
@@ -39,17 +39,55 @@ class YourSurveys extends Component {
           }} />
     }
   }
-  
- 
+  getManager = (user) => {
+  const {managerId, companyId} = user
+    axios.get('http://localhost:5000/users/getUser/', {params:{employeeId: managerId, companyId}})
+    .then(user => {
+      this.setState({manager: user.data})
+    })
+  }
+  setUser = () => {
+    this.setState({
+      user: this.props.auth.user
+    })
+  }
+
   render() {
-    const {_id, surveys } = this.props.survey;
+    const{isAuthenticated, user} = this.props.auth;
+    const {manager} = this.state
+    
+    if(isAuthenticated){
+      if(manager === null){
+        this.getManager(user)
+      }
+      if(user.positionTitle.includes("CEO")){
+        return (
+        <div className="header">
+        <h1>Your Surveys</h1>
+        <h2> You have no surveys, you are the CEO!!!</h2>
+        <h3> Consider Creating a survey!</h3>
+        </div> 
+        );
+      }
+      var surveys = null
+      if(!surveys){
+        
+        return <div className="header">
+        <h2>You have no open surveys</h2>
+        <big>{manager ? "Your manager's name is: " + `${manager.firstName}`:''}</big>
+        </div>
+      }
+    }
     return (
         <div className="header">
-          <h2>Your Surveys</h2>
-            {this.renderRedirect()}
-          {surveys.map(({_id, title_survey }) => (
+        <h2>Your Surveys</h2>
+        {this.renderRedirect()}
+        {isAuthenticated ?
+          
+          surveys.map(({_id, title_survey }) => (
                   <button key={_id}onClick={this.setRedirect} className="surveyResults" > {title_survey} </button>
-            ))}
+            )) :null }
+        
             
             
         </div> 
@@ -57,12 +95,11 @@ class YourSurveys extends Component {
   }
 }
 const mapStateToProps = state => ({
-  survey: state.survey,
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   redirect: state.redirect
 });
 
 export default connect(
   mapStateToProps,
-  { getSurveys, deleteSurvey }
+  null
 )(YourSurveys);

@@ -28,6 +28,7 @@ class Sidenav extends Component {
         <div className="sidenav">
             <img src={profile_pic} alt="profile_pic"></img>
             <p><strong>{user ? `${user.firstName}` : ''}</strong></p>
+            <p> {user ? `${user.companyName}`: ''}</p>
             <p>{isManager?'Manager' : 'Employee'}</p>
             <NavItem>
             <Logout />

@@ -17,18 +17,11 @@ export default class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
   }
-  constructor(props) {
-    super(props);
-    this.state = {
-      isManagerVal: true,
-      firstName: "John"
-    }
-  }
- 
+  
   render() {
-    const mySidenav = (props) => {
+    const mySidenav= () => {
       return (
-        <Sidenav isManager={this.state.isManagerVal} />
+        <Sidenav />
       );
     }
 
@@ -41,7 +34,7 @@ export default class App extends Component {
           )}/>  
 
           <Switch>
-            <Route path="/login" />
+            <Route path="/login"/>
             <Route path="/" render={mySidenav} />   
           </Switch>
            
@@ -52,7 +45,7 @@ export default class App extends Component {
             <Route path="/GivenSurveys" component={GivenSurveys} />
             <Route path="/Analytics" component={Analytics} />
             <Route path="/TakingSurvey" component={TakingSurvey} />
-          </Switch>         
+          </Switch> 
           </div>      
       </Router>
       </Provider>
