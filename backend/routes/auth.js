@@ -43,6 +43,7 @@ router.post('/', (req, res) => {
                     email: user.email,
                     companyId: user.companyId,
                     employeeId: user.employeeId,
+                    companyName: user.companyName,
                     managerId: user.managerId,
                     companyId: user.companyId,
                     positionTitle: user.positionTitle
