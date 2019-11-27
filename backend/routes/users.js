@@ -7,19 +7,20 @@ let User = require('../models/users.model');
 
 //route to get a user's info, removes password by a given employee ID
 router.get('/getUser', (req, res) => {
-  const {employeeId} = req.query;
+  const {employeeId, companyId} = req.query;
 
-  User.findOne( {employeeId}, function (err, result){
+  User.findOne( {employeeId, companyId}, function (err, result){
     if(err){
       res.status(400).json('Error: Cannot Find User' + err)
     }
     if(result){
+      
       res.send(result)
     }
     if(!result){
       res.send("User could not be found")
     }
-  })
+  }).select('-password')
 });
 
 

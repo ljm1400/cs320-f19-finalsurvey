@@ -46,11 +46,6 @@ class YourSurveys extends Component {
       this.setState({manager: user.data})
     })
   }
-  setUser = () => {
-    this.setState({
-      user: this.props.auth.user
-    })
-  }
 
   render() {
     const{isAuthenticated, user} = this.props.auth;
@@ -71,7 +66,6 @@ class YourSurveys extends Component {
       }
       var surveys = null
       if(!surveys){
-        
         return <div className="header">
         <h2>You have no open surveys</h2>
         <big>{manager ? "Your manager's name is: " + `${manager.firstName}`:''}</big>
