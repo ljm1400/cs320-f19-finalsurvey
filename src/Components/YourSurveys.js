@@ -10,17 +10,33 @@ import '../css/style.css';
 import login from './login';
 
 class YourSurveys extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state ={
+      redirect: false,
+      taking: null,
+      surveys: [],
+      manager: null
+    }
+  }
   static propTypes = {
     auth: PropTypes.object.isRequired,
     redirect: PropTypes.bool
   };
 
-  state ={
-    redirect: false,
-    taking: null,
-    surveys: [],
-    manager: null
+  componentDidMount() {
+    axios.get('http://localhost:5000/surveys/')
+      .then(response => {
+        if(response.data.length > 0) {
+          this.setState({
+            surveys: response.data
+          })
+        }
+        console.log(this.state.surveys);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   setRedirect = ({id}) => {

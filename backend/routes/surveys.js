@@ -8,31 +8,28 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  // const description_survey = req.body.description_survey;
-  // const close_date = Date.parse(req.body.close_date);
-  // const issued_date = Date.parse(req.body.issued_date);
-  // const issued_by = Number (req.body.issued_by)
-  // const answers = req.body.questions;
+  const survey_id = 1;
   const title_survey = req.body.title_survey;
   const description_survey = ""
-  const close_date = "2015-03-25" 
-  const issued_date = "2015-03-25" 
-  const issued_by = 1;
-  const answers = [1,2];
+  const close_date = req.body.close_date
+  const issued_date = req.body.issue_date
+  const issued_by = req.body.issued_by
   const questions = req.body.questions;
+  const answers = {};
 
   const newSurvey = new Survey({
+    survey_id,
     title_survey,
     description_survey,
     questions,
     answers,
     close_date,
     issued_date,
-    issued_by,
+    issued_by
   });
 
   newSurvey.save()
-  .then(() => ('Survey added' + res.json(questions)))
+  .then(() => (res.json(newSurvey)))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
