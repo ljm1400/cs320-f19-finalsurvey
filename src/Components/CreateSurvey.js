@@ -107,7 +107,7 @@ function CreateSurvey(props){
         user.openSurveys = surveyIdList
 
         const {employeeId, companyId} = user
-        axios.post('http://localhost:5000/users/update/', user)
+        axios.post('http://localhost:5000/users/update/', user, {params:{employeeId: employeeId, companyId}})
             .then(res => console.log("first error: " + res.data))
     }
 
