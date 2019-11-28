@@ -24,7 +24,7 @@ router.get('/getUser', (req, res) => {
 });
 
 
-router.route('/add').post((req, res) => {
+router.post('/add',(req, res) => {
   const firstName = req.body.firstName;
   const midName  = req.body.midName;
   const lastName = req.body.lastName;
@@ -59,8 +59,9 @@ router.route('/add').post((req, res) => {
 });
 
 
-router.route('/update/:id').post((req, res) => {
-  User.findById(req.params.id)
+router.route('/update').post((req, res) => {
+  const {employeeId, companyId} = req.query;
+  User.findOne( {employeeId, companyId})
   .then(user =>{
     user.openSurveys = req.body.openSurveys;
 

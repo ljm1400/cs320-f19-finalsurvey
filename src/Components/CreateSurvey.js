@@ -94,29 +94,33 @@ function CreateSurvey(props){
 
         axios.post("http://localhost:5000/surveys/add", state)
         .then(res => 
-            updateManagerOpenList(res.data._id)
+            getManagerOpenList(res.data._id)
         )
              
         questions.map(q => q.complete = true)
         handleClearQuestions();
     }
 
-    function updateManagerOpenList(newSurveyId) {
+    function getManagerOpenList(newSurveyId) {
         // Get manager's list of open surveys to create a new unique survey ID
-        const {managerId, companyId} = user
-        let surveyIdList =[]
-        axios.get('http://localhost:5000/users/getUser/', {params:{employeeId: managerId, companyId}})
+        const {employeeId, companyId} = user
+        axios.get('http://localhost:5000/users/getUser', {params:{employeeId: employeeId, companyId: companyId}})
         .then(user => {
-            if(user.openSurveys != null)
-                surveyIdList = user.openSurveys;
+            let surveyIdList = []
+            if(user.data.openSurveys!=null) {
+                 surveyIdList = user.data.openSurveys
+            }
+            updateManagerOpenList(surveyIdList, newSurveyId);
         })
-
+    }
+    function updateManagerOpenList(surveyIdList, newSurveyId) {
         console.log(newSurveyId);
         surveyIdList.push(newSurveyId)
         user.openSurveys = surveyIdList
+        const {employeeId, companyId} = user
 
-        axios.post('http://localhost:5000/users/update/'+ user.employeeId, user)
-        .then(res => console.log(res.data))
+        axios.post('http://localhost:5000/users/update/', user)
+            .then(res => console.log("first error: " + res.data))
     }
 
     function handleRadio(e){
