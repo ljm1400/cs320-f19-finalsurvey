@@ -12,7 +12,7 @@ export class Logout extends Component {
   render() {
     return (
       <Fragment>
-        <Button onClick={this.props.logout} href='../login'>
+        <Button color='dark' block  onClick={this.props.logout} href='../login'>
           Logout
         </Button>
       </Fragment>

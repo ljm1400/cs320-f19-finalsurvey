@@ -41,10 +41,12 @@ router.post('/', (req, res) => {
                     id: user.id,
                     firstName: user.firstName,
                     email: user.email,
-                    companyID: user.companyID,
-                    employeeID: user.employeeID,
-                    managerID: user.managerID,
-                    companyID: user.companyID,
+                    companyId: user.companyId,
+                    employeeId: user.employeeId,
+                    companyName: user.companyName,
+                    managerId: user.managerId,
+                    companyId: user.companyId,
+                    positionTitle: user.positionTitle
                 }
             });
         }

@@ -1,17 +1,28 @@
 const router = require('express').Router();
 const config = require('config');
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken');
 
 //user model
 let User = require('../models/users.model');
 
-router.route('/:id').get((req, res) => {
-  User.findById(req.params.id)
 
-    .then(user => res.json(user))
-    .catch(err => res.status(400).json('Error: ' + err));
+//route to get a user's info, removes password by a given employee ID
+router.get('/getUser', (req, res) => {
+  const {employeeId, companyId} = req.query;
+
+  User.findOne( {employeeId, companyId}, function (err, result){
+    if(err){
+      res.status(400).json('Error: Cannot Find User' + err)
+    }
+    if(result){
+      
+      res.send(result)
+    }
+    if(!result){
+      res.send("User could not be found")
+    }
+  }).select('-password')
 });
+
 
 router.route('/add').post((req, res) => {
   const firstName = req.body.firstName;
@@ -47,10 +58,11 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
 router.route('/update/:id').post((req, res) => {
   User.findById(req.params.id)
   .then(user =>{
-    user.surveysIssued = req.body.surveysIssued;
+    user.openSurveys = req.body.openSurveys;
 
     user.save()
       .then(() => res.json('User updated!'))
