@@ -7,8 +7,6 @@ import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
-
 const LOCAL_STORAGE_KEY = 'ultimate.questions'
 
 function CreateSurvey(props){
@@ -94,31 +92,21 @@ function CreateSurvey(props){
 
         axios.post("http://localhost:5000/surveys/add", state)
         .then(res => 
-            getManagerOpenList(res.data._id)
+            updateManagerOpenList(res.data._id)
         )
              
         questions.map(q => q.complete = true)
         handleClearQuestions();
     }
 
-    function getManagerOpenList(newSurveyId) {
-        // Get manager's list of open surveys to create a new unique survey ID
-        const {employeeId, companyId} = user
-        axios.get('http://localhost:5000/users/getUser', {params:{employeeId: employeeId, companyId: companyId}})
-        .then(user => {
-            let surveyIdList = []
-            if(user.data.openSurveys!=null) {
-                 surveyIdList = user.data.openSurveys
-            }
-            updateManagerOpenList(surveyIdList, newSurveyId);
-        })
-    }
-    function updateManagerOpenList(surveyIdList, newSurveyId) {
+
+    function updateManagerOpenList(newSurveyId) {
         console.log(newSurveyId);
+        let surveyIdList = user.openSurveys;
         surveyIdList.push(newSurveyId)
         user.openSurveys = surveyIdList
-        const {employeeId, companyId} = user
 
+        const {employeeId, companyId} = user
         axios.post('http://localhost:5000/users/update/', user)
             .then(res => console.log("first error: " + res.data))
     }
