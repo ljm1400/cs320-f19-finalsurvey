@@ -39,13 +39,13 @@ router.route('/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('delete/:id').delete((req, res) => {
   Survey.findByIdAndDelete(req.params.id)
     .then(() => res.json('Survey deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').post((req, res) => {
+router.route('update/:id').post((req, res) => {
   Survey.findById(req.params.id)
     .then(survey => {
       survey.title_survey = req.body.title_survey,
