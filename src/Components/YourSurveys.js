@@ -18,11 +18,11 @@ class YourSurveys extends Component {
 
     this.state ={
       redirect: false,
-      taking: null,
       surveyIdList: [],
       surveyDataList: [],
       manager: null,
-      user: this.props.auth.user
+      user: this.props.auth.user,
+      takingSurvey: null
     }
   
   }
@@ -35,19 +35,20 @@ class YourSurveys extends Component {
     this.getManager(this.state.user)
   }
 
-  setRedirect = (id) => {
-    this.setState({
-      redirect: true,
-      taking: id
-    })
+  setRedirect = (index) => {
+      this.setState({
+        redirect: true,
+        takingSurvey: this.state.surveyDataList[index]
+      })
   }
 
   renderRedirect = () => {
     if (this.state.redirect) {
+      console.log('b' + this.state.takingSurvey)
       return <Redirect to={
           {
             pathname: '/TakingSurvey',
-            state: {surveyId: this.state.taking}    
+            state: {survey: this.state.takingSurvey}    
           }} />
     }
   }
@@ -72,7 +73,7 @@ class YourSurveys extends Component {
             surveyDataList.push(survey.data)
           })
       )})
-      
+
        // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
       Promise.all(requests).then((val) => {
         this.setState({surveyDataList: surveyDataList})
@@ -110,14 +111,11 @@ class YourSurveys extends Component {
           <h2>Your Surveys</h2>
           {this.renderRedirect()}
           <div>
-            {console.log(this.state.surveyDataList)}
-            {console.log('f' + this.state.surveyIdList.length)}
-
-            {console.log('a' + this.state.surveyDataList.length)}
-              {this.state.surveyDataList.map((survey) => {
+              <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName}`:''}</p>
+              {this.state.surveyDataList.map((survey, index) => {
                   return <>
-                    <button className="surveyResults" key={survey._id} 
-                      onClick={this.setRedirect(survey._id)}>{survey.title_survey} </button>
+                    <button className="surveyResults" 
+                      onClick={ ()=> this.setRedirect(index)}>{survey.title_survey} </button>
                   </>
               })}                                
           </div>         
