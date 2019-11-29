@@ -35,19 +35,19 @@ export default class GivenSurvey extends Component {
             <div>
               {this.state.surveys.map((survey) => {
                    return <>
-                   <Collapsible title={survey.title_survey}>
-                     <h3>Questions</h3>
-                    <div className="surveyQuestions">
-                        {survey.questions.map((question, index) => {
-                          return <p>{index+1}) {question}</p>              
-                        })}
-                    </div>
-                    <h3>Answers</h3>
-                    <p>Very satisfied, Not Satisfied, Not Satisfied, Ok</p>
-                    <h3>Analytics</h3>
-                    <p>Project 1 Label: Employees satisfied</p>
-                    <p>Project 2 Label: Employees not satisfied</p>
-                    </Collapsible>    
+                      <Collapsible title={survey.title_survey}>
+                          <h3>Questions</h3>
+                          <div className="surveyQuestions">
+                              {survey.questions.map((question, index) => {
+                                return <p>{index+1}) {question}</p>              
+                              })}
+                          </div>
+                          <h3>Answers</h3>
+                          <p>Very satisfied, Not Satisfied, Not Satisfied, Ok</p>
+                          <h3>Analytics</h3>
+                          <p>Project 1 Label: Employees satisfied</p>
+                          <p>Project 2 Label: Employees not satisfied</p>
+                      </Collapsible>    
                     </>          
               })}
             </div>

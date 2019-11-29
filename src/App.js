@@ -21,9 +21,11 @@ export default class App extends Component {
       user: {}
     };
   }
+
   componentDidMount() {
     store.dispatch(loadUser());
   }
+  
   onUserChange = (user1) => {
     this.setState({
       user: user1

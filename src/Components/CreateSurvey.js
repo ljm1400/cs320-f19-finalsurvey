@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const LOCAL_STORAGE_KEY = 'ultimate.questions'
 
-function CreateSurvey(props){
+function CreateSurvey(props) {
     var state = {
         survey_id: 0,
         title_survey: "",
@@ -108,7 +108,7 @@ function CreateSurvey(props){
 
         const {employeeId, companyId} = user
         axios.post('http://localhost:5000/users/update/', user, {params:{employeeId: employeeId, companyId}})
-            .then(res => console.log("first error: " + res.data))
+            .then(res => console.log("Post Response: " + res.data))
     }
 
     function handleRadio(e){
