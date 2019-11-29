@@ -19,7 +19,7 @@ const surveySchema = new Schema({
   answers: {
       type: Array,
   },
-  issue_date: {
+  issued_date: {
       type: Date,
       requried: true
   },

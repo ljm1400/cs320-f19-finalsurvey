@@ -16,43 +16,59 @@ class GivenSurveys extends Component {
 
     this.state = {
       surveys: [],
+      gotSurveyData: false,
       openSurveyDataList: [],
       closedSurveyDataList: []
     };
-
   }
 
+  getOpenSurveys = (surveyList) => {  
+      let opensurveyIdList = surveyList
+      let openSurveyDataList = []
+      let requests = []
 
-  getOpenSurveys = (surveyList) => {
-    let opensurveyIdList = surveyList
-    let openSurveyDataList = []
-    let requests = []
+      opensurveyIdList.forEach(function(survey) {
+          requests.push(
+            axios.get('http://localhost:5000/surveys/'+ survey)
+          .then(survey => {
+            openSurveyDataList.push(survey.data)
+          })
+      )})
 
-    opensurveyIdList.forEach(function(survey) {
-        requests.push(
-          axios.get('http://localhost:5000/surveys/'+ survey)
-        .then(survey => {
-          openSurveyDataList.push(survey.data)
-        })
-    )})
+      // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
+      Promise.all(requests).then((val) => {
+        this.setState({openSurveyDataList: openSurveyDataList})
+      })
+   }
 
-     // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
-    Promise.all(requests).then((val) => {
-      this.setState({openSurveyDataList: openSurveyDataList})
-    })
-}
 
   render() {
-    if (this.props.auth.isAuthenticated)
-      if(this.state.opensurveyIdList == [])
-        this.getOpenSurveys(this.props.auth.user.openSurveys)
+    if (this.props.auth.isAuthenticated && this.state.gotSurveyData == false){
+      this.getOpenSurveys(this.props.auth.user.openSurveys)
+      this.setState({gotSurveyData: true});
+    }
+    
+   function formatDate(date) {
+    var year = date.getFullYear();
+  
+    var month = (1 + date.getMonth()).toString();
+    month = (month.length) > 1 ? month : '0' + month;
+  
+    var day = date.getDate().toString();
+    day = (day.length) > 1 ? day : '0' + day;
+    
+    return month + '/' + day + '/' + year;
+  }
     return (
         <div className="header">
             <h2>Open Surveys</h2>
             <div>
               {this.state.openSurveyDataList.map((survey) => {
                    return <>
-                      <Collapsible title={survey.title_survey}>
+                      <Collapsible 
+                      title={'Survey Title: ' + survey.title_survey} 
+                      issueDate={'Issue Date: ' + formatDate(new Date(survey.issued_date))}
+                      closingDate={'Closing Date: ' + formatDate(new Date(survey.close_date))}>
                           <h3>Questions</h3>
                           <div className="surveyQuestions">
                               {survey.questions.map((question, index) => {

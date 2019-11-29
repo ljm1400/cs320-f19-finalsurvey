@@ -11,10 +11,9 @@ const LOCAL_STORAGE_KEY = 'ultimate.questions'
 
 function CreateSurvey(props) {
     var state = {
-        survey_id: 0,
         title_survey: "",
         questions: [],
-        issue_date: new Date(),
+        issued_date: new Date(),
         close_date: "",
         issued_by: "",
     }
@@ -66,12 +65,6 @@ function CreateSurvey(props) {
         setQuestions(newQuestions)
     }
 
-    function getUniqueSurveyId(surveyList) {
-        if(surveyList.length == 0) return 1
-        let lastNum = surveyList.length;
-        return lastNum + 1;
-    }
-
     function c(){
         alert('You have submitted the survey');
         
@@ -79,18 +72,12 @@ function CreateSurvey(props) {
         Object.keys(questions).forEach(function(key) {
             questionList.push(questions[key].name);
         })
-
-     
-        //  let newSurveyId = getUniqueSurveyId(surveyIdList);
-        //  surveyIdList.push(newSurveyId);
-        //  console.log("new survey id" + newSurveyId)
   
         // set the state's values
         state.title_survey = surveyTitle.current.value;
         state.questions = questionList;
         state.issued_by = user.employeeId
         state.close_date = close_date;
-        state.issued_date = new Date();
         console.log(state);
 
         axios.post("http://localhost:5000/surveys/add", state)

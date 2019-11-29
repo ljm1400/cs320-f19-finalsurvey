@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/style.css';
 
 
-export default class Collapsible extends React.Component {
+export default class Answer extends React.Component {
     constructor(props){
         super(props);
         this.state = {

@@ -8,17 +8,15 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  //const survey_id = 1;
   const title_survey = req.body.title_survey;
   const description_survey = ""
   const close_date = req.body.close_date
-  const issued_date = req.body.issue_date
+  const issued_date = req.body.issued_date
   const issued_by = req.body.issued_by
   const questions = req.body.questions;
   const answers = [];
 
   const newSurvey = new Survey({
-    survey_id,
     title_survey,
     description_survey,
     questions,

@@ -7,6 +7,7 @@ export default class TakingSurvey extends Component {
       let survey = this.props.location.state.survey
       let formatted_Close_Date = this.formatDate(new Date(survey.close_date))
       let formatted_Issue_Date = this.formatDate(new Date(survey.issued_date))
+      
       this.state = {
           survey: survey,
           close_date: formatted_Close_Date,
@@ -30,7 +31,7 @@ export default class TakingSurvey extends Component {
     return (
         <div className="header">
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
-            <h3>{"Creation Date: " + this.state.issued_date}</h3>
+            <h3>{"Issued Date: " + this.state.issued_date}</h3>
             <h3>{"Closing Date: " + this.state.close_date}</h3>
             <div className="surveyQuestions">
               {this.state.survey.questions.map((question, index) => {
