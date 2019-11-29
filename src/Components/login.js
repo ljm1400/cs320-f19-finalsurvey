@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Redirect } from 'react-router-dom'
 import {
   Button,
@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import { login } from '../actions/authActions';
 import { clearErrors } from '../actions/errorActions';
 
+const LOCAL_STORAGE_KEY = 'ultimate.questions'
 class LoginModal extends Component {
   state = {
     modal: false,
@@ -31,6 +32,15 @@ class LoginModal extends Component {
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
+
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  //   if (user)  this.props.login(user);
+  // }, [])
+
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(user))
+  // }, []) 
 
   componentDidUpdate(prevProps) {
     const { error, isAuthenticated } = this.props;
