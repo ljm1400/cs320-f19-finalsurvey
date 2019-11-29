@@ -14,27 +14,15 @@ class YourSurveys extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props.auth.user)
 
     this.state ={
       redirect: false,
       surveyIdList: [],
       surveyDataList: [],
       manager: null,
-      user: this.props.auth.user,
       takingSurvey: null
     }
-  
   }
-
-  componentDidMount() {
-    /**
-     * get manager id to get open surveys, 
-     * then callback function on set state for surveyIdList to get the actual survey data
-    */
-    this.getManager(this.state.user)
-  }
-
   setRedirect = (index) => {
       this.setState({
         redirect: true,
@@ -81,10 +69,13 @@ class YourSurveys extends Component {
   }
 
   render() {
-    // const{isAuthenticated, user} = this.props.auth;
+    if(this.props.auth.isAuthenticated)
+      if(this.state.manager == null)
+        this.getManager(this.props.auth.user)
+    //const{isAuthenticated, user} = this.props.auth;
     // const {manager} = this.state
     
-    // if(isAuthenticated){
+    //if(isAuthenticated)
     //   if(manager === null){
     //     this.getManager(user)
     //   }

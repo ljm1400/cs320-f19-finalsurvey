@@ -13,24 +13,18 @@ class GivenSurveys extends Component {
 
   constructor(props) {
     super(props);
-    let user = props.auth.user
-    console.log(props.auth.user)
 
     this.state = {
       surveys: [],
-      user: user,
       openSurveyDataList: [],
       closedSurveyDataList: []
     };
 
   }
 
-  componentDidMount() {
-    this.getOpenSurveys()
-  }
 
-  getOpenSurveys = () => {
-    let opensurveyIdList = this.state.user.openSurveys
+  getOpenSurveys = (surveyList) => {
+    let opensurveyIdList = surveyList
     let openSurveyDataList = []
     let requests = []
 
@@ -49,6 +43,9 @@ class GivenSurveys extends Component {
 }
 
   render() {
+    if (this.props.auth.isAuthenticated)
+      if(this.state.opensurveyIdList == [])
+        this.getOpenSurveys(this.props.auth.user.openSurveys)
     return (
         <div className="header">
             <h2>Open Surveys</h2>
