@@ -99,17 +99,18 @@ class YourSurveys extends Component {
 
     return (
         <div className="header">
-          <h2>Your Surveys</h2>
+          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName}`:''}</p>
+          <h2>Surveys ToDo</h2>
           {this.renderRedirect()}
           <div>
-              <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName}`:''}</p>
               {this.state.surveyDataList.map((survey, index) => {
                   return <>
                     <button className="surveyResults" 
                       onClick={ ()=> this.setRedirect(index)}>{survey.title_survey} </button>
                   </>
               })}                                
-          </div>         
+          </div>   
+          <h2>Completed Surveys</h2>      
         </div> 
     );
   }
