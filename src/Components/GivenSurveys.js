@@ -2,38 +2,58 @@ import React, { Component } from 'react';
 import '../css/style.css';
 import axios from 'axios';
 import Collapsible from './Collapsible';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
-export default class GivenSurvey extends Component {
+class GivenSurveys extends Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
+    let user = props.auth.user
+    console.log(props.auth.user)
+
     this.state = {
-      surveys: []
+      surveys: [],
+      user: user,
+      openSurveyDataList: [],
+      closedSurveyDataList: []
     };
 
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/surveys/')
-      .then(response => {
-        if(response.data.length > 0) {
-          this.setState({
-            surveys: response.data
-          })
-        }
-        console.log(this.state.surveys);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    this.getOpenSurveys()
   }
+
+  getOpenSurveys = () => {
+    let opensurveyIdList = this.state.user.openSurveys
+    let openSurveyDataList = []
+    let requests = []
+
+    opensurveyIdList.forEach(function(survey) {
+        requests.push(
+          axios.get('http://localhost:5000/surveys/'+ survey)
+        .then(survey => {
+          openSurveyDataList.push(survey.data)
+        })
+    )})
+
+     // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
+    Promise.all(requests).then((val) => {
+      this.setState({openSurveyDataList: openSurveyDataList})
+    })
+}
 
   render() {
     return (
         <div className="header">
-            <h2>Given Surveys</h2>
+            <h2>Open Surveys</h2>
             <div>
-              {this.state.surveys.map((survey) => {
+              {this.state.openSurveyDataList.map((survey) => {
                    return <>
                       <Collapsible title={survey.title_survey}>
                           <h3>Questions</h3>
@@ -51,8 +71,17 @@ export default class GivenSurvey extends Component {
                     </>          
               })}
             </div>
+            <h2>Closed Surveys</h2>
         </div> 
       
     );
   }
 }
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(GivenSurveys);

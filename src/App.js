@@ -13,7 +13,7 @@ import loginModal from './Components/login';
 import { Provider } from 'react-redux';
 import {loadUser} from './actions/authActions'
 
-const UserObjContext = React.createContext('');
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +26,7 @@ export default class App extends Component {
     store.dispatch(loadUser());
   }
   
-  onUserChange = (user1) => {
-    this.setState({
-      user: user1
-    });
-  }
+
   
   render() {
     const mySidenav= () => {
@@ -41,7 +37,6 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-        <UserObjContext.Provider value={this.state.user}>
           <Router>
               <div>
               <Route exact path="/" render={() => (
@@ -63,7 +58,6 @@ export default class App extends Component {
               </Switch> 
               </div>      
           </Router>
-        </UserObjContext.Provider>
       </Provider>
 
     );
