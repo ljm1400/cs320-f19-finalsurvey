@@ -28,6 +28,8 @@ function CreateSurvey(props) {
         auth: PropTypes.object.isRequired
     };
     const { isAuthenticated, user } = props.auth;
+    console.log(user);
+    console.log(props.auth)
 
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
     // the first argument is the state, and the second is the function we will call on that state
@@ -88,6 +90,7 @@ function CreateSurvey(props) {
         state.questions = questionList;
         state.issued_by = user.employeeId
         state.close_date = close_date;
+        state.issued_date = new Date();
         console.log(state);
 
         axios.post("http://localhost:5000/surveys/add", state)
