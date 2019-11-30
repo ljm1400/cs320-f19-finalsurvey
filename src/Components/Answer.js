@@ -6,7 +6,8 @@ export default class Answer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            open: false
+            open: false,
+            questionObj: this.props.questionObj
         }
         this.togglePanel = this.togglePanel.bind(this);
     }
@@ -16,6 +17,10 @@ export default class Answer extends React.Component {
     }
 
     render() {
+        let questionType = ""
+        if(this.state.questionObj.type="t") {
+            questionType="text"
+        }
         return ( 
         /* pass in question object 
                 num, name, type, options, category
@@ -24,9 +29,9 @@ export default class Answer extends React.Component {
         }
         */
         <div className="answer">
-            {this.props.question.name}
-            {this.props.question.type}
-             <input type="text" style={{margin:10, fontSize:20}}/>
+            <p>{'Question ' + this.state.questionObj.num}) {this.state.questionObj.name}</p>
+            <p>{'Category: ' + this.state.questionObj.category}</p>
+             <input type={questionType} style={{margin:10, fontSize:20}}/>
         </div>);
     }
 

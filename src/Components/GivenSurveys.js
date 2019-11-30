@@ -4,6 +4,7 @@ import axios from 'axios';
 import Collapsible from './Collapsible';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as utils from './Utils.js'
 
 
 class GivenSurveys extends Component {
@@ -33,6 +34,9 @@ class GivenSurveys extends Component {
           .then(survey => {
             openSurveyDataList.push(survey.data)
           })
+          .catch(function(error) {
+            console.log("Could not get survey: " + error)
+          })
       )})
 
       // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
@@ -48,17 +52,6 @@ class GivenSurveys extends Component {
       this.setState({gotSurveyData: true});
     }
     
-   function formatDate(date) {
-    var year = date.getFullYear();
-  
-    var month = (1 + date.getMonth()).toString();
-    month = (month.length) > 1 ? month : '0' + month;
-  
-    var day = date.getDate().toString();
-    day = (day.length) > 1 ? day : '0' + day;
-    
-    return month + '/' + day + '/' + year;
-  }
     return (
         <div className="header">
             <h2>Open Surveys</h2>
@@ -67,8 +60,8 @@ class GivenSurveys extends Component {
                    return <>
                       <Collapsible 
                       title={'Survey Title: ' + survey.title_survey} 
-                      issueDate={'Issue Date: ' + formatDate(new Date(survey.issued_date))}
-                      closingDate={'Closing Date: ' + formatDate(new Date(survey.close_date))}>
+                      issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
+                      closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                           <h3>Questions</h3>
                           <div className="surveyQuestions">
                               {survey.questions.map((questionObj, index) => {

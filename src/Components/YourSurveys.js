@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../css/style.css';
+import * as utils from './Utils.js'
 
 class YourSurveys extends Component {
   static propTypes = {
@@ -32,7 +33,6 @@ class YourSurveys extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      console.log('b' + this.state.takingSurvey)
       return <Redirect to={
           {
             pathname: '/TakingSurvey',
@@ -59,6 +59,8 @@ class YourSurveys extends Component {
             axios.get('http://localhost:5000/surveys/'+ survey)
           .then(survey => {
             surveyDataList.push(survey.data)
+          }).catch(function (error) {
+            console.log('Failed to get survey' + error);
           })
       )})
 
@@ -102,9 +104,13 @@ class YourSurveys extends Component {
           {this.renderRedirect()}
           <div>
               {this.state.surveyDataList.map((survey, index) => {
+                  if(survey == null) {return null}
                   return <>
                     <button className="surveyResults" 
-                      onClick={ ()=> this.setRedirect(index)}>{survey.title_survey} </button>
+                      onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
+                      <br></br>
+                      {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
+                    </button>
                   </>
               })}                                
           </div>   

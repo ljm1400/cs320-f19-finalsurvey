@@ -107,6 +107,7 @@ h3{
   margin: 1px;
 }
 .surveyQuestions{
+  font-size: 20px;
   cursor: pointer;
   background-color: #afcdf5;
   font-family: verdana;
