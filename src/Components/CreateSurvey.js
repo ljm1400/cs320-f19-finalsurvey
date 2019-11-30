@@ -55,12 +55,11 @@ function CreateSurvey(props) {
         if(name === '') return
         setQuestionNum(quesNum + 1)
 
-        setQuestions(prevQuestions => {
-            
-                let obj = {id:uuidv4(), num: quesNum, name:name, type: type, 
-                    options:options, category:category, complete:false}
-                prevQuestions.push(obj);
-                return prevQuestions
+        setQuestions(prevQuestions => {            
+            let obj = {id:uuidv4(), num: quesNum, name:name, type: type, 
+                options:options, category:category, complete:false}
+            prevQuestions.push(obj);
+            return prevQuestions
         })
         console.log(questions)
         document.getElementById('ques').value='';

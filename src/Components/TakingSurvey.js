@@ -1,33 +1,22 @@
 import React, { Component } from 'react';
 import '../css/style.css';
 import Answer from './Answer';
+import * as Utils from './Utils.js'
 
 export default class TakingSurvey extends Component {
   constructor(props) {
       super(props);
       let survey = this.props.location.state.survey
-      let formatted_Close_Date = this.formatDate(new Date(survey.close_date))
-      let formatted_Issue_Date = this.formatDate(new Date(survey.issued_date))
+      let formatted_Close_Date = Utils.formatDate(new Date(survey.close_date))
+      let formatted_Issue_Date = Utils.formatDate(new Date(survey.issued_date))
       
       this.state = {
           survey: survey,
           close_date: formatted_Close_Date,
-          issued_date: formatted_Issue_Date
+          issued_date: formatted_Issue_Date,
+          surveyAnswers: []
       }
   }
-
-   formatDate(date) {
-    var year = date.getFullYear();
-  
-    var month = (1 + date.getMonth()).toString();
-    month = (month.length) > 1 ? month : '0' + month;
-  
-    var day = date.getDate().toString();
-    day = (day.length) > 1 ? day : '0' + day;
-    
-    return month + '/' + day + '/' + year;
-  }
-
 
   render() {
     function handleSubmit() {
