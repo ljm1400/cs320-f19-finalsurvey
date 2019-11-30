@@ -17,23 +17,29 @@ export default class TakingSurvey extends Component {
           surveyAnswers: []
       }
   }
+  changeAnswers(answers) {
+    this.setState({
+      surveyAnswers: answers
+    })
+  }
 
   render() {
     function handleSubmit() {
       alert('You have submitted your survey. Thank you!');
     }
+
     return (
         <div className="header">
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
             <h3>{"Issue Date: " + this.state.issued_date}</h3>
             <h3>{"Closing Date: " + this.state.close_date}</h3>
 
-            <div className="surveyQuestions">
+            <form className="surveyQuestions" onSubmit={handleSubmit}>
               {this.state.survey.questions.map((questionObj, index) => {
-                return <Answer questionObj={questionObj}></Answer>        
+                return <Answer questionObj={questionObj} changeAnswers={this.changeAnswers.bind(this)}></Answer>     
               })}
-               <button style={{fontSize:20}} onClick={handleSubmit}>Submit Survey</button>
-            </div>
+                <input type="submit" value="Submit Survey"></input>
+            </form>
         </div> 
     );
   }

@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, Redirect} from 'react';
 import QuestionList from './QuestionList';
 import uuidv4 from 'uuid/v4';
 import axios from 'axios';
@@ -19,8 +19,10 @@ function CreateSurvey(props) {
     }
     const [questionNum, setQuestionNum] = useState(1);
     const [close_date, setCloseDate] = useState(new Date());
+    const [release_date, setReleaseDate] = useState(new Date());
+
     const [questions,setQuestions] = useState([{}])
-    const [radio, setRadio] = useState("");
+    const [radio, setRadio] = useState("t");
 
     const surveyTitle = useRef()
     const questionNameRef = useRef()
@@ -77,9 +79,12 @@ function CreateSurvey(props) {
         setQuestions(newQuestions)
     }
 
-    function c(){
+    function handleSubmit(){
         alert('You have submitted the survey');
-        
+        if(questions.length == 0) {
+            console.info("Please add 1 question")
+            return false;
+        }
         // let questionList = [];
         // Object.keys(questions).forEach(function(key) {
         //     console.log(questions[key])
@@ -111,7 +116,7 @@ function CreateSurvey(props) {
 
         const {employeeId, companyId} = user
         axios.post('http://localhost:5000/users/update/', user, {params:{employeeId: employeeId, companyId}})
-            .then(res => console.log("Post Response: " + res.data))
+            .then(res => console.log("Updated Manager Open Surveys Response: " + res.data))
     }
 
     function handleRadio(e){
@@ -121,43 +126,59 @@ function CreateSurvey(props) {
     function handleCloseDate(date) {
         setCloseDate(date);
     }
+    function handleReleaseDate(date) {
+        setReleaseDate(date);
+    }
     
     return(
             <div className='createSurvey'>
                 <h2>Create a Survey</h2>
-                <label style={{fontSize:20}}>Survey Title
-                    <input ref={surveyTitle} type="text" style={{margin:10, fontSize:20}}/>
+                <form onSubmit={handleSubmit}>
+                    <label style={{fontSize:20}}>Survey Title
+                        <input ref={surveyTitle} type="text" style={{margin:10, fontSize:20}} required/>
+                    </label>
+                    
                     <br></br>
-                </label>
-                <label style={{fontSize:20}}>Closing Date 
-                    <DatePicker selected={close_date} onChange={handleCloseDate}></DatePicker>
-                </label>
-               
-                <label style={{fontSize:20}}>Question
-                    <input id= "ques" ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
-                </label>
-                <label style={{fontSize:20}}>Category
-                    <input ref={categoryRef} type="text" style={{margin:10, fontSize:20}}/>
-                </label>
+                    <label style={{fontSize:20}}>Closing Date 
+                        <DatePicker className="closingDate" selected={close_date} onChange={handleCloseDate}></DatePicker>
+                    </label>
+                    <label style={{fontSize:20}}>Release date 
+                        <DatePicker selected={release_date} onChange={handleReleaseDate}></DatePicker>
+                    </label>
+    
+                    <br></br>
+                    <label style={{fontSize:20}}>Question
+                        <input id= "ques" ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
+                    </label>
+                    <label style={{fontSize:20}}>Category
+                        <input ref={categoryRef} type="text" style={{margin:10, fontSize:20}}/>
+                    </label>
 
-                <form>
-                    <label style={{fontSize:20}}>Multiple choice
-                        <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{margin:10}} />
-                    </label>
-                    <label style={{fontSize:20}}>True/False
-                        <input type="radio" value="tr" onChange={handleRadio} checked={radio === 'tr'} style={{margin:10}} />
-                    </label>
-                    <label style={{fontSize:20}}>Text
-                        <input type="radio" value="t" onChange={handleRadio} checked={radio === 't'} style={{margin:10, fontSize:20}} />
-                    </label>
-                    <label style={{fontSize:20}}>Slider
-                        <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{margin:10}} />
-                    </label>
+                        <label style={{fontSize:20}}>Multiple choice
+                            <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{margin:10}} />
+                        </label>
+                        <label style={{fontSize:20}}>True/False
+                            <input type="radio" value="tr" onChange={handleRadio} checked={radio === 'tr'} style={{margin:10}} />
+                        </label>
+                        <label style={{fontSize:20}}>Text
+                            <input type="radio" value="t" onChange={handleRadio} checked={radio === 't'} style={{margin:10, fontSize:20}} />
+                        </label>
+                        <label style={{fontSize:20}}>Slider
+                            <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{margin:10}} />
+                        </label>
+
+                        <button type="button" style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
+                        <button type="button" style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
+
+                        <input type="submit" value="Submit Survey"></input>
                 </form>
-                <button style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
-                <button style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
-                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
-                <button style={{fontSize:20}} onClick={c}>Submit Survey</button>
+
+              
+               
             </div>
     )
 }
