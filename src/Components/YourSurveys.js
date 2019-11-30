@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../css/style.css';
+import * as utils from './Utils.js'
 
 class YourSurveys extends Component {
   static propTypes = {
@@ -32,7 +33,6 @@ class YourSurveys extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      console.log('b' + this.state.takingSurvey)
       return <Redirect to={
           {
             pathname: '/TakingSurvey',
@@ -59,6 +59,8 @@ class YourSurveys extends Component {
             axios.get('http://localhost:5000/surveys/'+ survey)
           .then(survey => {
             surveyDataList.push(survey.data)
+          }).catch(function (error) {
+            console.log('Failed to get survey' + error);
           })
       )})
 
@@ -69,8 +71,7 @@ class YourSurveys extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated)
-      if(this.state.manager == null)
+    if(this.props.auth.isAuthenticated && this.state.manager == null)
         this.getManager(this.props.auth.user)
     //const{isAuthenticated, user} = this.props.auth;
     // const {manager} = this.state
@@ -88,28 +89,32 @@ class YourSurveys extends Component {
     //     </div> 
     //     );
     //   }
-    //   var surveys = this.state.surveyIds;
-    //   if(!surveys){
-    //     return <div className="header">
-    //     <h2>You have no open surveys</h2>
-    //     <p>{manager ? "Your manager's name is: " + `${manager.firstName}`:''}</p>
-    //     </div>
-    //   }
-    // }
+
+      if(this.state.surveyIdList.length == 0) {
+        return <div className="header">
+          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName + ' ' + this.state.manager.lastName}`:''}</p>
+          <h2>You have no open surveys</h2>
+        </div>
+      }
 
     return (
         <div className="header">
-          <h2>Your Surveys</h2>
+          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName + ' ' + this.state.manager.lastName}`:''}</p>
+          <h2>Surveys ToDo</h2>
           {this.renderRedirect()}
           <div>
-              <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName}`:''}</p>
               {this.state.surveyDataList.map((survey, index) => {
+                  if(survey == null) {return null}
                   return <>
                     <button className="surveyResults" 
-                      onClick={ ()=> this.setRedirect(index)}>{survey.title_survey} </button>
+                      onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
+                      <br></br>
+                      {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
+                    </button>
                   </>
               })}                                
-          </div>         
+          </div>   
+          <h2>Completed Surveys</h2>      
         </div> 
     );
   }
