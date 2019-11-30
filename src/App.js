@@ -12,6 +12,7 @@ import TakingSurvey from './Components/TakingSurvey';
 import loginModal from './Components/login';
 import { Provider } from 'react-redux';
 import {loadUser} from './actions/authActions'
+import { Button } from 'reactstrap';
 
 
 export default class App extends Component {
@@ -25,8 +26,6 @@ export default class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
   }
-  
-
   
   render() {
     const mySidenav= () => {

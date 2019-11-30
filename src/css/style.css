@@ -19,7 +19,6 @@ body {
 }
 
 .sidenav {
-  border-radius: 10px;
   height: 100%;
   width: 210px;
   position: fixed;
@@ -106,6 +105,29 @@ body {
 h3{
   margin: 1px;
 }
+
+#surveys {
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  width: 90%;
+}
+
+#surveys td, #surveys th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#surveys tr:nth-child(n){background-color: #f2f2f2;}
+
+#surveys th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #0F9D58;
+  color: white;
+}
+
 .surveyQuestions{
   font-size: 20px;
   cursor: pointer;

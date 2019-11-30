@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/style.css';
 import Answer from './Answer';
+import { Button, Form, FormGroup } from 'reactstrap';
 import * as Utils from './Utils.js'
 
 export default class TakingSurvey extends Component {
@@ -32,7 +33,7 @@ export default class TakingSurvey extends Component {
               {this.state.survey.questions.map((questionObj, index) => {
                 return <Answer questionObj={questionObj}></Answer>        
               })}
-               <button style={{fontSize:20}} onClick={handleSubmit}>Submit Survey</button>
+              <Button color="success" onClick={handleSubmit}>Submit Survey</Button>{' '}
             </div>
         </div> 
     );
