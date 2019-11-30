@@ -171,10 +171,8 @@ function CreateSurvey(props) {
                         <button type="button" style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
                         <button type="button" style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
                         <br></br>
-                        <br></br>
-                        <br></br>
-                        <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
 
+                        <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
                         <input type="submit" value="Submit Survey"></input>
                 </form>
 
