@@ -21,24 +21,43 @@ export default class TakingSurvey extends Component {
       redirect: false
     }      
   }
+  
+  changeAnswers(answers) {
+    this.setState({
+      surveyAnswers: answers
+    })
+  }
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
 
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/YourSurveys' />
     }
+  }
+
+  handleSubmit() {
+    this.setRedirect();
+    alert('You have submitted your survey. Thank you!');
+  }
+
+  render() {
     return (
         <div className="header">
           {this.renderRedirect()}
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
             <h3>{"Issue Date: " + this.state.issued_date}</h3>
-            <h3>{"Closing Date: " + this.state.close_date}</h3>
-
-            <div className="surveyQuestions">
+            <h3>{"Close Date: " + this.state.close_date}</h3>
+            
+            <form className="surveyQuestions" onSubmit={this.handleSubmit}>
               {this.state.survey.questions.map((questionObj, index) => {
                 return <Answer questionObj={questionObj}></Answer>        
               })}
-              <Button color="success" onClick={handleSubmit}>Submit Survey</Button>{' '}
-            </div>
+              <Button color="success" onClick={this.handleSubmit}>Submit Survey</Button>{' '}
+            </form>
         </div> 
     );
   }
