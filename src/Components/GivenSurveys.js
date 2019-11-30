@@ -71,12 +71,13 @@ class GivenSurveys extends Component {
                       closingDate={'Closing Date: ' + formatDate(new Date(survey.close_date))}>
                           <h3>Questions</h3>
                           <div className="surveyQuestions">
-                              {survey.questions.map((question, index) => {
-                                return <p>{index+1}) {question}</p>              
+                              {survey.questions.map((questionObj, index) => {
+                                return <p>{questionObj.num}) {questionObj.name + ' (Category:'+questionObj.category + ')'}</p>              
                               })}
                           </div>
                           <h3>Answers</h3>
-                          <p>Very satisfied, Not Satisfied, Not Satisfied, Ok</p>
+                          <p>1) Very satisfied, Not Satisfied, Not Satisfied, Ok</p>
+                          <p>2) Ok</p>
                           <h3>Analytics</h3>
                           <p>Project 1 Label: Employees satisfied</p>
                           <p>Project 2 Label: Employees not satisfied</p>
