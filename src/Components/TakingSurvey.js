@@ -37,7 +37,7 @@ export default class TakingSurvey extends Component {
               {this.state.survey.questions.map((questionObj, index) => {
                 return <Answer questionObj={questionObj}></Answer>        
               })}
-              <Button color="success" onClick={handleSubmit}>Submit Survey</Button>{' '}
+              <Button color="success" >Submit Survey</Button>{' '}
             </div>
         </div> 
     );

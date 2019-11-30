@@ -120,8 +120,12 @@ function CreateSurvey(props) {
     }
 
     function handleRadio(e){
-        setRadio(e.target.value)
-        console.log(e.target.value)
+        let value = e.target.value
+        setRadio(value)
+        if(value == "m") {
+            
+        }
+
     }
     function handleCloseDate(date) {
         setCloseDate(date);

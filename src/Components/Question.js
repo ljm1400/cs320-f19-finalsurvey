@@ -18,11 +18,11 @@ export default function Question({ question,toggleQuestion, radio }) {
       }
       else if(radio === 'm'){
         // multiple choice
-        return <label>
-        Option 1<input style={{margin:10}} type="checkbox"></input>
-        Option 2<input style={{margin:10}} type="checkbox"></input>
-        Option 3<input style={{margin:10}} type="checkbox"></input>
-        Option 4<input style={{margin:10}} type="checkbox"></input>
+        return <label className="radioButtons">
+        Option 1<input style={{margin:10}} type="input"></input> <br></br>
+        Option 2<input style={{margin:10}} type="input"></input> <br></br>
+        Option 3<input style={{margin:10}} type="input"></input> <br></br>
+        Option 4<input style={{margin:10}} type="input"></input> <br></br>
           </label>
       }
       else if(radio === 'tr'){
