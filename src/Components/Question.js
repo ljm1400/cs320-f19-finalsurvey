@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import '../css/style.css'
 
 export default function Question({ question,toggleQuestion, radio }) {
   
@@ -49,6 +50,8 @@ export default function Question({ question,toggleQuestion, radio }) {
       </label> */}
       <label style={{margin:20}} >{question.name + '  (Category: '+question.category+')'}</label>
       <Question></Question>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+      <button class="buttons" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
       <label style={{margin:20, fontSize: 20}} >(Delete)</label>
       <input style={{marginLeft:20}} type="checkbox" checked={question.complete} onChange={handleQuestionClick} />
     </div>

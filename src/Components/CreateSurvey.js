@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect, Redirect} from 'react';
 import QuestionList from './QuestionList';
 import uuidv4 from 'uuid/v4';
+import '../css/style.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -157,6 +158,7 @@ function CreateSurvey(props) {
                     <label style={{fontSize:20}}>Category
                         <input ref={categoryRef} type="text" style={{margin:10, fontSize:20}}/>
                     </label>
+                    <br></br>
 
                         <label style={{fontSize:20}}>Multiple choice
                             <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{margin:10}} />
@@ -172,11 +174,10 @@ function CreateSurvey(props) {
                         </label>
                         
                         <br></br>                        
-                        <button type="button" style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
-                        <button type="button" style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
+                        <button type="buttons" onClick={handleAddQuestion}>Add Question</button>
                         <br></br>
-
                         <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
+                        <br></br>
                         <input type="submit" value="Submit Survey"></input>
                 </form>
 
