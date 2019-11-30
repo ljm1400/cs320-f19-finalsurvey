@@ -6,7 +6,8 @@ export default class Answer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            open: false
+            open: false,
+            questionObj: this.props.questionObj
         }
         this.togglePanel = this.togglePanel.bind(this);
     }
@@ -16,14 +17,21 @@ export default class Answer extends React.Component {
     }
 
     render() {
-        return (
-        <div>
-            <div onClick={(e) => this.togglePanel(e)} className="surveyResults">
-                {this.props.title} 
-                <div className='issuedDate'>{this.props.issueDate}</div>
-                <div className='closingDate'>{this.props.closingDate}</div>
-            </div>                 
-            {this.state.open ? (<div className='surveyQuestions'>{this.props.children}</div>) : null }
+        let questionType = ""
+        if(this.state.questionObj.type="t") {
+            questionType="text"
+        }
+        return ( 
+        /* pass in question object 
+                num, name, type, options, category
+        {num: 1, name: "how satisfied are you?", type: text, 
+            options: ["not satisfied", "satisfied"], category: workload} 
+        }
+        */
+        <div className="answer">
+            <p>{'Question ' + this.state.questionObj.num}) {this.state.questionObj.name}</p>
+            <p>{'Category: ' + this.state.questionObj.category}</p>
+             <input type={questionType} style={{margin:10, fontSize:20}}/>
         </div>);
     }
 

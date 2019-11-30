@@ -17,18 +17,19 @@ function CreateSurvey(props) {
         close_date: "",
         issued_by: "",
     }
+    const [questionNum, setQuestionNum] = useState(1);
     const [close_date, setCloseDate] = useState(new Date());
-    const [questions,setQuestions] = useState([{id:1, name:'question', complete:false}])
-    const [radio, setRadio] = useState(0);
+    const [questions,setQuestions] = useState([{}])
+    const [radio, setRadio] = useState("");
+
     const surveyTitle = useRef()
     const questionNameRef = useRef()
+    const categoryRef = useRef()
 
     var propTypes = {
         auth: PropTypes.object.isRequired
     };
     const { isAuthenticated, user } = props.auth;
-    console.log(user);
-    console.log(props.auth)
 
     // const [todos,setTodos] = useState(['question 1','question 2']) -> this was the earlier version
     // the first argument is the state, and the second is the function we will call on that state
@@ -45,14 +46,26 @@ function CreateSurvey(props) {
 
 
     function handleAddQuestion(e){
+        const quesNum = questionNum
         const name = questionNameRef.current.value
-        console.log(user.employeeId)
+        const type = radio
+        const options = ["satisfied", "not satisfied"]
+        const category = categoryRef.current.value
 
         if(name === '') return
+        setQuestionNum(quesNum + 1)
+
         setQuestions(prevQuestions => {
-            return [...prevQuestions, {id:uuidv4(), name:name, complete:false}]
+            
+                let obj = {id:uuidv4(), num: quesNum, name:name, type: type, 
+                    options:options, category:category, complete:false}
+                prevQuestions.push(obj);
+                return prevQuestions
         })
+        console.log(questions)
+        document.getElementById('ques').value='';
     }
+
     function toggleQuestion(id) {
         const newQuestions = [...questions]
         const question = newQuestions.find(question => question.id === id)
@@ -68,16 +81,18 @@ function CreateSurvey(props) {
     function c(){
         alert('You have submitted the survey');
         
-        let questionList = [];
-        Object.keys(questions).forEach(function(key) {
-            questionList.push(questions[key].name);
-        })
+        // let questionList = [];
+        // Object.keys(questions).forEach(function(key) {
+        //     console.log(questions[key])
+        //     questionList.push(questions[key]);
+        // })
   
         // set the state's values
         state.title_survey = surveyTitle.current.value;
-        state.questions = questionList;
+        state.questions = questions;
         state.issued_by = user.employeeId
         state.close_date = close_date;
+        console.log('FINAL STATE')
         console.log(state);
 
         axios.post("http://localhost:5000/surveys/add", state)
@@ -91,7 +106,6 @@ function CreateSurvey(props) {
 
 
     function updateManagerOpenList(newSurveyId) {
-        console.log(newSurveyId);
         let surveyIdList = user.openSurveys;
         surveyIdList.push(newSurveyId)
         user.openSurveys = surveyIdList
@@ -103,10 +117,10 @@ function CreateSurvey(props) {
 
     function handleRadio(e){
         setRadio(e.target.value)
+        console.log(e.target.value)
     }
     function handleCloseDate(date) {
         setCloseDate(date);
-        console.log(date);
     }
     
     return(
@@ -121,7 +135,10 @@ function CreateSurvey(props) {
                 </label>
                
                 <label style={{fontSize:20}}>Question
-                    <input ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
+                    <input id= "ques" ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
+                </label>
+                <label style={{fontSize:20}}>Category
+                    <input ref={categoryRef} type="text" style={{margin:10, fontSize:20}}/>
                 </label>
 
                 <form>

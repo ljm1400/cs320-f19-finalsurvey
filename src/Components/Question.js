@@ -47,7 +47,7 @@ export default function Question({ question,toggleQuestion, radio }) {
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
         {todo.name}
       </label> */}
-      <label style={{margin:20}} >{question.name}</label>
+      <label style={{margin:20}} >{question.name + '  (Category: '+question.category+')'}</label>
       <Question></Question>
       <label style={{margin:20, fontSize: 20}} >(Delete)</label>
       <input style={{marginLeft:20}} type="checkbox" checked={question.complete} onChange={handleQuestionClick} />
