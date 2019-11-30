@@ -100,7 +100,7 @@ class YourSurveys extends Component {
     return (
         <div className="header">
           <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName + ' ' + this.state.manager.lastName}`:''}</p>
-          <h2>Surveys ToDo</h2>
+          <h2>Surveys To Do</h2>
           {this.renderRedirect()}
           <div>
               {this.state.surveyDataList.map((survey, index) => {

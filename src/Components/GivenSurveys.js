@@ -35,7 +35,7 @@ class GivenSurveys extends Component {
             openSurveyDataList.push(survey.data)
           })
           .catch(function(error) {
-            console.log("Could not get survey: " + error)
+            console.log("Could not get survey: " + survey + '\n' +error)
           })
       )})
 
