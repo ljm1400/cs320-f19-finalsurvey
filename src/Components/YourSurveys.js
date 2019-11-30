@@ -69,8 +69,7 @@ class YourSurveys extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated)
-      if(this.state.manager == null)
+    if(this.props.auth.isAuthenticated && this.state.manager == null)
         this.getManager(this.props.auth.user)
     //const{isAuthenticated, user} = this.props.auth;
     // const {manager} = this.state
@@ -88,18 +87,17 @@ class YourSurveys extends Component {
     //     </div> 
     //     );
     //   }
-    //   var surveys = this.state.surveyIds;
-    //   if(!surveys){
-    //     return <div className="header">
-    //     <h2>You have no open surveys</h2>
-    //     <p>{manager ? "Your manager's name is: " + `${manager.firstName}`:''}</p>
-    //     </div>
-    //   }
-    // }
+
+      if(this.state.surveyIdList.length == 0) {
+        return <div className="header">
+          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName + ' ' + this.state.manager.lastName}`:''}</p>
+          <h2>You have no open surveys</h2>
+        </div>
+      }
 
     return (
         <div className="header">
-          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName}`:''}</p>
+          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName + ' ' + this.state.manager.lastName}`:''}</p>
           <h2>Surveys ToDo</h2>
           {this.renderRedirect()}
           <div>

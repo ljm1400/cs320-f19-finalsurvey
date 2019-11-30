@@ -27,16 +27,21 @@ export default class TakingSurvey extends Component {
     return month + '/' + day + '/' + year;
   }
 
+
   render() {
+    function handleSubmit() {
+
+    }
     return (
         <div className="header">
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
-            <h3>{"Issued Date: " + this.state.issued_date}</h3>
+            <h3>{"Issue Date: " + this.state.issued_date}</h3>
             <h3>{"Closing Date: " + this.state.close_date}</h3>
             <div className="surveyQuestions">
               {this.state.survey.questions.map((question, index) => {
                 return <p>{index+1}) {question}</p>              
               })}
+               <button style={{fontSize:20}} onClick={handleSubmit}>Submit Survey</button>
             </div>
         </div> 
     );
