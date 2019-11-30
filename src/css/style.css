@@ -85,6 +85,11 @@ body {
   padding: 10px 10px;
 }
 
+.createSurvey.closingDate {
+  margin-right:5 px;
+  padding: 10px;
+}
+
 .surveyResults {
   background-color: #0F9D58;
   font-size: 20px;
@@ -97,6 +102,21 @@ body {
   border-radius:10px;
   cursor: pointer;
 }
+
+  input[type=text] {padding:5px; border:2px solid #ccc; 
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+  }
+  input[type=text]:focus {border-color:#333; }
+  
+  input[type=submit] {
+      width: 10em;  height: 2em;
+      font-size: 20px;
+      padding:5px 15px; background:#ccc; border:0 none;
+      cursor:pointer;
+      -webkit-border-radius: 5px;
+      border-radius: 5px; 
+  }
 
 .active, .surveyResults:hover {
   background-color: rgb(98, 182, 42);
@@ -129,7 +149,7 @@ h3{
 }
 
 .surveyQuestions{
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   background-color: #afcdf5;
   font-family: verdana;
