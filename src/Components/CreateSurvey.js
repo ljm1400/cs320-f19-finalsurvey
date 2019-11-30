@@ -166,7 +166,8 @@ function CreateSurvey(props) {
                         <label style={{fontSize:20}}>Slider
                             <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{margin:10}} />
                         </label>
-
+                        
+                        <br></br>                        
                         <button type="button" style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
                         <button type="button" style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
                         <br></br>
