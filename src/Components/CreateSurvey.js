@@ -111,6 +111,7 @@ function CreateSurvey(props) {
 
     function updateManagerOpenList(newSurveyId) {
         let surveyIdList = user.openSurveys;
+        if(surveyIdList.length == 0){surveyIdList = []}
         surveyIdList.push(newSurveyId)
         user.openSurveys = surveyIdList
 
