@@ -8,9 +8,14 @@ export default class Answer extends React.Component {
         this.state = {
             open: false,
             questionObj: this.props.questionObj,
+            changeAnswers: this.props.changeAnswers,
             answers: []
         }
         this.togglePanel = this.togglePanel.bind(this);
+        function handleChange(e) {
+            
+            this.props.changeAnswers(e)
+        }
     }
 
     togglePanel(e){
@@ -18,15 +23,16 @@ export default class Answer extends React.Component {
     }
 
     render() {
+        const {changeAnswers} = this.props
         let questionType = this.state.questionObj.type
-        if(questionType="t") {
+        if(questionType==="t") {
             questionType="text"
-        } else if(questionType="tr") {
+        } else if(questionType==="tr") {
             questionType="radio"
         }
 
         function handleChange(e) {
-            this.props.changeAnswers(e)
+            changeAnswers(e)
         }
 
         return ( 
