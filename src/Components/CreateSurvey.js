@@ -177,7 +177,7 @@ function CreateSurvey(props) {
                         </label>
                         
                         <br></br>                        
-                        <button type="buttons" onClick={handleAddQuestion}>Add Question</button>
+                        <button type="button" style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
                         <br></br>
                         <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
                         <br></br>
