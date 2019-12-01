@@ -141,8 +141,8 @@ function CreateSurvey(props) {
     function handleReleaseDate(date) {
         setReleaseDate(date);
     }
-    function randerTableHeader() {
-        let header = ["Type", "Question", "Category", "Option"]
+    function renderTableHeader() {
+        let header = ["Type", "Question", "Category", ""]
         return header.map((key, index) => {
             return <th key={index}>{key}</th>
         })
@@ -165,12 +165,6 @@ function CreateSurvey(props) {
                 </label>
 
                 <br></br>
-                <table id="surveys">
-                    <tbody>
-                        <tr>{randerTableHeader()}</tr>
-                    </tbody>
-                </table>
-
 
                 <label style={{ fontSize: 20 }}>Question
                         <input id="ques" ref={questionNameRef} type="text" style={{ margin: 10, fontSize: 20 }} />
@@ -195,8 +189,9 @@ function CreateSurvey(props) {
 
                 <br></br>
                 <button type="button" style={{ fontSize: 20, margin: 10, backgroundColor: 'white' }} onClick={handleAddQuestion}>Add Question</button>
+                <button type="button" onClick={handleClearQuestions}>remove question</button>
                 <br></br>
-                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio} />
+                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
                 <br></br>
                 <input type="submit" value="Submit Survey"></input>
             </form>

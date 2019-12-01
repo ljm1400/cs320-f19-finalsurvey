@@ -8,6 +8,9 @@ export default function Question({ question,toggleQuestion, radio }) {
   function handleQuestionClick() {
     toggleQuestion(question.id)
   }
+
+  function handleRemove(){
+  }
   // var a = 1;
   function Question(){
       if(radio === 's'){
@@ -43,15 +46,32 @@ export default function Question({ question,toggleQuestion, radio }) {
   }
 
   return (
+    <tr>
+      <td>
+        {question.name}
+        <br></br>
+        <Question></Question>
+      </td>
+      <td>{question.category}</td>
+      <td>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <button type="button" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  )
+
+  /**
+  return (
     <div style={{margin:10, padding:10}}>
       {/* <label>
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
         {todo.name}
-      </label> */}
+      </label> }
       <label style={{margin:20}} >{question.name + '  (Category: '+question.category+')'}</label>
       <Question></Question>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <button type="button" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
     </div>
   )
+  */
 }
