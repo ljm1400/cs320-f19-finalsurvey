@@ -47,7 +47,7 @@ class GivenSurveys extends Component {
   }
 
   randerTableHeader() {
-    let header = ["Question Number", "Questions", "Category", "Answers"]
+    let header = ["#", "Questions", "Category", "Answers"]
     return header.map((key, index) => {
       return <th key={index}>{key}</th>
     })
