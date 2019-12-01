@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import '../css/style.css'
-import { Collapse, Card, CardBody} from 'reactstrap'
 
 export default function Question({ question,toggleQuestion, radio }) {
   
@@ -50,9 +49,9 @@ export default function Question({ question,toggleQuestion, radio }) {
         {todo.name}
       </label> */}
       <label style={{margin:20}} >{question.name + '  (Category: '+question.category+')'}</label>
-      
+      <Question></Question>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-      <button className="buttons" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
+      <button type="button" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
     </div>
   )
 }
