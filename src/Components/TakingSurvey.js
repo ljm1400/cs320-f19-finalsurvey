@@ -35,11 +35,14 @@ export default class TakingSurvey extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/YourSurveys' />
+      return <Redirect to={
+        {
+          pathname: '/YourSurveys'    
+        }} />
     }
   }
 
-  handleSubmit() {
+  handleSubmitButton() {
     this.setRedirect();
     alert('You have submitted your survey. Thank you!');
   }
@@ -52,11 +55,12 @@ export default class TakingSurvey extends Component {
             <h3>{"Issue Date: " + this.state.issued_date}</h3>
             <h3>{"Close Date: " + this.state.close_date}</h3>
             
-            <form className="surveyQuestions" onSubmit={this.handleSubmit}>
+            <form className="surveyQuestions" onSubmit={this.handleSubmitButton}>
               {this.state.survey.questions.map((questionObj, index) => {
                 return <Answer questionObj={questionObj}></Answer>        
               })}
-              <Button color="success" onClick={this.handleSubmit()}>Submit Survey</Button>{' '}
+              <Button color="success">Submit Survey</Button>{' '}
+              {/* don't need onClick for button, since form is handling the onSubmit */}
             </form>
         </div> 
     );
