@@ -6,10 +6,7 @@ export default function Question({ question,toggleQuestion, radio }) {
   // var [a,b] = useState('radio');
   // a = radio;
   function handleQuestionClick() {
-    toggleQuestion(question.id)
-  }
-
-  function handleRemove(){
+    toggleQuestion(question.id, 'remove')
   }
   // var a = 1;
   function Question(){
@@ -46,7 +43,7 @@ export default function Question({ question,toggleQuestion, radio }) {
   }
 
   return (
-    <tr>
+    <>
       <td>
         {question.name}
         <br></br>
@@ -57,7 +54,7 @@ export default function Question({ question,toggleQuestion, radio }) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
         <button type="button" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
       </td>
-    </tr>
+    </>
   )
 
   /**

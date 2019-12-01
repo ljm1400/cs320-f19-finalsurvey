@@ -72,16 +72,19 @@ function CreateSurvey(props) {
         document.getElementById('ques').value = '';
     }
 
-    function toggleQuestion(id) {
+    function toggleQuestion(id, action) {
         const newQuestions = [...questions]
         const question = newQuestions.find(question => question.id === id)
         question.complete = !question.complete
         setQuestions(newQuestions)
+
+        if (action === 'remove') {
+            const newQuestions = questions.filter(question => !question.complete)
+            setQuestions(newQuestions)
+        }
     }
 
     function handleClearQuestions() {
-        const newQuestions = questions.filter(question => !question.complete)
-        setQuestions(newQuestions)
     }
 
     function handleSubmit() {
@@ -141,12 +144,6 @@ function CreateSurvey(props) {
     function handleReleaseDate(date) {
         setReleaseDate(date);
     }
-    function renderTableHeader() {
-        let header = ["Type", "Question", "Category", ""]
-        return header.map((key, index) => {
-            return <th key={index}>{key}</th>
-        })
-    }
 
     return (
         <div className='createSurvey'>
@@ -189,9 +186,8 @@ function CreateSurvey(props) {
 
                 <br></br>
                 <button type="button" style={{ fontSize: 20, margin: 10, backgroundColor: 'white' }} onClick={handleAddQuestion}>Add Question</button>
-                <button type="button" onClick={handleClearQuestions}>remove question</button>
                 <br></br>
-                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
+                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio} />
                 <br></br>
                 <input type="submit" value="Submit Survey"></input>
             </form>
