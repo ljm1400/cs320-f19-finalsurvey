@@ -23,64 +23,83 @@ class GivenSurveys extends Component {
     };
   }
 
-  getOpenSurveys = (surveyList) => {  
-      let opensurveyIdList = surveyList
-      let openSurveyDataList = []
-      let requests = []
+  getOpenSurveys = (surveyList) => {
+    let opensurveyIdList = surveyList
+    let openSurveyDataList = []
+    let requests = []
 
-      opensurveyIdList.forEach(function(survey) {
-          requests.push(
-            axios.get('http://localhost:5000/surveys/'+ survey)
+    opensurveyIdList.forEach(function (survey) {
+      requests.push(
+        axios.get('http://localhost:5000/surveys/' + survey)
           .then(survey => {
             openSurveyDataList.push(survey.data)
           })
-          .catch(function(error) {
-            console.log("Could not get survey: " + survey + '\n' +error)
+          .catch(function (error) {
+            console.log("Could not get survey: " + error)
           })
-      )})
+      )
+    })
 
-      // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
-      Promise.all(requests).then((val) => {
-        this.setState({openSurveyDataList: openSurveyDataList})
-      })
-   }
+    // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
+    Promise.all(requests).then((val) => {
+      this.setState({ openSurveyDataList: openSurveyDataList })
+    })
+  }
 
+  randerTableHeader() {
+    let header = ["#", "Questions", "Category", "Answers"]
+    return header.map((key, index) => {
+      return <th key={index}>{key}</th>
+    })
+  }
+
+  randerTableItems(questions) {
+    return questions.map((sur, index) => {
+      // temporarily hardcode survey answers
+      return (
+        <tr>
+          <td>{sur.num}</td>
+          <td>{sur.name}</td>
+          <td>{sur.category}</td>
+          <td>Ans{sur.num}</td>
+        </tr>
+      )
+    })
+  }
 
   render() {
-    if (this.props.auth.isAuthenticated && this.state.gotSurveyData == false){
+    if (this.props.auth.isAuthenticated && this.state.gotSurveyData == false) {
       this.getOpenSurveys(this.props.auth.user.openSurveys)
-      this.setState({gotSurveyData: true});
+      this.setState({ gotSurveyData: true });
     }
-    
+
     return (
-        <div className="header">
-            <h2>Open Surveys</h2>
-            <div>
-              {this.state.openSurveyDataList.map((survey) => {
-                   return <>
-                      <Collapsible 
-                      title={'Survey Title: ' + survey.title_survey} 
-                      issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
-                      closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
-                          <h3>Questions</h3>
-                          <div className="surveyQuestions">
-                              {survey.questions.map((questionObj, index) => {
-                                return <p>{questionObj.num}) {questionObj.name + ' (Category:'+questionObj.category + ')'}</p>              
-                              })}
-                          </div>
-                          <h3>Answers</h3>
-                          <p>1) Very satisfied, Not Satisfied, Not Satisfied, Ok</p>
-                          <p>2) Ok</p>
-                          <h3>Analytics</h3>
-                          <p>Project 1 Label: Employees satisfied</p>
-                          <p>Project 2 Label: Employees not satisfied</p>
-                      </Collapsible>    
-                    </>          
-              })}
-            </div>
-            <h2>Closed Surveys</h2>
-        </div> 
-      
+      <div className="header">
+        <h2>Open Surveys</h2>
+        <div>
+          {this.state.openSurveyDataList.map((survey) => {
+            return <>
+              <Collapsible
+                title={'Survey Title: ' + survey.title_survey}
+                issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
+                closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
+                <h3>Questions</h3>
+                <table id='surveys'>
+                  <tbody>
+                    <tr>{this.randerTableHeader()}</tr>
+                    {this.randerTableItems(survey.questions)}
+                  </tbody>
+                </table>
+                <h3>Analytics</h3>
+                <p>Project 1 Label: Employees satisfied</p>
+                <p>Project 2 Label: Employees not satisfied</p>
+              </Collapsible>
+            </>
+          })}
+        </div>
+        <h2>Closed Surveys</h2>
+      </div>
+
     );
   }
 }

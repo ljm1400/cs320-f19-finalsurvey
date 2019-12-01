@@ -26,8 +26,6 @@ export default class App extends Component {
     store.dispatch(loadUser());
   }
   
-
-  
   render() {
     const mySidenav= () => {
       return (
