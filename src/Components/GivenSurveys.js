@@ -102,7 +102,7 @@ class GivenSurveys extends Component {
                   </tbody>
                 </table>
 
-                <h3>Answers</h3>
+                <h3>Analytics</h3>
                 <p>Project 1 Label: Employees satisfied</p>
                 <p>Project 2 Label: Employees not satisfied</p>
               </Collapsible>
