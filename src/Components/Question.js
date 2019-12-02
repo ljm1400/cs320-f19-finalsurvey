@@ -15,14 +15,11 @@ export default function Question({ question,toggleQuestion, radio }) {
 
   // var a = 1;
   function Question(){
-      if(question.type === 'true_false'){
+      if(question.type === 'True False'){
         // slider
-        return <label>
-        True<input style={{margin:20}} type="radio"></input>
-        False<input style={{margin:20}} type="radio"></input>
-          </label>
+        return <></>
       }
-      else if(question.type === 'multiple'){
+      else if(question.type === 'Multiple Choice'){
         // multiple choice
         return <label className="radioButtons">
         Option 1<input style={{margin:10}} type="input"></input> <br></br>
@@ -31,13 +28,13 @@ export default function Question({ question,toggleQuestion, radio }) {
         Option 4<input style={{margin:10}} type="input"></input> <br></br>
           </label>
       }
-      else if(question.type === 'text'){
+      else if(question.type === 'Text'){
         // true false
         return <label>
-        <input style={{margin:20}} type="text"></input>
+        Question type: short/long answer
           </label>
       }
-      else if(question.type === 'slider'){
+      else if(question.type === 'Slider'){
         return <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
       }
       else{
@@ -56,6 +53,7 @@ export default function Question({ question,toggleQuestion, radio }) {
         <br></br>
         <Question></Question>
       </td>
+      <td>{question.type}</td>
       <td>{question.category}</td>
       <td>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>

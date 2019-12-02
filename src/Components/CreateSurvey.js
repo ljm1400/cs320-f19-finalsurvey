@@ -187,10 +187,10 @@ function CreateSurvey(props) {
 
                 <label style={{ fontSize: 20, margin:10 }}>Type:  
                     <select name="questionType" ref={typeRef} style={{margin:10}}>
-                        <option value="true_false">True / False</option>
-                        <option value="multiple">Multiple Choice</option>
-                        <option value="text">Text</option>
-                        <option value="slider">Slider</option>
+                        <option value="True False">True / False</option>
+                        <option value="Multiple Choice">Multiple Choice</option>
+                        <option value="Text">Text</option>
+                        <option value="Slider">Slider</option>
                     </select>
                 </label>
                 

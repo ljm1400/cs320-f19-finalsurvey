@@ -4,7 +4,7 @@ import Question from './Question'
 
 
 function randerTableHeader() {
-  let header = ["Question", "Category", "Option"]
+  let header = ["Question", "Type", "Category", "Option"]
   return header.map((key, index) => {
     return <th key={index}>{key}</th>
   })
