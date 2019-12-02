@@ -22,20 +22,18 @@ export default function Question({ question,toggleQuestion, radio }) {
       else if(question.type === 'Multiple Choice'){
         // multiple choice
         return <label className="radioButtons">
-        Option 1<input style={{margin:10}} type="input"></input> <br></br>
-        Option 2<input style={{margin:10}} type="input"></input> <br></br>
-        Option 3<input style={{margin:10}} type="input"></input> <br></br>
-        Option 4<input style={{margin:10}} type="input"></input> <br></br>
-          </label>
-      }
-      else if(question.type === 'Text'){
-        // true false
-        return <label>
-        Question type: short/long answer
-          </label>
+          Option 1<input style={{margin:10}} type="input"></input> <br></br>
+          Option 2<input style={{margin:10}} type="input"></input> <br></br>
+          Option 3<input style={{margin:10}} type="input"></input> <br></br>
+          Option 4<input style={{margin:10}} type="input"></input> <br></br>
+        </label>
       }
       else if(question.type === 'Slider'){
-        return <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
+        return <label className="radioButtons">
+          Low End:<input style={{margin:10}} type="input" value="Very Unhappy"></input> <br></br>
+          High End:<input style={{margin:10}} type="input" value="Very Happy"></input> <br></br>
+        </label>
+      
       }
       else{
         // text
