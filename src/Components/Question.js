@@ -30,8 +30,8 @@ export default function Question({ question,toggleQuestion, radio }) {
       }
       else if(question.type === 'Slider'){
         return <label className="radioButtons">
-          Low End:<input style={{margin:10}} type="input" value="Very Unhappy"></input> <br></br>
-          High End:<input style={{margin:10}} type="input" value="Very Happy"></input> <br></br>
+          Low End:<input style={{margin:10}} type="input" defaultValue="Very Unhappy"></input> <br></br>
+          High End:<input style={{margin:10}} type="input" defaultValue="Very Happy"></input> <br></br>
         </label>
       
       }
@@ -55,7 +55,7 @@ export default function Question({ question,toggleQuestion, radio }) {
       <td>{question.category}</td>
       <td>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <button type="button" onClick={handleQuestionClick}><i class="fa fa-trash"></i></button>
+        <button type="button" onClick={handleQuestionClick}><i className="fa fa-trash"></i></button>
       </td>
     </>
   )

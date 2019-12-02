@@ -8,19 +8,31 @@ import * as Utils from './Utils.js'
 export default class TakingSurvey extends Component {
   constructor(props) {
     super(props);
+    if(this.props.location.state){
+      let survey = this.props.location.state.survey
+      let formatted_Close_Date = Utils.formatDate(new Date(survey.close_date))
+      let formatted_Issue_Date = Utils.formatDate(new Date(survey.issued_date))
 
-    let survey = this.props.location.state.survey
-    let formatted_Close_Date = Utils.formatDate(new Date(survey.close_date))
-    let formatted_Issue_Date = Utils.formatDate(new Date(survey.issued_date))
-
-    this.state = {
-      survey: survey,
-      close_date: formatted_Close_Date,
-      issued_date: formatted_Issue_Date,
-      surveyAnswers: [],
-      redirect: false
-    }      
+      this.state = {
+        survey: survey,
+        close_date: formatted_Close_Date,
+        issued_date: formatted_Issue_Date,
+        surveyAnswers: [],
+        redirect: false
+      }  
+    }
+    else{
+      this.state = {
+        survey: null,
+        close_date: null,
+        issued_date: null,
+        surveyAnswers: [],
+        redirect: true
+      }  
+    }
   }
+
+
   
   changeAnswers(answers) {
     this.setState({
@@ -34,23 +46,21 @@ export default class TakingSurvey extends Component {
   }
 
   renderRedirect = () => {
-    if (this.state.redirect) {
       return <Redirect to={
         {
           pathname: '/YourSurveys'    
         }} />
     }
-  }
+  
 
   handleSubmitButton() {
-    this.setRedirect();
     alert('You have submitted your survey. Thank you!');
   }
 
   render() {
+    if(this.state.survey)
     return (
         <div className="header">
-          {this.renderRedirect()}
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
             <h3>{"Issue Date: " + this.state.issued_date}</h3>
             <h3>{"Close Date: " + this.state.close_date}</h3>
@@ -64,5 +74,7 @@ export default class TakingSurvey extends Component {
             </form>
         </div> 
     );
+    else
+    return this.renderRedirect();
   }
 }

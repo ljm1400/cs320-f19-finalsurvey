@@ -12,12 +12,11 @@ export default class Answer extends React.Component {
             answers: []
         }
         this.togglePanel = this.togglePanel.bind(this);
-        function handleChange(e) {
-            
-            this.props.changeAnswers(e)
-        }
     }
+    handleChange(e) {
 
+        this.state.changeAnswers(e)
+    }
     togglePanel(e){
        this.setState({open: !this.state.open})
     }
@@ -30,17 +29,12 @@ export default class Answer extends React.Component {
         } else if(questionType==="tr") {
             questionType="radio"
         }
-
-        function handleChange(e) {
-            changeAnswers(e)
-        }
-
         return ( 
         /* pass in question object { num, name, type, options, category } */
         <div className="answer">
             <p>{'Question ' + this.state.questionObj.num}) {this.state.questionObj.name}</p>
             <p>{'Category: ' + this.state.questionObj.category}</p>
-             <input type={questionType} onChange={e=>handleChange(e)} style={{margin:10, fontSize:20}} />
+             <input type={questionType} onSubmit={e=>this.handleChange(e)} style={{margin:10, fontSize:20}} />
         </div>);
     }
 
