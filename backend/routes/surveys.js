@@ -43,18 +43,16 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').post((req, res) => {
+router.route('/addAnswers/:id').post((req, res) => {
   Survey.findById(req.params.id)
     .then(survey => {
-      survey.title_survey = req.body.title_survey,
-      description_survey = req.body.description_survey,
-      questions = req.body.questions,
-      answers = req.body.answers,
-      close_date = Date.parse(req.body.close_date),
-      issued_date = Date.parse(req.body.issued_date),
-      issued_by = Number(req.body.issued_by),
+      if(survey.answers === null){
+        survey.answers = req.body.answers
+      }
+      else survey.answers.push(req.body.answers)
 
-      Survey.save()
+
+      survey.save()
         .then(() => res.json('Survey updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })

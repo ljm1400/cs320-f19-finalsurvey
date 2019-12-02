@@ -69,7 +69,7 @@ class GivenSurveys extends Component {
   }
 
   render() {
-    if (this.props.auth.isAuthenticated && this.state.gotSurveyData == false) {
+    if (this.props.auth.isAuthenticated && this.state.gotSurveyData === false) {
       this.getOpenSurveys(this.props.auth.user.openSurveys)
       this.setState({ gotSurveyData: true });
     }
