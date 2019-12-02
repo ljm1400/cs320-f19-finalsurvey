@@ -36,8 +36,7 @@ export default class Answer extends React.Component {
         return ( 
         /* pass in question object { num, name, type, options, category } */
         <div className="answer">
-            <p>{'Question ' + this.state.questionObj.num}) {this.state.questionObj.name}</p>
-            <p>{'Category: ' + this.state.questionObj.category}</p>
+            
              <input type={questionType}  onChange={e=>this.handleChange(e.target.value)} style={{margin:10, fontSize:20}} />
         </div>);
     }
