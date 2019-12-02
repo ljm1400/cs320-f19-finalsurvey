@@ -20,6 +20,7 @@ function CreateSurvey(props) {
         close_date: "",
         issued_by: "",
     }
+    
     const [questionNum, setQuestionNum] = useState(1);
     const [close_date, setCloseDate] = useState(new Date());
     const [release_date, setReleaseDate] = useState(new Date());
@@ -30,6 +31,7 @@ function CreateSurvey(props) {
     const surveyTitle = useRef()
     const questionNameRef = useRef()
     const categoryRef = useRef()
+    const typeRef = useRef()
 
     var propTypes = {
         auth: PropTypes.object.isRequired
@@ -53,7 +55,7 @@ function CreateSurvey(props) {
     function handleAddQuestion(e) {
         const quesNum = questionNum
         const name = questionNameRef.current.value
-        const type = radio
+        const type = typeRef.current.value
         const options = ["satisfied", "not satisfied"]
         const category = categoryRef.current.value
 
@@ -62,8 +64,13 @@ function CreateSurvey(props) {
 
         setQuestions(prevQuestions => {
             let obj = {
-                id: uuidv4(), num: quesNum, name: name, type: type,
-                options: options, category: category, complete: false
+                id: uuidv4(), 
+                num: quesNum,
+                name: name,
+                type: type,
+                options: options,
+                category: category,
+                complete: false
             }
             prevQuestions.push(obj);
             return prevQuestions
@@ -89,7 +96,7 @@ function CreateSurvey(props) {
 
     function handleSubmit() {
         alert('You have submitted the survey');
-        if (questions.length == 0) {
+        if (questions.length === 0) {
             console.info("Please add 1 question")
             return false;
         }
@@ -119,24 +126,20 @@ function CreateSurvey(props) {
 
     function updateManagerOpenList(newSurveyId) {
         let surveyIdList = user.openSurveys;
-        if (surveyIdList.length == 0 || surveyIdList == undefined) {
+        if (surveyIdList.length === 0 || surveyIdList === undefined) {
             surveyIdList = []
         }
         surveyIdList.push(newSurveyId)
         user.openSurveys = surveyIdList
 
         const { employeeId, companyId } = user
-        axios.post('http://localhost:5000/users/update/', user, { params: { employeeId: employeeId, companyId } })
+        axios.post('http://localhost:5000/users/update/', user, { params: { employeeId, companyId } })
             .then(res => console.log("Updated Manager Open Surveys Response: " + res.data))
     }
 
     function handleRadio(e) {
         let value = e.target.value
         setRadio(value)
-        if (value == "m") {
-
-        }
-
     }
     function handleCloseDate(date) {
         setCloseDate(date);
@@ -154,10 +157,10 @@ function CreateSurvey(props) {
                 </label>
 
                 <br></br>
-                <label style={{ fontSize: 20 }}>Closing Date
+                <label style={{ fontSize: 20, margin:10 }}>Closing Date
                         <DatePicker className="closingDate" selected={close_date} onChange={handleCloseDate}></DatePicker>
                 </label>
-                <label style={{ fontSize: 20 }}>Release date
+                <label style={{ fontSize: 20, margin:10 }}>Release date
                         <DatePicker selected={release_date} onChange={handleReleaseDate}></DatePicker>
                 </label>
 
@@ -169,7 +172,7 @@ function CreateSurvey(props) {
                 <label style={{ fontSize: 20 }}>Category
                         <input ref={categoryRef} type="text" style={{ margin: 10, fontSize: 20 }} />
                 </label>
-                <br></br>
+                {/* <br></br>
 
                 <label style={{ fontSize: 20 }}>Multiple choice
                             <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{ margin: 10 }} />
@@ -182,9 +185,23 @@ function CreateSurvey(props) {
                 </label>
                 <label style={{ fontSize: 20 }}>Slider
                             <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{ margin: 10 }} />
-                </label>
+                </label> */}
 
                 <br></br>
+                
+
+                <label style={{ fontSize: 20, margin:10 }}>Type:  
+                    <select name="questionType" ref={typeRef} style={{margin:10}}>
+                        <option value="True False">True / False</option>
+                        <option value="Multiple Choice">Multiple Choice</option>
+                        <option value="Text">Text</option>
+                        <option value="Slider">Slider</option>
+                    </select>
+                </label>
+                
+
+                <br></br>
+
                 <button type="button" style={{ fontSize: 20, margin: 10, backgroundColor: 'white' }} onClick={handleAddQuestion}>Add Question</button>
                 <br></br>
                 <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio} />

@@ -47,28 +47,38 @@ class GivenSurveys extends Component {
   }
 
   randerTableHeader() {
-    let header = ["#", "Questions", "Category", "Answers"]
+    let header = ["#", "Questions", "Type", "Category", "Answers"]
     return header.map((key, index) => {
       return <th key={index}>{key}</th>
     })
   }
-
-  randerTableItems(questions) {
+  formatAnswers(answers){
+    return answers.map((ans, index) => {
+      let person = ans
+      return person.map((answer, ind) =>{
+        if(ind !== 0)
+        return <p>{answer}</p>
+      })
+      
+    })
+  }
+  randerTableItems(questions, survey) {
     return questions.map((sur, index) => {
       // temporarily hardcode survey answers
       return (
         <tr>
           <td>{sur.num}</td>
           <td>{sur.name}</td>
+          <td>{sur.type}</td>
           <td>{sur.category}</td>
-          <td>Ans{sur.num}</td>
+          <td>{survey.answers ? this.formatAnswers(survey.answers) : ""}</td>
         </tr>
       )
     })
   }
 
   render() {
-    if (this.props.auth.isAuthenticated && this.state.gotSurveyData == false) {
+    if (this.props.auth.isAuthenticated && this.state.gotSurveyData === false) {
       this.getOpenSurveys(this.props.auth.user.openSurveys)
       this.setState({ gotSurveyData: true });
     }
@@ -84,12 +94,14 @@ class GivenSurveys extends Component {
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 <h3>Questions</h3>
+                
                 <table id='surveys'>
                   <tbody>
                     <tr>{this.randerTableHeader()}</tr>
-                    {this.randerTableItems(survey.questions)}
+                    {this.randerTableItems(survey.questions, survey)}
                   </tbody>
                 </table>
+
                 <h3>Analytics</h3>
                 <p>Project 1 Label: Employees satisfied</p>
                 <p>Project 2 Label: Employees not satisfied</p>

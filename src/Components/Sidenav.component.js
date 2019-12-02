@@ -36,7 +36,7 @@ class Sidenav extends Component {
               <a href="/YourSurveys">Your Surveys</a>
               {isManager ? <a href="/CreateSurvey">Create Survey</a> : null}
               {isManager ?<a href="/GivenSurveys">Given Surveys</a> : null}
-              {isManager ?<a href="/Analytics">Analytics</a> : null}
+              
             </div>             
         </div>
         </>
@@ -51,3 +51,5 @@ export default connect(
   mapStateToProps,
   null
 )(Sidenav);
+
+// if we decide to add a separate analytics page later, we will need {isManager ?<a href="/Analytics">Analytics</a> : null} 
