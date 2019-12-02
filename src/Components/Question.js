@@ -8,16 +8,21 @@ export default function Question({ question,toggleQuestion, radio }) {
   function handleQuestionClick() {
     toggleQuestion(question.id, 'remove')
   }
+
+  // function handleTrueFalse(e){
+  //   let a = e.target.value;
+  // }
+
   // var a = 1;
   function Question(){
-      if(radio === 's'){
+      if(question.type === 'true_false'){
         // slider
         return <label>
-        1<input style={{margin:20}} type="radio"></input>
-        2<input style={{margin:20}} type="radio"></input>
+        True<input style={{margin:20}} type="radio"></input>
+        False<input style={{margin:20}} type="radio"></input>
           </label>
       }
-      else if(radio === 'm'){
+      else if(question.type === 'multiple'){
         // multiple choice
         return <label className="radioButtons">
         Option 1<input style={{margin:10}} type="input"></input> <br></br>
@@ -26,12 +31,14 @@ export default function Question({ question,toggleQuestion, radio }) {
         Option 4<input style={{margin:10}} type="input"></input> <br></br>
           </label>
       }
-      else if(radio === 'tr'){
+      else if(question.type === 'text'){
         // true false
         return <label>
-        True<input style={{margin:20}} type="radio"></input>
-        False<input style={{margin:20}} type="radio"></input>
+        <input style={{margin:20}} type="text"></input>
           </label>
+      }
+      else if(question.type === 'slider'){
+        return <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
       }
       else{
         // text
