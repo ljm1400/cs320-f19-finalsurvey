@@ -1,11 +1,14 @@
-import React, {useState, useRef, useEffect, Redirect} from 'react';
+import React, { useState, useRef, useEffect, Redirect } from 'react';
 import QuestionList from './QuestionList';
 import uuidv4 from 'uuid/v4';
+import '../css/style.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import 'reactstrap';
+
 
 const LOCAL_STORAGE_KEY = 'ultimate.questions'
 
@@ -17,16 +20,18 @@ function CreateSurvey(props) {
         close_date: "",
         issued_by: "",
     }
+    
     const [questionNum, setQuestionNum] = useState(1);
     const [close_date, setCloseDate] = useState(new Date());
     const [release_date, setReleaseDate] = useState(new Date());
 
-    const [questions,setQuestions] = useState([{}])
+    const [questions, setQuestions] = useState([{}])
     const [radio, setRadio] = useState("t");
 
     const surveyTitle = useRef()
     const questionNameRef = useRef()
     const categoryRef = useRef()
+    const typeRef = useRef()
 
     var propTypes = {
         auth: PropTypes.object.isRequired
@@ -47,41 +52,51 @@ function CreateSurvey(props) {
     }, [questions])
 
 
-    function handleAddQuestion(e){
+    function handleAddQuestion(e) {
         const quesNum = questionNum
         const name = questionNameRef.current.value
-        const type = radio
+        const type = typeRef.current.value
         const options = ["satisfied", "not satisfied"]
         const category = categoryRef.current.value
 
-        if(name === '') return
+        if (name === '') return
         setQuestionNum(quesNum + 1)
 
-        setQuestions(prevQuestions => {            
-            let obj = {id:uuidv4(), num: quesNum, name:name, type: type, 
-                options:options, category:category, complete:false}
+        setQuestions(prevQuestions => {
+            let obj = {
+                id: uuidv4(), 
+                num: quesNum,
+                name: name,
+                type: type,
+                options: options,
+                category: category,
+                complete: false
+            }
             prevQuestions.push(obj);
             return prevQuestions
         })
         console.log(questions)
-        document.getElementById('ques').value='';
+        document.getElementById('ques').value = '';
     }
 
-    function toggleQuestion(id) {
+    function toggleQuestion(id, action) {
         const newQuestions = [...questions]
         const question = newQuestions.find(question => question.id === id)
         question.complete = !question.complete
         setQuestions(newQuestions)
+
+        if (action === 'remove') {
+            const newQuestions = questions.filter(question => !question.complete)
+            setQuestions(newQuestions)
+        }
     }
 
     function handleClearQuestions() {
-        const newQuestions = questions.filter(question => !question.complete)
-        setQuestions(newQuestions)
     }
 
-    function handleSubmit(){
+    function handleSubmit() {
         alert('You have submitted the survey');
-        if(questions.length == 0) {
+        if (questions.length === 0) {
             console.info("Please add 1 question")
             return false;
         }
@@ -90,7 +105,7 @@ function CreateSurvey(props) {
         //     console.log(questions[key])
         //     questionList.push(questions[key]);
         // })
-  
+
         // set the state's values
         state.title_survey = surveyTitle.current.value;
         state.questions = questions;
@@ -100,10 +115,10 @@ function CreateSurvey(props) {
         console.log(state);
 
         axios.post("http://localhost:5000/surveys/add", state)
-        .then(res => 
-            updateManagerOpenList(res.data._id)
-        )
-             
+            .then(res =>
+                updateManagerOpenList(res.data._id)
+            )
+
         questions.map(q => q.complete = true)
         handleClearQuestions();
     }
@@ -111,17 +126,20 @@ function CreateSurvey(props) {
 
     function updateManagerOpenList(newSurveyId) {
         let surveyIdList = user.openSurveys;
+        if (surveyIdList.length === 0 || surveyIdList === undefined) {
+            surveyIdList = []
+        }
         surveyIdList.push(newSurveyId)
         user.openSurveys = surveyIdList
 
-        const {employeeId, companyId} = user
-        axios.post('http://localhost:5000/users/update/', user, {params:{employeeId: employeeId, companyId}})
+        const { employeeId, companyId } = user
+        axios.post('http://localhost:5000/users/update/', user, { params: { employeeId, companyId } })
             .then(res => console.log("Updated Manager Open Surveys Response: " + res.data))
     }
 
-    function handleRadio(e){
-        setRadio(e.target.value)
-        console.log(e.target.value)
+    function handleRadio(e) {
+        let value = e.target.value
+        setRadio(value)
     }
     function handleCloseDate(date) {
         setCloseDate(date);
@@ -129,64 +147,79 @@ function CreateSurvey(props) {
     function handleReleaseDate(date) {
         setReleaseDate(date);
     }
-    
-    return(
-            <div className='createSurvey'>
-                <h2>Create a Survey</h2>
-                <form onSubmit={handleSubmit}>
-                    <label style={{fontSize:20}}>Survey Title
-                        <input ref={surveyTitle} type="text" style={{margin:10, fontSize:20}} required/>
-                    </label>
-                    
-                    <br></br>
-                    <label style={{fontSize:20}}>Closing Date 
+
+    return (
+        <div className='createSurvey'>
+            <h2>Create a Survey</h2>
+            <form onSubmit={handleSubmit}>
+                <label style={{ fontSize: 20 }}>Survey Title
+                        <input ref={surveyTitle} type="text" style={{ margin: 10, fontSize: 20 }} required />
+                </label>
+
+                <br></br>
+                <label style={{ fontSize: 20, margin:10 }}>Closing Date
                         <DatePicker className="closingDate" selected={close_date} onChange={handleCloseDate}></DatePicker>
-                    </label>
-                    <label style={{fontSize:20}}>Release date 
+                </label>
+                <label style={{ fontSize: 20, margin:10 }}>Release date
                         <DatePicker selected={release_date} onChange={handleReleaseDate}></DatePicker>
-                    </label>
-    
-                    <br></br>
-                    <label style={{fontSize:20}}>Question
-                        <input id= "ques" ref={questionNameRef} type="text" style={{margin:10, fontSize:20}}/>
-                    </label>
-                    <label style={{fontSize:20}}>Category
-                        <input ref={categoryRef} type="text" style={{margin:10, fontSize:20}}/>
-                    </label>
+                </label>
 
-                        <label style={{fontSize:20}}>Multiple choice
-                            <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{margin:10}} />
-                        </label>
-                        <label style={{fontSize:20}}>True/False
-                            <input type="radio" value="tr" onChange={handleRadio} checked={radio === 'tr'} style={{margin:10}} />
-                        </label>
-                        <label style={{fontSize:20}}>Text
-                            <input type="radio" value="t" onChange={handleRadio} checked={radio === 't'} style={{margin:10, fontSize:20}} />
-                        </label>
-                        <label style={{fontSize:20}}>Slider
-                            <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{margin:10}} />
-                        </label>
-                        
-                        <br></br>                        
-                        <button type="button" style={{fontSize:20, margin:10, backgroundColor:'white'}} onClick={handleAddQuestion}>Add Question</button>
-                        <button type="button" style={{fontSize:20}} onClick={handleClearQuestions}>Remove Question</button>
-                        <br></br>
+                <br></br>
 
-                        <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio}/>
-                        <input type="submit" value="Submit Survey"></input>
-                </form>
+                <label style={{ fontSize: 20 }}>Question
+                        <input id="ques" ref={questionNameRef} type="text" style={{ margin: 10, fontSize: 20 }} />
+                </label>
+                <label style={{ fontSize: 20 }}>Category
+                        <input ref={categoryRef} type="text" style={{ margin: 10, fontSize: 20 }} />
+                </label>
+                {/* <br></br>
 
-              
-               
-            </div>
+                <label style={{ fontSize: 20 }}>Multiple choice
+                            <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{ margin: 10 }} />
+                </label>
+                <label style={{ fontSize: 20 }}>True/False
+                            <input type="radio" value="tr" onChange={handleRadio} checked={radio === 'tr'} style={{ margin: 10 }} />
+                </label>
+                <label style={{ fontSize: 20 }}>Text
+                            <input type="radio" value="t" onChange={handleRadio} checked={radio === 't'} style={{ margin: 10, fontSize: 20 }} />
+                </label>
+                <label style={{ fontSize: 20 }}>Slider
+                            <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{ margin: 10 }} />
+                </label> */}
+
+                <br></br>
+                
+
+                <label style={{ fontSize: 20, margin:10 }}>Type:  
+                    <select name="questionType" ref={typeRef} style={{margin:10}}>
+                        <option value="True False">True / False</option>
+                        <option value="Multiple Choice">Multiple Choice</option>
+                        <option value="Text">Text</option>
+                        <option value="Slider">Slider</option>
+                    </select>
+                </label>
+                
+
+                <br></br>
+
+                <button type="button" style={{ fontSize: 20, margin: 10, backgroundColor: 'white' }} onClick={handleAddQuestion}>Add Question</button>
+                <br></br>
+                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio} />
+                <br></br>
+                <input type="submit" value="Submit Survey"></input>
+            </form>
+
+
+
+        </div>
     )
 }
 const mapStateToProps = state => ({
     auth: state.auth
-  });
-  
-  export default connect(
+});
+
+export default connect(
     mapStateToProps,
     null
-  )(CreateSurvey);
+)(CreateSurvey);
 // a={todos} - here a can be a variable and it's a way to call the list to render the list from useState([])

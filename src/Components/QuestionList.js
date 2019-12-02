@@ -1,12 +1,37 @@
-  
+
 import React from 'react'
 import Question from './Question'
 
-export default function QuestionList({ questions, toggleQuestion, radio}) {
+
+function randerTableHeader() {
+  let header = ["Question", "Type", "Category", "Option"]
+  return header.map((key, index) => {
+    return <th key={index}>{key}</th>
+  })
+}
+
+function randerTableItems(questions, toggleQuestion, radio) {
   return (
     questions.map(question => {
-      return <Question key={question.id} toggleQuestion={toggleQuestion} question={question} radio={radio}/>
+      return (
+        <tr>
+          <Question key={question.id} toggleQuestion={toggleQuestion} question={question} radio={radio} />
+        </tr>
+      )
     })
+  )
+}
+
+export default function QuestionList({ questions, toggleQuestion, radio }) {
+  return (
+    <div>
+      <table id='surveys'>
+        <tbody>
+          <tr>{randerTableHeader()}</tr>
+          {randerTableItems(questions, toggleQuestion, radio)}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
