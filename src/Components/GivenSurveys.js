@@ -85,12 +85,14 @@ class GivenSurveys extends Component {
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 <h3>Questions</h3>
+                
                 <table id='surveys'>
                   <tbody>
                     <tr>{this.randerTableHeader()}</tr>
                     {this.randerTableItems(survey.questions)}
                   </tbody>
                 </table>
+
                 <h3>Analytics</h3>
                 <p>Project 1 Label: Employees satisfied</p>
                 <p>Project 2 Label: Employees not satisfied</p>

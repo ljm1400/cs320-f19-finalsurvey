@@ -25,9 +25,12 @@ export default class Answer extends React.Component {
 
     render() {
         let questionType = this.state.questionObj.type
+        
         if(questionType==="t") {
             questionType="text"
-        } else if(questionType==="tr") {
+        } else if(questionType === "tr") {
+            questionType="radio"
+        } else if(questionType === "m") {
             questionType="radio"
         }
         return ( 
@@ -35,7 +38,7 @@ export default class Answer extends React.Component {
         <div className="answer">
             <p>{'Question ' + this.state.questionObj.num}) {this.state.questionObj.name}</p>
             <p>{'Category: ' + this.state.questionObj.category}</p>
-             <input type={questionType} target = "answer" onChange={e=>this.handleChange(e.target.value)} style={{margin:10, fontSize:20}} />
+             <input type={questionType}  onChange={e=>this.handleChange(e.target.value)} style={{margin:10, fontSize:20}} />
         </div>);
     }
 

@@ -80,6 +80,27 @@ class TakingSurvey extends Component {
     this.setRedirect();
   }
 
+  
+  randerTableHeader() {
+    let header = ["#", "Question", "Category", "Your Answer"]
+    return header.map((key, index) => {
+      return <th key={index}>{key}</th>
+    })
+  }
+
+  randerTableItems(questions) {
+    return questions.map((questionObj, index) => {
+      // temporarily hardcode survey answers
+      return (
+        <tr>
+          <td>{questionObj.num}</td>
+          <td>{questionObj.name}</td>
+          <td>{questionObj.category}</td>
+          <td><Answer index = {index} questionObj={questionObj} changeAnswers ={this.changeAnswers.bind(this)} > </Answer></td>
+        </tr>
+      )
+    })
+  }
   //currently this is the only way I could get the user to store any user data
   render() {
     if(this.props.auth.isAuthenticated && this.state.user === null){
@@ -93,14 +114,18 @@ class TakingSurvey extends Component {
         <div className="header">
             {this.renderRedirect()}
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
-            <h3>{"Issue Date: " + this.state.issued_date}</h3>
-            <h3>{"Close Date: " + this.state.close_date}</h3>
+            <h4>{"Issue Date: " + this.state.issued_date}</h4>
+            <h4>{"Close Date: " + this.state.close_date}</h4>
             
             <form className="surveyQuestions" onSubmit={this.handleSubmitButton}>
-              {this.state.survey.questions.map((questionObj, index) => {
-                return <Answer index = {index} questionObj={questionObj} changeAnswers ={this.changeAnswers.bind(this)}> </Answer>        
-              })}
-              <Button type = "submit" color="success">Submit Survey</Button>{' '}
+                <table id='surveys'>
+                    <tbody>
+                      <tr>{this.randerTableHeader()}</tr>
+                      {this.randerTableItems(this.state.survey.questions)}
+                    </tbody>
+                </table>
+
+              <Button color="success">Submit Survey</Button>{' '}
               {/* don't need onClick for button, since form is handling the onSubmit */}
             </form>
         </div> 
