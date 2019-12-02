@@ -24,16 +24,18 @@ export default class Answer extends React.Component {
     render() {
         const {changeAnswers} = this.props
         let questionType = this.state.questionObj.type
+        
         if(questionType==="t") {
             questionType="text"
-        } else if(questionType==="tr") {
+        } else if(questionType === "tr") {
+            questionType="radio"
+        } else if(questionType === "m") {
             questionType="radio"
         }
         return ( 
         /* pass in question object { num, name, type, options, category } */
         <div className="answer">
-            <p>{'Question ' + this.state.questionObj.num}) {this.state.questionObj.name}</p>
-            <p>{'Category: ' + this.state.questionObj.category}</p>
+            <p>{this.state.questionObj.name}</p>
              <input type={questionType} onSubmit={e=>this.handleChange(e)} style={{margin:10, fontSize:20}} />
         </div>);
     }

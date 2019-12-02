@@ -57,18 +57,43 @@ export default class TakingSurvey extends Component {
     alert('You have submitted your survey. Thank you!');
   }
 
+  randerTableHeader() {
+    let header = ["#", "Question", "Category", "Your Answer"]
+    return header.map((key, index) => {
+      return <th key={index}>{key}</th>
+    })
+  }
+
+  randerTableItems(questions) {
+    return questions.map((questionObj, index) => {
+      // temporarily hardcode survey answers
+      return (
+        <tr>
+          <td>{questionObj.num}</td>
+          <td>{questionObj.name}</td>
+          <td>{questionObj.category}</td>
+          <td><Answer questionObj={questionObj}></Answer></td>
+        </tr>
+      )
+    })
+  }
+
   render() {
     if(this.state.survey)
     return (
         <div className="header">
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
-            <h3>{"Issue Date: " + this.state.issued_date}</h3>
-            <h3>{"Close Date: " + this.state.close_date}</h3>
+            <h4>{"Issue Date: " + this.state.issued_date}</h4>
+            <h4>{"Close Date: " + this.state.close_date}</h4>
             
             <form className="surveyQuestions" onSubmit={this.handleSubmitButton}>
-              {this.state.survey.questions.map((questionObj, index) => {
-                return <Answer questionObj={questionObj}></Answer>        
-              })}
+                <table id='surveys'>
+                    <tbody>
+                      <tr>{this.randerTableHeader()}</tr>
+                      {this.randerTableItems(this.state.survey.questions)}
+                    </tbody>
+                </table>
+
               <Button color="success">Submit Survey</Button>{' '}
               {/* don't need onClick for button, since form is handling the onSubmit */}
             </form>
