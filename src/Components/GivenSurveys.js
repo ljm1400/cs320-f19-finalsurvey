@@ -52,8 +52,17 @@ class GivenSurveys extends Component {
       return <th key={index}>{key}</th>
     })
   }
-
-  randerTableItems(questions) {
+  formatAnswers(answers){
+    return answers.map((ans, index) => {
+      let person = ans
+      return person.map((answer, ind) =>{
+        if(ind !== 0)
+        return <p>{answer}</p>
+      })
+      
+    })
+  }
+  randerTableItems(questions, survey) {
     return questions.map((sur, index) => {
       // temporarily hardcode survey answers
       return (
@@ -62,7 +71,7 @@ class GivenSurveys extends Component {
           <td>{sur.name}</td>
           <td>{sur.type}</td>
           <td>{sur.category}</td>
-          <td>Ans{sur.num}</td>
+          <td>{survey.answers ? this.formatAnswers(survey.answers) : ""}</td>
         </tr>
       )
     })
@@ -89,11 +98,11 @@ class GivenSurveys extends Component {
                 <table id='surveys'>
                   <tbody>
                     <tr>{this.randerTableHeader()}</tr>
-                    {this.randerTableItems(survey.questions)}
+                    {this.randerTableItems(survey.questions, survey)}
                   </tbody>
                 </table>
 
-                <h3>Analytics</h3>
+                <h3>Answers</h3>
                 <p>Project 1 Label: Employees satisfied</p>
                 <p>Project 2 Label: Employees not satisfied</p>
               </Collapsible>
