@@ -94,8 +94,7 @@ class YourSurveys extends Component {
 
       if(this.state.surveyIdList.length === 0) {
         return <div className="header">
-          <p>{this.state.manager ? "Your manager is " + `${this.state.manager.firstName + ' ' + this.state.manager.lastName}`:''}</p>
-          <h2>You have no open surveys</h2>
+          <h2>You have no open surveys to complete</h2>
         </div>
       }
 
