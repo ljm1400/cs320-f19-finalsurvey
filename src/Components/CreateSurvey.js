@@ -62,8 +62,13 @@ function CreateSurvey(props) {
 
         setQuestions(prevQuestions => {
             let obj = {
-                id: uuidv4(), num: quesNum, name: name, type: type,
-                options: options, category: category, complete: false
+                id: uuidv4(), 
+                num: quesNum,
+                name: name,
+                type: type,
+                options: options,
+                category: category,
+                complete: false
             }
             prevQuestions.push(obj);
             return prevQuestions
