@@ -52,6 +52,7 @@ class GivenSurveys extends Component {
       return <th key={index}>{key}</th>
     })
   }
+
   formatAnswers(answers, num){
     return answers.map((ans, index) => {
       let person = ans
@@ -61,6 +62,7 @@ class GivenSurveys extends Component {
       })
     })
   }
+
   randerTableItems(questions, survey) {
     return questions.map((sur, index) => {
       // temporarily hardcode survey answers
@@ -87,6 +89,7 @@ class GivenSurveys extends Component {
         <h2>Open Surveys</h2>
         <div>
           {this.state.openSurveyDataList.map((survey) => {
+            if(survey == null) return  <></>
             return <>
               <Collapsible
                 title={'Survey Title: ' + survey.title_survey}
