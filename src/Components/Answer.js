@@ -12,9 +12,8 @@ export default class Answer extends React.Component {
             questionObj: this.props.questionObj,
             changeAnswers: this.props.changeAnswers,
             answer: null,
-            tr: true,
-            fa: false
-
+            tr: false,
+            fa: false,
         }
         this.togglePanel = this.togglePanel.bind(this);
     }

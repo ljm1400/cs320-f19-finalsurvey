@@ -74,6 +74,7 @@ class TakingSurvey extends Component {
   handleSubmitButton= e => {
     e.preventDefault();
     let answers = this.state.surveyAnswers
+    console.log(answers)
     alert('You have submitted your survey. Thank you!');
     //do the axios posting here
     axios.post("http://localhost:5000/surveys/addAnswers/" + this.state.survey._id, {answers})
