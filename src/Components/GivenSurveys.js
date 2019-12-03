@@ -93,7 +93,7 @@ class GivenSurveys extends Component {
             if(survey == null) return  <></>
             return <>
               <Collapsible
-                title={'Survey Title: ' + survey.title_survey}
+                title={survey.title_survey}
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 <h3>Questions</h3>

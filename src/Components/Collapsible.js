@@ -19,7 +19,7 @@ export default class Collapsible extends React.Component {
         return (
         <div>
             <div onClick={(e) => this.togglePanel(e)} className="surveyResults">
-                {this.props.title} 
+                <div className="surveyTitle"  style={{color:'AQUA'}}> {this.props.title} </div>
                 <div className='issuedDate'>{this.props.issueDate}</div>
                 <div className='closingDate'>{this.props.closingDate}</div>
             </div>                 
