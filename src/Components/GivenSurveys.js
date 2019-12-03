@@ -59,6 +59,7 @@ class GivenSurveys extends Component {
       return person.map((answer, ind) =>{
         if(ind == num)
         return <p>{answer}</p>
+        //return <p>{'Person ' + ind+') '+answer}</p>
       })
     })
   }
