@@ -50,7 +50,7 @@ class TakingSurvey extends Component {
   
   changeAnswers(answers, index) {
     let answerList = this.state.surveyAnswers
-    answerList[index+1] = answers
+    answerList.push(answers)
     this.setState({
       surveyAnswers: answerList
     })

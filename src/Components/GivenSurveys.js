@@ -52,14 +52,13 @@ class GivenSurveys extends Component {
       return <th key={index}>{key}</th>
     })
   }
-  formatAnswers(answers){
+  formatAnswers(answers, num){
     return answers.map((ans, index) => {
       let person = ans
       return person.map((answer, ind) =>{
-        if(ind !== 0)
+        if(ind == num)
         return <p>{answer}</p>
       })
-      
     })
   }
   randerTableItems(questions, survey) {
@@ -71,7 +70,7 @@ class GivenSurveys extends Component {
           <td>{sur.name}</td>
           <td>{sur.type}</td>
           <td>{sur.category}</td>
-          <td>{survey.answers ? this.formatAnswers(survey.answers) : ""}</td>
+          <td>{survey.answers ? this.formatAnswers(survey.answers, index + 1) : ""}</td>
         </tr>
       )
     })

@@ -26,12 +26,14 @@ export default class Answer extends React.Component {
     render() {
         let questionType = this.state.questionObj.type
         
-        if(questionType==="t") {
+        if(questionType==="Text") {
             questionType="text"
-        } else if(questionType === "tr") {
+        } else if(questionType === "True False") {
             questionType="radio"
-        } else if(questionType === "m") {
+        } else if(questionType === "Multiple") {
             questionType="radio"
+        } else if(questionType == "Slider") {
+            
         }
         return ( 
         /* pass in question object { num, name, type, options, category } */
