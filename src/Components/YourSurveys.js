@@ -110,6 +110,8 @@ class YourSurveys extends Component {
                       onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
                       <br></br>
                       {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
+                      <br></br>
+                      {'Completion Date: '}
                     </button>
                   </>
               })}                                

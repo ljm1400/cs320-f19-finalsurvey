@@ -30,7 +30,8 @@ class TakingSurvey extends Component {
         issued_date: formatted_Issue_Date,
         surveyAnswers: null,
         redirect: false,
-        user: null
+        user: null,
+        completedDate: Utils.formatDate(new Date())
       }  
   }
 
