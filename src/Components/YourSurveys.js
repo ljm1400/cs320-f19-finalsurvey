@@ -73,8 +73,11 @@ class YourSurveys extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated && this.state.manager === null)
-        this.getManager(this.props.auth.user)
+    let user = this.props.auth.user
+    if(this.props.auth.isAuthenticated && this.state.manager === null) {
+      this.getManager(this.props.auth.user)
+    }
+
     //const{isAuthenticated, user} = this.props.auth;
     // const {manager} = this.state
     
@@ -97,6 +100,16 @@ class YourSurveys extends Component {
           <h2>You have no open surveys to complete</h2>
         </div>
       }
+      function isCompleted(survey) {
+        console.log(user._id)
+        survey.answers.map((ansArr) => {
+          if(ansArr[0] == user._id) {
+            return true
+          }
+        })
+        return false
+      }
+      let completedSurveys = []
 
     return (
         <div className="header">
@@ -105,16 +118,34 @@ class YourSurveys extends Component {
           <div>
               {this.state.surveyDataList.map((survey, index) => {
                   if(survey == null) {return null}
+                  if(isCompleted(survey)) {
+                      completedSurveys.push(survey)
+                  }
                   return <>
                     <button className="surveyResults" 
                       onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
                       <br></br>
                       {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
+                      <br></br>
+                      {'Completion Date: '}
                     </button>
                   </>
               })}                                
           </div>   
-          <h2>Completed Surveys</h2>      
+          <h2>Completed Surveys</h2>    
+          <div>
+              {completedSurveys.map((survey, index) => {
+                 return <>
+                 <button className="surveyResults" 
+                   onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
+                   <br></br>
+                   {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
+                   <br></br>
+                   {'Completion Date: '}
+                 </button>
+               </>
+              })}
+          </div>  
         </div> 
     );
   }
