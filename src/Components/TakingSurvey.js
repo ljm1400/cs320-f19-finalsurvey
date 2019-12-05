@@ -30,7 +30,8 @@ class TakingSurvey extends Component {
         issued_date: formatted_Issue_Date,
         surveyAnswers: null,
         redirect: false,
-        user: null
+        user: null,
+        completedDate: Utils.formatDate(new Date())
       }  
   }
 
@@ -49,7 +50,7 @@ class TakingSurvey extends Component {
   
   changeAnswers(answers, index) {
     let answerList = this.state.surveyAnswers
-    answerList[index+1] = answers
+    answerList[index + 1] = answers
     this.setState({
       surveyAnswers: answerList
     })
@@ -73,6 +74,7 @@ class TakingSurvey extends Component {
   handleSubmitButton= e => {
     e.preventDefault();
     let answers = this.state.surveyAnswers
+    console.log(answers)
     alert('You have submitted your survey. Thank you!');
     //do the axios posting here
     axios.post("http://localhost:5000/surveys/addAnswers/" + this.state.survey._id, {answers})

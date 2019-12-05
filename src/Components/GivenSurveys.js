@@ -52,16 +52,18 @@ class GivenSurveys extends Component {
       return <th key={index}>{key}</th>
     })
   }
-  formatAnswers(answers){
+
+  formatAnswers(answers, num){
     return answers.map((ans, index) => {
       let person = ans
       return person.map((answer, ind) =>{
-        if(ind !== 0)
+        if(ind == num)
         return <p>{answer}</p>
+        //return <p>{'Person ' + ind+') '+answer}</p>
       })
-      
     })
   }
+
   randerTableItems(questions, survey) {
     return questions.map((sur, index) => {
       // temporarily hardcode survey answers
@@ -71,7 +73,7 @@ class GivenSurveys extends Component {
           <td>{sur.name}</td>
           <td>{sur.type}</td>
           <td>{sur.category}</td>
-          <td>{survey.answers ? this.formatAnswers(survey.answers) : ""}</td>
+          <td>{survey.answers ? this.formatAnswers(survey.answers, index + 1) : ""}</td>
         </tr>
       )
     })
@@ -88,9 +90,10 @@ class GivenSurveys extends Component {
         <h2>Open Surveys</h2>
         <div>
           {this.state.openSurveyDataList.map((survey) => {
+            if(survey == null) return  <></>
             return <>
               <Collapsible
-                title={'Survey Title: ' + survey.title_survey}
+                title={survey.title_survey}
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 <h3>Questions</h3>
