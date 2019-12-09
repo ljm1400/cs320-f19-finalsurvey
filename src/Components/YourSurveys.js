@@ -100,6 +100,16 @@ class YourSurveys extends Component {
           <h2>You have no open surveys to complete</h2>
         </div>
       }
+
+      function isExpired(survey) {
+        let date = new Date();
+        let today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        if (survey.close_date < today) {
+          return true
+        }
+        return false
+      }
+      
       function isCompleted(survey) {
         console.log(user._id)
         survey.answers.map((ansArr) => {
@@ -118,7 +128,8 @@ class YourSurveys extends Component {
           <div>
               {this.state.surveyDataList.map((survey, index) => {
                   if(survey == null) {return null}
-                  if(isCompleted(survey)) {
+                  if(isCompleted(survey) || isExpired(survey)) {
+                      // dont show the complete survey
                       completedSurveys.push(survey)
                   }
                   return <>
