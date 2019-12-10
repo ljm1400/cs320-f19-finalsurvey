@@ -85,11 +85,38 @@ class GivenSurveys extends Component {
       this.setState({ gotSurveyData: true });
     }
 
+    function isExpired(survey) {
+      let today = utils.formatDate(new Date())
+      let closedDate = utils.formatDate(new Date(survey.close_date))
+      if (closedDate < today) {
+        return true
+      }
+      return false
+    }
+
+    function renderOpenSurveys(surveys) {
+      let openSurveys = surveys.filter((survey) => {
+        if (survey === null) {  return null }
+        if (!isExpired(survey))
+          return survey
+      })
+      return openSurveys
+    }
+
+    function renderClosedSurveys(surveys) {
+      let closedSurveys = surveys.filter((survey) => {
+        if (survey === null) {  return null }
+        if (isExpired(survey))
+          return survey
+      })
+      return closedSurveys
+    }
+
     return (
       <div className="header">
         <h2>Open Surveys</h2>
         <div>
-          {this.state.openSurveyDataList.map((survey) => {
+          {renderOpenSurveys(this.state.openSurveyDataList).map((survey) => {
             if(survey == null) return  <></>
             return <>
               <Collapsible
@@ -112,7 +139,33 @@ class GivenSurveys extends Component {
             </>
           })}
         </div>
+        <br></br>
         <h2>Closed Surveys</h2>
+        <div>
+          {renderClosedSurveys(this.state.openSurveyDataList).map((survey) => {
+            if(survey == null) return  <></>
+            return <>
+              <Collapsible
+                title={survey.title_survey}
+                issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
+                closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
+                <h3>Questions</h3>
+                
+                <table id='surveys'>
+                  <tbody>
+                    <tr>{this.randerTableHeader()}</tr>
+                    {this.randerTableItems(survey.questions, survey)}
+                  </tbody>
+                </table>
+
+                <h3>Analytics</h3>
+                <p>Project 1 Label: Employees satisfied</p>
+                <p>Project 2 Label: Employees not satisfied</p>
+              </Collapsible>
+            </>
+          })}
+        </div>
+
       </div>
 
     );
