@@ -102,9 +102,9 @@ class YourSurveys extends Component {
       }
 
       function isExpired(survey) {
-        let date = new Date();
-        let today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
-        if (survey.close_date < today) {
+        let today = utils.formatDate(new Date())
+        let closedDate = utils.formatDate(new Date(survey.close_date))
+        if (closedDate < today) {
           return true
         }
         return false
@@ -113,25 +113,51 @@ class YourSurveys extends Component {
       function isCompleted(survey) {
         console.log(user._id)
         survey.answers.map((ansArr) => {
-          if(ansArr[0] == user._id) {
+          if(ansArr[0] === user._id) {
             return true
           }
         })
         return false
       }
-      let completedSurveys = []
+
+      function renderOpenSurveys(surveys) {
+        let openSurveys = surveys.slice()
+        openSurveys.fill(null)
+        for (let i = 0; i < surveys.length; i++) {
+          let survey = surveys[i]
+          if (survey === null)
+            continue
+          if (!isExpired(survey) && !isCompleted(survey))
+            openSurveys[i] = survey
+        }
+        /**
+        let openSurveys = surveys.filter((survey) => {
+          if (survey === null) {  return null }
+          if (!isExpired(survey) && !isCompleted(survey))
+            return survey
+        })
+        */
+        return openSurveys
+      }
+
+      function renderClosedSurveys(surveys) {
+        // Don't need to preserve the index since it won't need click action
+        // If needed, modify here
+        let closedSurveys = surveys.filter((survey) => {
+          if (survey === null) {  return null }
+          if (isExpired(survey) || isCompleted(survey))
+            return survey
+        })
+        return closedSurveys
+      }
 
     return (
         <div className="header">
           <h2>Surveys To Do</h2>
           {this.renderRedirect()}
           <div>
-              {this.state.surveyDataList.map((survey, index) => {
-                  if(survey == null) {return null}
-                  if(isCompleted(survey) || isExpired(survey)) {
-                      // dont show the complete survey
-                      completedSurveys.push(survey)
-                  }
+              {renderOpenSurveys(this.state.surveyDataList).map((survey, index) => {
+                  if(survey === null) {return null}
                   return <>
                     <button className="surveyResults" 
                       onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
@@ -142,13 +168,13 @@ class YourSurveys extends Component {
                     </button>
                   </>
               })}                                
-          </div>   
+          </div>
+          <br></br> 
           <h2>Completed Surveys</h2>    
           <div>
-              {completedSurveys.map((survey, index) => {
+              {renderClosedSurveys(this.state.surveyDataList).map((survey, index) => {
                  return <>
-                 <button className="surveyResults" 
-                   onClick={ ()=> this.setRedirect(index)}>{survey.title_survey}  
+                 <button className="closedSurvey">{survey.title_survey}  
                    <br></br>
                    {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
                    <br></br>

@@ -106,6 +106,18 @@ body {
   padding: 10px;
 }
 
+.closedSurvey {
+  background-color: rgb(131, 131, 131);
+  font-size: 20px;
+  color: white;
+  padding: 20px;
+  margin-bottom: 5px;
+  width: 80%;
+
+  border-width: 1px;
+  border-radius:10px;
+}
+
 .surveyResults {
   background-color: #0F9D58;
   font-size: 20px;
