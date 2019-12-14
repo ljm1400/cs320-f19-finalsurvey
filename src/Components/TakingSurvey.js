@@ -109,7 +109,7 @@ class TakingSurvey extends Component {
       this.initUser()
 
     }
-    if(this.state.user && this.state.surveyAnswers === null){
+    if(this.state.user && this.state.user._id !== null && this.state.surveyAnswers === null){
       this.setUser()
     }
     return (
