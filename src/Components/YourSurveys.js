@@ -20,10 +20,13 @@ class YourSurveys extends Component {
       redirect: false,
       check: false,
       send: false,
+      render: false,
       openSurveyIdList: [],
       openSurveyDataList: [],
       closedSurveyIdList: [],
-      closeSurveyDataList:[],
+      closedSurveyDataList:[],
+      renderOpen: [],
+      renderClosed:[],
       manager: null,
       user: null,
       takingSurvey: null
@@ -115,9 +118,6 @@ class YourSurveys extends Component {
         if(closeDate < today){
           closed.push(survey._id)
         }
-        if(this.isCompleted(survey)){
-          closed.push(survey._id)
-        }
         else{
           newOpen.push(survey._id)
         }
@@ -130,15 +130,13 @@ class YourSurveys extends Component {
 
   isCompleted(survey) {
     let user = this.state.user
-    console.log(user)
+    let result = false
     survey.answers.map((ansArr) => {
-      console.log(ansArr[0])
-      if(ansArr[0] === user._id) {
-        console.log(ansArr[0] === user._id)
-        return true
+      if(user._id === ansArr[0]) {
+        result = true
       }
     })
-    return false
+    return result
   }
 
   updateManagerLists(){
@@ -146,6 +144,29 @@ class YourSurveys extends Component {
     axios.post('http://localhost:5000/users/updateboth/', {openSurveys: this.state.openSurveyIdList, closedSurveys: this.state.closedSurveyIdList }, {params:{employeeId: manager.employeeId, companyId: manager.companyId}})
       .then(res => console.log("Updated Manager Survey Information: " + res.data))
     this.setState({send: true})
+  }
+
+  prepareRender(){
+    let open = this.state.openSurveyDataList
+    let closed = this.state.closedSurveyDataList
+    let renderOpen = []
+
+    open.map((survey) => {
+      if(survey != null){
+        if (this.isCompleted(survey)){
+          closed.push(survey)
+        }
+        else{
+          renderOpen.push(survey)
+        }
+      }
+    })
+    this.setState({
+      renderOpen: renderOpen,
+      renderClosed: closed,
+      render: true
+    })
+
   }
 
 
@@ -159,6 +180,9 @@ class YourSurveys extends Component {
     }
     if(this.state.manager !== null && this.state.check === true && this.state.send === false){
       this.updateManagerLists()
+    }
+    if(this.state.check === true && this.state.send === true && this.state.render === false){
+      this.prepareRender()
     }
     //const{isAuthenticated, user} = this.props.auth;
     // const {manager} = this.state
@@ -182,20 +206,13 @@ class YourSurveys extends Component {
           <h1>You have no open surveys to complete</h1>
         </div>
       }
-
       
-      
-
-      
-
-      
-
     return (
         <div className="header">
           <h2>Surveys To Do</h2>
           {this.renderRedirect()}
           <div>
-              {this.state.openSurveyDataList.map((survey, index) => {
+              {this.state.renderOpen.length != 0 ?this.state.renderOpen.map((survey, index) => {
                   if(survey === null) {return null}
                   return <>
                     <button className="surveyResults" 
@@ -205,16 +222,22 @@ class YourSurveys extends Component {
                       <br></br>
                     </button>
                   </>
-              })}                                
+              }): "You have no surveys to complete"}                                
           </div>
           <br></br> 
-          <h2>Completed Surveys</h2>    
+          <br></br> 
+          <br></br> 
+          <br></br> 
+          <br></br> 
+          <br></br> 
+          <br></br> 
+          {this.state.renderClosed.length != 0 ?<h2>Completed Surveys</h2> : ""}   
           <div>
-              {this.state.closedSurveyDataList ? this.state.closedSurveyDataList.map((survey, index) => {
+              {this.state.renderClosed ? this.state.renderClosed.map((survey, index) => {
                  return <>
                  <button className="closedSurvey">{survey.title_survey}  
                    <br></br>
-                   {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
+                   {'Close Date: ' + utils.formatDate(new Date(survey.close_date))}
                    <br></br>
                    
                  </button>
