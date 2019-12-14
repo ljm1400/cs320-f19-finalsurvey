@@ -45,6 +45,25 @@ class GivenSurveys extends Component {
       this.setState({ openSurveyDataList: openSurveyDataList })
     })
   }
+  getClosedSurveyData = () => {
+      let surveyDataList = []
+      let requests = []
+
+      this.state.closedSurveyIdList.forEach(function(survey) {
+          requests.push(
+            axios.get('http://localhost:5000/surveys/'+ survey)
+          .then(survey => {
+            surveyDataList.push(survey.data)
+          }).catch(function (error) {
+            console.log('Failed to get survey' + error);
+          })
+      )})
+
+       // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
+      Promise.all(requests).then((val) => {
+        this.setState({closedSurveyDataList: surveyDataList})
+      })
+  }
 
   randerTableHeader() {
     let header = ["#", "Questions", "Type", "Category", "Answers"]

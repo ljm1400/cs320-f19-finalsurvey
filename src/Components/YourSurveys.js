@@ -18,16 +18,21 @@ class YourSurveys extends Component {
 
     this.state ={
       redirect: false,
-      surveyIdList: [],
-      surveyDataList: [],
+      check: false,
+      send: false,
+      openSurveyIdList: [],
+      openSurveyDataList: [],
+      closedSurveyIdList: [],
+      closeSurveyDataList:[],
       manager: null,
+      user: null,
       takingSurvey: null
     }
   }
   setRedirect = (index) => {
       this.setState({
         redirect: true,
-        takingSurvey: this.state.surveyDataList[index]
+        takingSurvey: this.state.openSurveyDataList[index]
       })
   }
 
@@ -43,20 +48,26 @@ class YourSurveys extends Component {
     }
   }
 
+
   getManager = (user) => {
   const {managerId, companyId} = user
+  let man = null;
     axios.get('http://localhost:5000/users/getUser/', {params:{employeeId: managerId, companyId}})
-    .then(user => {
-      this.setState({manager: user.data})
-      this.setState({surveyIdList: user.data.openSurveys}, this.getSurveyData)
+    .then(manager => {
+
+      this.setState({user, manager: manager.data})
+      this.setState({openSurveyIdList: manager.data.openSurveys}, this.getOpenSurveyData)
+      this.setState({closedSurveyIdList: manager.data.closedSurveys}, this.getClosedSurveyData)
+      
+      
     })
   }
 
-  getSurveyData = () => {
+  getOpenSurveyData = () => {
       let surveyDataList = []
       let requests = []
 
-      this.state.surveyIdList.forEach(function(survey) {
+      this.state.openSurveyIdList.forEach(function(survey) {
           requests.push(
             axios.get('http://localhost:5000/surveys/'+ survey)
           .then(survey => {
@@ -68,16 +79,87 @@ class YourSurveys extends Component {
 
        // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
       Promise.all(requests).then((val) => {
-        this.setState({surveyDataList: surveyDataList})
+        this.setState({openSurveyDataList: surveyDataList})
       })
   }
+
+  getClosedSurveyData = () => {
+      let surveyDataList = []
+      let requests = []
+
+      this.state.closedSurveyIdList.forEach(function(survey) {
+          requests.push(
+            axios.get('http://localhost:5000/surveys/'+ survey)
+          .then(survey => {
+            surveyDataList.push(survey.data)
+          }).catch(function (error) {
+            console.log('Failed to get survey' + error);
+          })
+      )})
+
+       // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
+      Promise.all(requests).then((val) => {
+        this.setState({closedSurveyDataList: surveyDataList})
+      })
+  }
+
+  checkOpenForExpired(){
+    let closed = this.state.closedSurveyIdList;
+    let open = this.state.openSurveyDataList;
+    let newOpen = []
+    let today = utils.formatDate(new Date())
+       
+    open.map((survey) => {
+      if(survey!== null){
+        let closeDate = utils.formatDate(new Date(survey.close_date))
+        if(closeDate < today){
+          closed.push(survey._id)
+        }
+        if(this.isCompleted(survey)){
+          closed.push(survey._id)
+        }
+        else{
+          newOpen.push(survey._id)
+        }
+      }
+    })
+    this.setState({openSurveyIdList: newOpen}, this.getOpenSurveyData)
+    this.setState({closedSurveyIdList: closed}, this.getClosedSurveyData)
+    this.setState({check: true})
+  }
+
+  isCompleted(survey) {
+    let user = this.state.user
+    console.log(user)
+    survey.answers.map((ansArr) => {
+      console.log(ansArr[0])
+      if(ansArr[0] === user._id) {
+        console.log(ansArr[0] === user._id)
+        return true
+      }
+    })
+    return false
+  }
+
+  updateManagerLists(){
+    let manager = this.state.manager
+    axios.post('http://localhost:5000/users/updateboth/', {openSurveys: this.state.openSurveyIdList, closedSurveys: this.state.closedSurveyIdList }, {params:{employeeId: manager.employeeId, companyId: manager.companyId}})
+      .then(res => console.log("Updated Manager Survey Information: " + res.data))
+    this.setState({send: true})
+  }
+
 
   render() {
     let user = this.props.auth.user
     if(this.props.auth.isAuthenticated && this.state.manager === null) {
       this.getManager(this.props.auth.user)
     }
-
+    if(this.state.manager !== null && this.state.openSurveyDataList.length !== 0 && this.state.check === false){
+      this.checkOpenForExpired()
+    }
+    if(this.state.manager !== null && this.state.check === true && this.state.send === false){
+      this.updateManagerLists()
+    }
     //const{isAuthenticated, user} = this.props.auth;
     // const {manager} = this.state
     
@@ -95,68 +177,25 @@ class YourSurveys extends Component {
     //     );
     //   }
 
-      if(this.state.surveyIdList.length === 0) {
+      if(this.state.openSurveyIdList.length === 0) {
         return <div className="header">
-          <h2>You have no open surveys to complete</h2>
+          <h1>You have no open surveys to complete</h1>
         </div>
       }
 
-      function isExpired(survey) {
-        let today = utils.formatDate(new Date())
-        let closedDate = utils.formatDate(new Date(survey.close_date))
-        if (closedDate < today) {
-          return true
-        }
-        return false
-      }
       
-      function isCompleted(survey) {
-        console.log(user._id)
-        survey.answers.map((ansArr) => {
-          if(ansArr[0] === user._id) {
-            return true
-          }
-        })
-        return false
-      }
+      
 
-      function renderOpenSurveys(surveys) {
-        let openSurveys = surveys.slice()
-        openSurveys.fill(null)
-        for (let i = 0; i < surveys.length; i++) {
-          let survey = surveys[i]
-          if (survey === null)
-            continue
-          if (!isExpired(survey) && !isCompleted(survey))
-            openSurveys[i] = survey
-        }
-        /**
-        let openSurveys = surveys.filter((survey) => {
-          if (survey === null) {  return null }
-          if (!isExpired(survey) && !isCompleted(survey))
-            return survey
-        })
-        */
-        return openSurveys
-      }
+      
 
-      function renderClosedSurveys(surveys) {
-        // Don't need to preserve the index since it won't need click action
-        // If needed, modify here
-        let closedSurveys = surveys.filter((survey) => {
-          if (survey === null) {  return null }
-          if (isExpired(survey) || isCompleted(survey))
-            return survey
-        })
-        return closedSurveys
-      }
+      
 
     return (
         <div className="header">
           <h2>Surveys To Do</h2>
           {this.renderRedirect()}
           <div>
-              {renderOpenSurveys(this.state.surveyDataList).map((survey, index) => {
+              {this.state.openSurveyDataList.map((survey, index) => {
                   if(survey === null) {return null}
                   return <>
                     <button className="surveyResults" 
@@ -164,7 +203,6 @@ class YourSurveys extends Component {
                       <br></br>
                       {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
                       <br></br>
-                      {'Completion Date: '}
                     </button>
                   </>
               })}                                
@@ -172,16 +210,16 @@ class YourSurveys extends Component {
           <br></br> 
           <h2>Completed Surveys</h2>    
           <div>
-              {renderClosedSurveys(this.state.surveyDataList).map((survey, index) => {
+              {this.state.closedSurveyDataList ? this.state.closedSurveyDataList.map((survey, index) => {
                  return <>
                  <button className="closedSurvey">{survey.title_survey}  
                    <br></br>
                    {'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}
                    <br></br>
-                   {'Completion Date: '}
+                   
                  </button>
                </>
-              })}
+              }): "You have not completed any surveys"}
           </div>  
         </div> 
     );
