@@ -142,6 +142,7 @@ class GivenSurveys extends Component {
             return <>
               <Collapsible
                 title={survey.title_survey}
+                surveyType="surveyResults"
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 <h3>Questions</h3>
@@ -168,6 +169,7 @@ class GivenSurveys extends Component {
             return <>
               <Collapsible
                 title={survey.title_survey}
+                surveyType="closedSurvey"
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 <h3>Questions</h3>               

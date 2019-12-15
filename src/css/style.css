@@ -130,6 +130,9 @@ body {
   border-radius:10px;
   cursor: pointer;
 }
+.surveyTitle {
+  color: AQUA
+}
 
   input[type=text] {padding:5px; border:2px solid #ccc; 
       -webkit-border-radius: 5px;
