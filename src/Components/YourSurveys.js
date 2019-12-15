@@ -54,7 +54,6 @@ class YourSurveys extends Component {
 
   getManager = (user) => {
   const {managerId, companyId} = user
-  let man = null;
     axios.get('http://localhost:5000/users/getUser/', {params:{employeeId: managerId, companyId}})
     .then(manager => {
       this.setState({user, manager: manager.data})
@@ -125,10 +124,10 @@ class YourSurveys extends Component {
     this.setState({check: true})
   }
 
-  isCompleted(survey) {
-    let user = this.props.auth.user
+  isCompleted(survey, user) {
     let found = false
     survey.answers.forEach((ansArr) => {
+      console.log(user)
       if (user._id == ansArr[0]) {
         found = true
         return false // breaks foreach loop, doesn't return out of function
@@ -147,34 +146,35 @@ class YourSurveys extends Component {
     this.setState({updatedManagerClosedList: true})
   }
 
-  renderOpenAndCompleted() {
+  renderOpenAndCompleted(user) {
     let renderCompleted = []
     let renderOpen = []
 
     this.state.openSurveyDataList.forEach((survey) => {
       if(survey != null){
-        console.log(this.isCompleted(survey))
-        if(this.isCompleted(survey) == true){
-          console.log("adding closed")
+        console.log(survey)
+        if(this.isCompleted(survey, user) == true){
+          console.log("adding completed survey")
           renderCompleted.push(survey)
         }
         else {
-          console.log("adding open")
+          console.log("adding open survey")
           renderOpen.push(survey)
         }
       }
     })
-    this.setState({renderOpen: renderOpen})
-    this.setState({renderClosed: renderCompleted})
-    this.setState({render: true})
+    this.setState({renderClosed: renderCompleted, 
+      renderOpen: renderOpen, 
+      render: true})
   }
 
 
   render() {
-    let user = this.props.auth.user
-    if(this.props.auth.isAuthenticated && this.state.manager === null) {
-      this.getManager(this.props.auth.user)
-    } else {
+    let auth = this.props.auth
+    if(auth.isAuthenticated && this.state.manager === null) {
+      this.getManager(auth.user)
+    } 
+    if(auth.isAuthenticated) {
       if(this.state.check === false && this.state.openSurveyDataList.length !== 0){
         this.checkOpenForExpired()
       }
@@ -182,9 +182,10 @@ class YourSurveys extends Component {
         this.updateManagerLists()
       }
       if(this.state.check === true && this.state.updatedManagerClosedList === true && this.state.render === false){
-        this.renderOpenAndCompleted()
+        this.renderOpenAndCompleted(auth.user)
       }
     }
+    
 
 
       if(this.state.openSurveyIdList.length === 0) {
@@ -210,7 +211,6 @@ class YourSurveys extends Component {
                   </>
               }): "You have no surveys to complete"}                                
           </div>
-          <br></br> 
           <br></br> 
           <h2>Completed Surveys</h2>
           <div>

@@ -65,8 +65,7 @@ class GivenSurveys extends Component {
       })
   }
 
-  randerTableHeader() {
-    let header = ["#", "Questions", "Type", "Category", "Answers"]
+  randerTableHeader(header) {
     return header.map((key, index) => {
       return <th key={index}>{key}</th>
     })
@@ -76,9 +75,10 @@ class GivenSurveys extends Component {
     return answers.map((ans, index) => {
       let person = ans
       return person.map((answer, ind) =>{
-        if(ind == num)
-        return <p>{answer}</p>
-        //return <p>{'Person ' + ind+') '+answer}</p>
+        if(ind == num) {
+          let personNum = index + 1
+          return <p>{'Person ' + personNum +') '+answer}</p>
+        }
       })
     })
   }
@@ -131,6 +131,7 @@ class GivenSurveys extends Component {
       })
       return closedSurveys
     }
+    let headerAnswers = ["#", "Questions", "Type", "Category", "Answers"]
 
     return (
       <div className="header">
@@ -146,8 +147,8 @@ class GivenSurveys extends Component {
                 <h3>Questions</h3>
                 
                 <table id='surveys'>
-                  <tbody>
-                    <tr>{this.randerTableHeader()}</tr>
+                  <tbody>                    
+                    <tr>{this.randerTableHeader(headerAnswers)}</tr>
                     {this.randerTableItems(survey.questions, survey)}
                   </tbody>
                 </table>
@@ -172,13 +173,13 @@ class GivenSurveys extends Component {
                 <h3>Questions</h3>               
                 <table id='surveys'>
                   <tbody>
-                    <tr>{this.randerTableHeader()}</tr>
+                    <tr>{this.randerTableHeader(headerAnswers)}</tr>
                     {this.randerTableItems(survey.questions, survey)}
                   </tbody>
                 </table>
 
                 <h3 style={{padding:10}}>Analytics</h3>
-                <p>Group by analytics</p>
+                <h4>1) Categories</h4>
               </Collapsible>
             </>
           })}
