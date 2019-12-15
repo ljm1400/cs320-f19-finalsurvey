@@ -45,11 +45,11 @@ class GivenSurveys extends Component {
       this.setState({ openSurveyDataList: openSurveyDataList })
     })
   }
-  getClosedSurveyData = () => {
+  getClosedSurveyData = (closedSurveyList) => {
       let surveyDataList = []
       let requests = []
 
-      this.state.closedSurveyIdList.forEach(function(survey) {
+      closedSurveyList.forEach(function(survey) {
           requests.push(
             axios.get('http://localhost:5000/surveys/'+ survey)
           .then(survey => {
@@ -101,6 +101,7 @@ class GivenSurveys extends Component {
   render() {
     if (this.props.auth.isAuthenticated && this.state.gotSurveyData === false) {
       this.getOpenSurveys(this.props.auth.user.openSurveys)
+      this.getClosedSurveyData(this.props.auth.user.closedSurveys)
       this.setState({ gotSurveyData: true });
     }
 
@@ -161,7 +162,7 @@ class GivenSurveys extends Component {
         <br></br>
         <h2>Closed Surveys</h2>
         <div>
-          {renderClosedSurveys(this.state.openSurveyDataList).map((survey) => {
+          {renderClosedSurveys(this.state.closedSurveyDataList).map((survey) => {
             if(survey == null) return  <></>
             return <>
               <Collapsible
