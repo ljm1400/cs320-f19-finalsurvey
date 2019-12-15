@@ -169,8 +169,7 @@ class GivenSurveys extends Component {
                 title={survey.title_survey}
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
-                <h3>Questions</h3>
-                
+                <h3>Questions</h3>               
                 <table id='surveys'>
                   <tbody>
                     <tr>{this.randerTableHeader()}</tr>
@@ -178,9 +177,8 @@ class GivenSurveys extends Component {
                   </tbody>
                 </table>
 
-                <h3>Analytics</h3>
-                <p>Project 1 Label: Employees satisfied</p>
-                <p>Project 2 Label: Employees not satisfied</p>
+                <h3 style={{padding:10}}>Analytics</h3>
+                <p>Group by analytics</p>
               </Collapsible>
             </>
           })}

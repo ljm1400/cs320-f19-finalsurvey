@@ -168,8 +168,9 @@ function CreateSurvey(props) {
                 <br></br>
 
                 <label style={{ fontSize: 20 }}>Question
-                        <input id="ques" ref={questionNameRef} type="text" style={{ margin: 10, fontSize: 20 }} />
+                        <textarea rows="2" cols="40" id="ques" ref={questionNameRef} style={{ margin: 10, fontSize: 20 }} />               
                 </label>
+                <br></br>
                 <label style={{ fontSize: 20 }}>Category
                         <input ref={categoryRef} type="text" style={{ margin: 10, fontSize: 20 }} />
                 </label>
