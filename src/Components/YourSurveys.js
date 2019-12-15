@@ -127,13 +127,12 @@ class YourSurveys extends Component {
   isCompleted(survey, user) {
     let found = false
     survey.answers.forEach((ansArr) => {
-      console.log(user)
-      if (user._id == ansArr[0]) {
+      if (user._id == ansArr[0] || user.id == ansArr[0]) {
         found = true
         return false // breaks foreach loop, doesn't return out of function
       }
     })
-    console.log("returning false")
+    console.log(found)
     return found
   }
 
