@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../actions/authActions';
 import { clearErrors } from '../actions/errorActions';
+import fullLogo from '../res/fs-full.png'
 
 const LOCAL_STORAGE_KEY = 'ultimate.questions'
 class LoginModal extends Component {
@@ -102,6 +103,7 @@ class LoginModal extends Component {
     return (
       <div className="header">
         {this.renderRedirect()}
+        <img className="fullLogo" src={fullLogo}></img>
         <h2>
           Welcome to Final-Surveys
         </h2>

@@ -83,9 +83,8 @@ class GivenSurveys extends Component {
     })
   }
 
-  randerTableItems(questions, survey) {
-    return questions.map((sur, index) => {
-      // temporarily hardcode survey answers
+  randerTableItems(survey) {
+    return survey.questions.map((sur, index) => {
       return (
         <tr>
           <td>{sur.num}</td>
@@ -96,6 +95,41 @@ class GivenSurveys extends Component {
         </tr>
       )
     })
+  }
+
+  renderTrueFalseTableItems(survey) {
+      console.log(survey.questions)
+      console.log("------")
+      let tfQuestionArr = survey.questions.filter(ques => 
+        ques.category == "True False"
+      )
+     
+      console.log(tfQuestionArr)
+
+      tfQuestionArr.map((ques, index) => {
+        let quesNum = ques.num
+        console.log(ques.num)
+        console.log('---')
+        let totalAnswers = survey.answers.length
+        let numTrue = 0
+        survey.answers.map((ansArr, idx) => {
+            if(ansArr[quesNum] == "True") numTrue++
+        })
+        let numFalse = totalAnswers - numTrue
+
+        return (
+          <tr>
+            <td>{ques.name}</td>
+            <td>{numTrue}</td>
+            <td>{numFalse}</td>
+          </tr>
+        )
+      })   
+  }
+  renderTableItemsAnalyticCategories(questions, survey) {
+      let categoryObjArr = []
+      
+
   }
 
   render() {
@@ -132,6 +166,8 @@ class GivenSurveys extends Component {
       return closedSurveys
     }
     let headerAnswers = ["#", "Questions", "Type", "Category", "Answers"]
+    let headerTrueFalse = ["T/F Question", "True Count", "False Count"]
+    let headerCategories = ["Category", "Answers"]
 
     return (
       <div className="header">
@@ -150,13 +186,12 @@ class GivenSurveys extends Component {
                 <table id='surveys'>
                   <tbody>                    
                     <tr>{this.randerTableHeader(headerAnswers)}</tr>
-                    {this.randerTableItems(survey.questions, survey)}
+                    {this.randerTableItems(survey)}
                   </tbody>
                 </table>
-
+                {/* ----- */}
                 <h3>Analytics</h3>
-                <p>Project 1 Label: Employees satisfied</p>
-                <p>Project 2 Label: Employees not satisfied</p>
+
               </Collapsible>
             </>
           })}
@@ -172,16 +207,33 @@ class GivenSurveys extends Component {
                 surveyType="closedSurvey"
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
-                <h3>Questions</h3>               
+                
+                <h3>Questions</h3>     
                 <table id='surveys'>
                   <tbody>
                     <tr>{this.randerTableHeader(headerAnswers)}</tr>
-                    {this.randerTableItems(survey.questions, survey)}
+                    {this.randerTableItems(survey)}
                   </tbody>
                 </table>
 
-                <h3 style={{padding:10}}>Analytics</h3>
-                <h4>1) Categories</h4>
+                {/* ----- */}
+                <h3>Analytics</h3>
+                <h4>True False Count</h4>
+                <table id='surveys'>
+                  <tbody>
+                    <tr>{this.randerTableHeader(headerTrueFalse)}</tr>
+                    {this.renderTrueFalseTableItems(survey)}
+                  </tbody>
+                </table>
+
+                 <br></br>
+                <h4>Categories</h4>
+                <table id='surveys'>
+                  <tbody>
+                    <tr>{this.randerTableHeader(headerCategories)}</tr>
+   
+                  </tbody>
+                </table>
               </Collapsible>
             </>
           })}

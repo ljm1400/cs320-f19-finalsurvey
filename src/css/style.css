@@ -9,6 +9,16 @@ body {
   background-color:   #dfe3ee;
 }
 
+h4 {
+  text-align: left;
+  padding-left: 2em;
+}
+
+.fullLogo {
+  padding-left: 0em;
+  height: 50%;
+  width: 50%;
+}
 .buttons {
   background-color: #0F9D58;
   border: none;
