@@ -131,6 +131,45 @@ class GivenSurveys extends Component {
 
   }
 
+  generateQuestions(headerAnswers, survey) {
+    return (
+      <>
+        <h3>Questions</h3>     
+        <table id='surveys'>
+          <tbody>
+            <tr>{this.randerTableHeader(headerAnswers)}</tr>
+            {this.randerTableItems(survey)}
+          </tbody>
+        </table>
+        <br></br>
+      </>
+    ) 
+  }
+  generateAnalytics(headerTrueFalse,survey, headerCategories ) {
+    return (
+      <>
+        <h3>Analytics</h3>
+        <h4>True False Count</h4>
+        <table id='surveys'>
+          <tbody>
+            <tr>{this.randerTableHeader(headerTrueFalse)}</tr>
+            {this.renderTrueFalseTableItems(survey)}
+          </tbody>
+        </table>
+
+          <br></br>
+        <h4>Categories</h4>
+        <table id='surveys'>
+          <tbody>
+            <tr>{this.randerTableHeader(headerCategories)}</tr>
+
+          </tbody>
+        </table>
+        <br></br>
+      </>
+    )
+  }
+
   render() {
     if (this.props.auth.isAuthenticated && this.state.gotSurveyData === false) {
       this.getOpenSurveys(this.props.auth.user.openSurveys)
@@ -180,21 +219,14 @@ class GivenSurveys extends Component {
                 surveyType="surveyResults"
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
-                <h3>Questions</h3>
-                
-                <table id='surveys'>
-                  <tbody>                    
-                    <tr>{this.randerTableHeader(headerAnswers)}</tr>
-                    {this.randerTableItems(survey)}
-                  </tbody>
-                </table>
-                {/* ----- */}
-                <h3>Analytics</h3>
-
+                {this.generateQuestions(headerAnswers, survey)}
+                {this.generateAnalytics(headerTrueFalse, survey, headerCategories)}
               </Collapsible>
             </>
           })}
         </div>
+
+
         <br></br>
         <h2>Closed Surveys</h2>
         <div>
@@ -205,34 +237,9 @@ class GivenSurveys extends Component {
                 title={survey.title_survey}
                 surveyType="closedSurvey"
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
-                closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
-                
-                <h3>Questions</h3>     
-                <table id='surveys'>
-                  <tbody>
-                    <tr>{this.randerTableHeader(headerAnswers)}</tr>
-                    {this.randerTableItems(survey)}
-                  </tbody>
-                </table>
-
-                {/* ----- */}
-                <h3>Analytics</h3>
-                <h4>True False Count</h4>
-                <table id='surveys'>
-                  <tbody>
-                    <tr>{this.randerTableHeader(headerTrueFalse)}</tr>
-                    {this.renderTrueFalseTableItems(survey)}
-                  </tbody>
-                </table>
-
-                 <br></br>
-                <h4>Categories</h4>
-                <table id='surveys'>
-                  <tbody>
-                    <tr>{this.randerTableHeader(headerCategories)}</tr>
-   
-                  </tbody>
-                </table>
+                closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>          
+                {this.generateQuestions(headerAnswers, survey)}
+                {this.generateAnalytics(headerTrueFalse,survey, headerCategories )}
               </Collapsible>
             </>
           })}

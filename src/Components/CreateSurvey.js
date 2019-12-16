@@ -172,7 +172,7 @@ function CreateSurvey(props) {
                 </label>
                 <br></br>
                 <label style={{ fontSize: 20 }}>Category
-                        <input ref={categoryRef} type="text" style={{ margin: 10, fontSize: 20 }} />
+                        <input ref={categoryRef} value="N/A" type="text" style={{ margin: 10, fontSize: 20 }} />
                 </label>
 
                 <br></br>
