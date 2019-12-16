@@ -186,7 +186,7 @@ class GivenSurveys extends Component {
           <strong>Question#{ques.num} {ques.name}</strong>
           <br></br>
           <strong>Total Answers: {totalAnsLength}</strong>
-          <p><b>Average Value: {averageNum}</b></p>
+          <p><b>Average Response: {this.determineAverageResponse(averageNum)}</b></p>
           <p>Strongly Disagree: {stDisCount} Somewhat Disagree: {soDisCnt}</p>
           <p>No Opinion: {noOpinionCnt}</p>
           <p>Somewhat Agree: {soAgreeCnt} Strongly Agree: {stAgreeCnt}</p>
@@ -200,6 +200,20 @@ class GivenSurveys extends Component {
         </div>
       )
     })
+  }
+
+  determineAverageResponse(avgVal) {
+    let diff1 = Math.abs(SLIDER_NUMS.ONE-avgVal)
+    let diff2 = Math.abs(SLIDER_NUMS.TWO-avgVal)
+    let diff3 = Math.abs(SLIDER_NUMS.THREE-avgVal)
+    let diff4 = Math.abs(SLIDER_NUMS.FOUR-avgVal)
+    let diff5 = Math.abs(SLIDER_NUMS.FIVE-avgVal)
+    let minDiff = Math.min(diff1, diff2, diff3, diff4, diff5)
+    if(minDiff == diff1) return SLIDER_VALUES.ONE
+    if(minDiff == diff2) return SLIDER_VALUES.TWO
+    if(minDiff == diff3) return SLIDER_VALUES.THREE
+    if(minDiff == diff4) return SLIDER_VALUES.FOUR
+    if(minDiff == diff5) return SLIDER_VALUES.FIVE
   }
 
   handleBarClick(element, id){ 
