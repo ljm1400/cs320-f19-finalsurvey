@@ -183,6 +183,8 @@ class GivenSurveys extends Component {
       const margin = {top: 20, right: 20, bottom: 30, left: 40};
       return (
         <div ref="root">
+          <strong>#{ques.num} {ques.name}</strong>
+          <br></br>
           <strong>Total Answers: {totalAnsLength}</strong>
           <p><b>Average Value: {averageNum}</b></p>
           <p>Strongly Disagree: {stDisCount} Somewhat Disagree: {soDisCnt}</p>
@@ -231,7 +233,7 @@ class GivenSurveys extends Component {
         </table>
 
         <br></br>
-        <h4>Slider Count</h4>
+        <h4>Slider Question Values</h4>
         <table id='surveys'>
           <tbody>
             {this.renderSliderGraph(survey)}
