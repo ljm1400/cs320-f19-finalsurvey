@@ -214,6 +214,7 @@ class YourSurveys extends Component {
           <h2>Completed Surveys</h2>
           <div>
               {this.state.renderClosed.length != 0 ? this.state.renderClosed.map((survey, index) => {
+                if(survey == null) return null
                  return <>
                  <button className="closedSurvey">{survey.title_survey}  
                    <br></br>
@@ -229,6 +230,7 @@ class YourSurveys extends Component {
           <h2>Closed Surveys</h2>
           <div>
               {this.state.closedSurveyDataList.length != 0 ? this.state.closedSurveyDataList.map((survey, index) => {
+                 if(survey == null) return null
                  return <>
                  <button className="closedSurvey">{survey.title_survey}  
                    <br></br>

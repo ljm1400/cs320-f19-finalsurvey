@@ -183,7 +183,7 @@ class GivenSurveys extends Component {
       const margin = {top: 20, right: 20, bottom: 30, left: 40};
       return (
         <div ref="root">
-          <strong>#{ques.num} {ques.name}</strong>
+          <strong>Question#{ques.num} {ques.name}</strong>
           <br></br>
           <strong>Total Answers: {totalAnsLength}</strong>
           <p><b>Average Value: {averageNum}</b></p>
