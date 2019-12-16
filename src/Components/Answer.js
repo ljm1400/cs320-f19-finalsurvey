@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/style.css';
 import {Slider} from "@material-ui/core"
+import {SLIDER_VALUES} from '../constants/Slider.js'
 
 const marks = [
     {
@@ -102,22 +103,22 @@ export default class Answer extends React.Component {
     handleSlider(event, value){
         let answer = ""
         if(value === -1){
-            answer = "No Answer"
+            answer = SLIDER_VALUES.ZERO
         }
         if(value === 0){
-            answer = "Strongly Disagree"
+            answer = SLIDER_VALUES.ONE
         }
         if(value === 25){
-            answer = "Somewhat Disagree"
+            answer = SLIDER_VALUES.TWO
         }
         if(value === 50){
-            answer = "No Opinion"
+            answer = SLIDER_VALUES.THREE
         }
         if(value === 75){
-            answer = "Somewhat Agree"
+            answer = SLIDER_VALUES.FOUR
         }
         if(value === 100){
-            answer = "Strongly Agree"
+            answer = SLIDER_VALUES.FIVE
         }
         console.log(answer)
         this.state.changeAnswers(answer, this.state.index)

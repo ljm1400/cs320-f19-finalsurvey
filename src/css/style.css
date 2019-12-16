@@ -1,148 +1,153 @@
-* {
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-}
+  * {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-body {
-  font-family: "Lato", sans-serif;
-  background-color:   #dfe3ee;
-}
+  body {
+    font-family: "Lato", sans-serif;
+    background-color:   #dfe3ee;
+  }
 
-h4 {
-  text-align: left;
-  padding-left: 2em;
-}
+  h4 {
+    text-align: left;
+    padding-left: 2em;
+  }
 
-.fullLogo {
-  padding-left: 0em;
-  height: 50%;
-  width: 50%;
-}
-.buttons {
-  background-color: #0F9D58;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  padding: 10px 16px;
-  font-size: 20px;
-}
+  .sliderChart {
+    width: 20%;
+    color: BLUE;
+  }
 
-.buttons:hover {
-  background-color: #4CAF50;
-}
+  .fullLogo {
+    padding-left: 0em;
+    height: 50%;
+    width: 50%;
+  }
+  .buttons {
+    background-color: #0F9D58;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 16px;
+    font-size: 20px;
+  }
 
-.links {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 2em 0em 1em 0em;
-  padding: 0;
-}
+  .buttons:hover {
+    background-color: #4CAF50;
+  }
 
-.sidenav {
-  height: 100%;
-  width: 210px;
-  position: fixed;
-  z-index: 1;
-  top: 0px;
-  left: -15px;
-  background-color: #272c33;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+  .links {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 2em 0em 1em 0em;
+    padding: 0;
+  }
 
-.sidenav p {
-  font-family: Arial;
-  text-align: center;
-  font-weight: bold;
-  height:10px;
-  padding: 5px 8px 6x 16px;
-  text-decoration: none;
-  font-size: 15px;
-  color: #0F9D58;
-  display: block;
-}
+  .sidenav {
+    height: 100%;
+    width: 210px;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: -15px;
+    background-color: #272c33;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
 
-.sidenav img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  
-  margin-bottom: 25px;
-  height: 15%;
-  width: 60%;
-  border-radius: 50%;
-} 
-.sidenav a {
-  background-size: 144px 56px;
-  font-family: Arial;
-  text-align: center;
-  padding: 16px 5px 16px 16px;
-  text-decoration: none;
-  font-size: 15px;
-  color: #818181;
-  display: block;
- }
+  .sidenav p {
+    font-family: Arial;
+    text-align: center;
+    font-weight: bold;
+    height:10px;
+    padding: 5px 8px 6x 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #0F9D58;
+    display: block;
+  }
 
-.sidenav a:hover {
-  background-color: #4CAF50;
-  color: #fff;
-  margin-left: 15px;
-}
+  .sidenav img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    margin-bottom: 25px;
+    height: 15%;
+    width: 60%;
+    border-radius: 50%;
+  } 
+  .sidenav a {
+    background-size: 144px 56px;
+    font-family: Arial;
+    text-align: center;
+    padding: 16px 5px 16px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+  }
 
-.header {
-  text-align: center;
-  margin-top:20px;
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 10px 10px;
-}
+  .sidenav a:hover {
+    background-color: #4CAF50;
+    color: #fff;
+    margin-left: 15px;
+  }
 
-.createSurvey {
-  text-align: center;
-  margin-top: 0px;
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 10px 10px;
-}
-.radioButtons {
-  font-size: 20px;
-}
+  .header {
+    text-align: center;
+    margin-top:20px;
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 10px 10px;
+  }
 
-.createSurvey.closingDate {
-  margin-right:5 px;
-  padding: 10px;
-}
+  .createSurvey {
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 10px 10px;
+  }
+  .radioButtons {
+    font-size: 20px;
+  }
 
-.closedSurvey {
-  background-color: rgb(131, 131, 131);
-  font-size: 20px;
-  color: white;
-  padding: 20px;
-  margin-bottom: 5px;
-  width: 80%;
+  .createSurvey.closingDate {
+    margin-right:5 px;
+    padding: 10px;
+  }
 
-  border-width: 1px;
-  border-radius:10px;
-}
+  .closedSurvey {
+    background-color: rgb(131, 131, 131);
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+    margin-bottom: 5px;
+    width: 80%;
 
-.surveyResults {
-  background-color: #0F9D58;
-  font-size: 20px;
-  color: white;
-  padding: 20px;
-  margin-bottom: 5px;
-  width: 80%;
+    border-width: 1px;
+    border-radius:10px;
+  }
 
-  border-width: 1px;
-  border-radius:10px;
-  cursor: pointer;
-}
-.surveyTitle {
-  color: AQUA
-}
+  .surveyResults {
+    background-color: #0F9D58;
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+    margin-bottom: 5px;
+    width: 80%;
+
+    border-width: 1px;
+    border-radius:10px;
+    cursor: pointer;
+  }
+  .surveyTitle {
+    color: AQUA
+  }
 
   input[type=text] {padding:5px; border:2px solid #ccc; 
       -webkit-border-radius: 5px;

@@ -5,6 +5,8 @@ import Collapsible from './Collapsible';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as utils from './Utils.js'
+import {SLIDER_VALUES, SLIDER_NUMS} from '../constants/Slider.js'
+import BarChart from 'react-bar-chart';
 
 
 class GivenSurveys extends Component {
@@ -19,9 +21,16 @@ class GivenSurveys extends Component {
       surveys: [],
       gotSurveyData: false,
       openSurveyDataList: [],
-      closedSurveyDataList: []
+      closedSurveyDataList: [],
+      width: 500
     };
   }
+
+  // componentDidMount: () => {
+  //   window.onresize = () => {
+  //    this.setState({width: this.refs.root.offsetWidth}); 
+  //   };
+  // }
 
   getOpenSurveys = (surveyList) => {
     let opensurveyIdList = surveyList
@@ -98,9 +107,6 @@ class GivenSurveys extends Component {
   }
 
   renderTrueFalseTableItems(survey) {
-      console.log(survey.questions)
-      console.log("------")
-
       return survey.questions.map((ques, index) => {
           if(ques.type != "True False") return null
           console.log(ques)
@@ -125,10 +131,77 @@ class GivenSurveys extends Component {
           );
       })   
   }
-  renderCategoryTableItems(questions, survey) {
-      let categoryObjArr = []
-      
 
+  renderSliderGraph(survey) {
+    return survey.questions.map((ques, ind) => {
+      if(ques.type != "Slider") return null
+      console.log(ques)
+
+      let quesNum = ques.num
+      let totalAnsLength = survey.answers.length
+      let stDisCount = 0,
+          soDisCnt = 0, 
+          noOpinionCnt = 0, 
+          soAgreeCnt = 0,
+          stAgreeCnt = 0,
+          total = 0;
+
+      survey.answers.map((ansArr, idx) => {
+        let ans = ansArr[quesNum]
+        if(ans == SLIDER_VALUES.ONE) {
+          stDisCount++;
+          total+= SLIDER_NUMS.ONE
+        }
+        else if(ans == SLIDER_VALUES.TWO) {
+          soDisCnt++;
+          total+= SLIDER_NUMS.TWO
+        }
+        else if(ans == SLIDER_VALUES.THREE) {
+          noOpinionCnt++;
+          total+= SLIDER_NUMS.THREE
+        }
+        else if(ans == SLIDER_VALUES.FOUR) {
+          soAgreeCnt++;
+          total+= SLIDER_NUMS.FOUR
+        }
+        else if(ans == SLIDER_VALUES.FIVE) {
+          stAgreeCnt++;
+          total+= SLIDER_NUMS.FIVE
+        }
+      })
+      let averageNum = total / totalAnsLength
+      console.log("&&&&&&")
+      console.log(total)
+      console.log(averageNum)
+      const data = [
+        {text: "StronglyD", value: stDisCount},
+        {text: "SomewhatD", value: soDisCnt},
+        {text: "Neutral", value: noOpinionCnt},
+        {text: "SomewhatA", value: soAgreeCnt},
+        {text: "StronglyA", value: stAgreeCnt}
+      ];
+      const margin = {top: 20, right: 20, bottom: 30, left: 40};
+      return (
+        <div ref="root">
+          <strong>Total Answers: {totalAnsLength}</strong>
+          <p><b>Average Value: {averageNum}</b></p>
+          <p>Strongly Disagree: {stDisCount} Somewhat Disagree: {soDisCnt}</p>
+          <p>No Opinion: {noOpinionCnt}</p>
+          <p>Somewhat Agree: {soAgreeCnt} Strongly Agree: {stAgreeCnt}</p>
+          <BarChart 
+            ylabel='Count'
+            width={this.state.width}
+            height={500}
+            margin={margin}
+            data={data}
+            onBarClick={this.handleBarClick}/>
+        </div>
+      )
+    })
+  }
+
+  handleBarClick(element, id){ 
+    console.log(`The bin ${element.text} with id ${id} was clicked`);
   }
 
   generateQuestions(headerAnswers, survey) {
@@ -145,7 +218,7 @@ class GivenSurveys extends Component {
       </>
     ) 
   }
-  generateAnalytics(headerTrueFalse,survey, headerCategories ) {
+  generateAnalytics(headerTrueFalse,survey, headerCategories, headerSlider) {
     return (
       <>
         <h3>Analytics</h3>
@@ -156,6 +229,15 @@ class GivenSurveys extends Component {
             {this.renderTrueFalseTableItems(survey)}
           </tbody>
         </table>
+
+        <br></br>
+        <h4>Slider Count</h4>
+        <table id='surveys'>
+          <tbody>
+            {this.renderSliderGraph(survey)}
+          </tbody>
+        </table>
+
 
           <br></br>
         <h4>Categories</h4>
@@ -205,6 +287,7 @@ class GivenSurveys extends Component {
     }
     let headerAnswers = ["#", "Questions", "Type", "Category", "Answers"]
     let headerTrueFalse = ["T/F Question", "True Count", "False Count"]
+    let headerSlider = ["Average Value /100", "#Strong Disagree","#Somewhat Disagree", "#No Opinion", "#Somewhat Agree", "#Strongly Agree"]
     let headerCategories = ["Category", "Answers"]
 
     return (
@@ -220,7 +303,7 @@ class GivenSurveys extends Component {
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>
                 {this.generateQuestions(headerAnswers, survey)}
-                {this.generateAnalytics(headerTrueFalse, survey, headerCategories)}
+                {this.generateAnalytics(headerTrueFalse, survey, headerCategories, headerSlider)}
               </Collapsible>
             </>
           })}
@@ -239,7 +322,7 @@ class GivenSurveys extends Component {
                 issueDate={'Issue Date: ' + utils.formatDate(new Date(survey.issued_date))}
                 closingDate={'Closing Date: ' + utils.formatDate(new Date(survey.close_date))}>          
                 {this.generateQuestions(headerAnswers, survey)}
-                {this.generateAnalytics(headerTrueFalse,survey, headerCategories )}
+                {this.generateAnalytics(headerTrueFalse, survey, headerCategories, headerSlider )}
               </Collapsible>
             </>
           })}
