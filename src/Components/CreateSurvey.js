@@ -104,11 +104,7 @@ function CreateSurvey(props) {
             return false;
         }
         alert('You have submitted the survey');
-        // let questionList = [];
-        // Object.keys(questions).forEach(function(key) {
-        //     console.log(questions[key])
-        //     questionList.push(questions[key]);
-        // })
+ 
 
         // set the state's values
         state.title_survey = surveyTitle.current.value;
@@ -166,18 +162,16 @@ function CreateSurvey(props) {
                 </label>
 
                 <br></br>
-
                 <label style={{ fontSize: 20 }}>Question
                         <textarea rows="2" cols="40" id="ques" ref={questionNameRef} style={{ margin: 10, fontSize: 20 }} />               
                 </label>
+
                 <br></br>
                 <label style={{ fontSize: 20 }}>Category
                         <input ref={categoryRef} value="N/A" type="text" style={{ margin: 10, fontSize: 20 }} />
                 </label>
 
                 <br></br>
-                
-
                 <label style={{ fontSize: 20, margin:10 }}>Type:  
                     <select name="questionType" ref={typeRef} style={{margin:10}}>
                         <option value="True False">True / False</option>
@@ -195,9 +189,6 @@ function CreateSurvey(props) {
                 <br></br>
                 <input type="submit" value="Submit Survey"></input>
             </form>
-
-
-
         </div>
     )
 }

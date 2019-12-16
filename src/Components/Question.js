@@ -8,48 +8,40 @@ export default function Question({ question,toggleQuestion, radio, getOptions}) 
   function handleQuestionClick() {
     toggleQuestion(question.id, 'remove')
   }
-  const options = []
+  let options = []
 
   function handleMC(e){
-   let a = e.target.value;
+    let a = e.target.value;
 
-   if(e.target.name === "option1"){
-     options[0] = a;
-   }
-   if(e.target.name === "option2"){
-    options[1] = a;
+    if(e.target.name === "option1"){
+      options.push(a)
+    }
+    if(e.target.name === "option2"){
+      options.push(a)
+    }
+    if(e.target.name === "option3"){
+      options.push(a)
+    }
+    if(e.target.name === "option4"){
+      options.push(a)
+    }
   }
-  if(e.target.name === "option3"){
-    options[2] = a;
-  }
-  if(e.target.name === "option4"){
-    options[3] = a;
-  }
-}
-  // var a = 1;
+
   function Question(){
-      if(question.type === 'True False'){
-        return <></>
-      }
-      else if(question.type === 'Multiple Choice'){
-        // multiple choice
-        return <label>
-          Option 1<input style={{margin:10}} name = "option1" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
-          Option 2<input style={{margin:10}} name = "option2" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
-          Option 3<input style={{margin:10}} name = "option3" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
-          Option 4<input style={{margin:10}} name = "option4" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
-        </label>
-      }
-      else if(question.type === 'Slider'){
-        return <></>
-      }
-      else{
-        // text
-        // need to return label for the question type
-        return <></>
-        //return <p style={{margin:20, fontSize:15}}>Text Question</p>
-        //<input style={{margin:20, fontSize:15}} type="text"/>
-      }
+    if(question.type === 'Multiple Choice'){
+      return <label>
+        Option 1<input style={{margin:10}} name = "option1" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+        Option 2<input style={{margin:10}} name = "option2" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+        Option 3<input style={{margin:10}} name = "option3" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+        Option 4<input style={{margin:10}} name = "option4" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+      </label>
+    }
+    else if(question.type === 'Slider'){
+      return <></>
+    }
+    else{
+      return <></>
+    }
   }
 
   return (

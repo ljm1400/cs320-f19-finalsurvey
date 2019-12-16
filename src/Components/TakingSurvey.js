@@ -116,8 +116,9 @@ class TakingSurvey extends Component {
         <div className="header">
             {this.renderRedirect()}
             <h2>{"Taking Survey: " + this.state.survey.title_survey}</h2>
-            <h4>{"Issue Date: " + this.state.issued_date}</h4>
-            <h4>{"Close Date: " + this.state.close_date}</h4>
+            <h3>{"Issue Date: " + this.state.issued_date}</h3>
+            <h3>{"Close Date: " + this.state.close_date}</h3>
+            <br></br>
             
             <form className="surveyQuestions" onSubmit={this.handleSubmitButton}>
                 <table id='surveys'>
@@ -127,7 +128,7 @@ class TakingSurvey extends Component {
                     </tbody>
                 </table>
 
-              <Button color="success">Submit Survey</Button>{' '}
+              <Button className="submitSurveyButton" color="success">Submit Survey</Button>{' '}
               {/* don't need onClick for button, since form is handling the onSubmit */}
             </form>
         </div> 
