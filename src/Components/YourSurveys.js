@@ -35,7 +35,7 @@ class YourSurveys extends Component {
   setRedirect = (index) => {
       this.setState({
         redirect: true,
-        takingSurvey: this.state.openSurveyDataList[index]
+        takingSurvey: this.state.renderOpen[index]
       })
   }
 
