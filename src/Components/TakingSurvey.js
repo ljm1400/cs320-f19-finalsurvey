@@ -36,7 +36,6 @@ class TakingSurvey extends Component {
   }
 
   setUser (){
-    
     this.setState({
       surveyAnswers: [this.state.user._id]
     })
@@ -112,6 +111,8 @@ class TakingSurvey extends Component {
     if(this.state.user && this.state.user._id !== null && this.state.surveyAnswers === null){
       this.setUser()
     }
+    console.log("----")
+    console.log(this.state.survey.questions)
     return (
         <div className="header">
             {this.renderRedirect()}

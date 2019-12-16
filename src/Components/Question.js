@@ -14,16 +14,16 @@ export default function Question({ question,toggleQuestion, radio, getOptions}) 
     let a = e.target.value;
 
     if(e.target.name === "option1"){
-      options.push(a)
+      options[0] = a
     }
     if(e.target.name === "option2"){
-      options.push(a)
+      options[1] = a
     }
     if(e.target.name === "option3"){
-      options.push(a)
+      options[2] = a
     }
     if(e.target.name === "option4"){
-      options.push(a)
+      options[3] = a
     }
   }
 
@@ -37,7 +37,15 @@ export default function Question({ question,toggleQuestion, radio, getOptions}) 
       </label>
     }
     else if(question.type === 'Slider'){
-      return <></>
+      return <>
+        <input type="range" name="points" value="3" min="1" max="5" step="1" list="ticks"></input>
+        <datalist id="ticks">
+          <option>1</option>
+          <option>3</option>
+          <option>5</option>
+        </datalist>
+        <p>1)Strongly Disagree 3) No opinion 5)Strongly Agree</p>
+      </>
     }
     else{
       return <></>

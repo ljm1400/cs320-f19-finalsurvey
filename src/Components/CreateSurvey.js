@@ -98,7 +98,6 @@ function CreateSurvey(props) {
     }
 
     function handleSubmit() {
-        
         if (questions.length === 0) {
             console.info("Please add 1 question")
             return false;
