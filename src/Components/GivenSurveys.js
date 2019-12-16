@@ -100,30 +100,29 @@ class GivenSurveys extends Component {
   renderTrueFalseTableItems(survey) {
       console.log(survey.questions)
       console.log("------")
-      let tfQuestionArr = survey.questions.filter(ques => 
-        ques.category == "True False"
-      )
-     
-      console.log(tfQuestionArr)
 
-      tfQuestionArr.map((ques, index) => {
-        let quesNum = ques.num
-        console.log(ques.num)
-        console.log('---')
-        let totalAnswers = survey.answers.length
-        let numTrue = 0
-        survey.answers.map((ansArr, idx) => {
-            if(ansArr[quesNum] == "True") numTrue++
-        })
-        let numFalse = totalAnswers - numTrue
+      return survey.questions.map((ques, index) => {
+          if(ques.type != "True False") return null
+          console.log(ques)
 
-        return (
-          <tr>
-            <td>{ques.name}</td>
-            <td>{numTrue}</td>
-            <td>{numFalse}</td>
-          </tr>
-        )
+          let totalAnswers = survey.answers.length
+          let numTrue = 0
+          let quesNum = ques.num
+          
+          survey.answers.map((ansArr, idx) => {
+              if(ansArr[quesNum] == "True") 
+                numTrue++
+          })
+          console.log(numTrue)
+          let numFalse = totalAnswers - numTrue
+          console.log('trigger2')
+          return (
+            <tr>
+              <td>{ques.name}</td>
+              <td>{numTrue}</td>
+              <td>{numFalse}</td>
+            </tr>
+          );
       })   
   }
   renderTableItemsAnalyticCategories(questions, survey) {
