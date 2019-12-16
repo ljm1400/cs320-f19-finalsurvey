@@ -62,6 +62,7 @@ export default class Answer extends React.Component {
         }
         this.state.changeAnswers(value, this.state.index)
     }
+
     handleMC(value){
         if(this.state.questionObj.options[0] && value === this.state.questionObj.options[0]){
             this.setState({
@@ -97,6 +98,7 @@ export default class Answer extends React.Component {
         }
         this.state.changeAnswers(value, this.state.index)
     }
+
     handleSlider(event, value){
         let answer = ""
         if(value === -1){
@@ -146,10 +148,17 @@ export default class Answer extends React.Component {
         } 
         else if(questionType === "Multiple Choice") {
            return <div>
-            {this.state.questionObj.options[0] ?<label><input type="checkbox" checked={this.state.one} name="one" class="radio" value={this.state.questionObj.options[0]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[0]}</label>: ""}
-            {this.state.questionObj.options[1] ?<label><input type="checkbox" checked={this.state.two} name="two" class="radio" value={this.state.questionObj.options[1]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[1]}</label>: ""}
-            {this.state.questionObj.options[2] ?<label><input type="checkbox" checked={this.state.three} name="three" class="radio" value={this.state.questionObj.options[2]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[3]}</label>: ""}
-            {this.state.questionObj.options[3] ?<label><input type="checkbox" checked={this.state.four} name="four" class="radio" value={this.state.questionObj.options[3]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[4]}</label>: ""}
+            {this.state.questionObj.options[0] ?
+            <label><input type="checkbox" checked={this.state.one} name="one" class="radio" 
+            value={this.state.questionObj.options[0]} onChange={e=>this.handleMC(e.target.value)}/>
+            {this.state.questionObj.options[0]}</label>: ""}
+
+            {this.state.questionObj.options[1] ?
+            <label><input type="checkbox" checked={this.state.two} name="two" class="radio" value={this.state.questionObj.options[1]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[1]}</label>: ""}
+            {this.state.questionObj.options[2] ?
+            <label><input type="checkbox" checked={this.state.three} name="three" class="radio" value={this.state.questionObj.options[2]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[3]}</label>: ""}
+            {this.state.questionObj.options[3] ?
+            <label><input type="checkbox" checked={this.state.four} name="four" class="radio" value={this.state.questionObj.options[3]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[4]}</label>: ""}
            </div>
         } 
         else if(questionType == "Slider") {
