@@ -125,7 +125,7 @@ class GivenSurveys extends Component {
           );
       })   
   }
-  renderTableItemsAnalyticCategories(questions, survey) {
+  renderCategoryTableItems(questions, survey) {
       let categoryObjArr = []
       
 

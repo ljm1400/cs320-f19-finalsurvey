@@ -149,7 +149,7 @@ h4 {
       border-radius: 5px;
   }
   input[type=text]:focus {border-color:#333; }
-  
+
   input[type=submit] {
       width: 10em;  height: 2em;
       font-size: 20px;
@@ -159,54 +159,59 @@ h4 {
       border-radius: 5px; 
   }
 
-.active, .surveyResults:hover {
-  background-color: rgb(98, 182, 42);
-}
+  .active, .surveyResults:hover {
+    background-color: rgb(98, 182, 42);
+  }
 
-h3{
-  margin: 1px;
-}
+  h3{
+    margin: 1px;
+  }
 
-#surveys {
-  text-align: center;
-  border-collapse: collapse;
-  border: 1px solid #ddd;
-  width: 90%;
-}
+  #surveys {
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    width: 90%;
+    margin-top: 1em;
+  }
 
-#surveys td, #surveys th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+  #surveys td, #surveys th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
 
-#surveys tr:nth-child(n){background-color: #f2f2f2;}
+  #surveys tr:nth-child(n){background-color: #f2f2f2;}
 
-#surveys th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #0F9D58;
-  color: white;
-}
+  #surveys th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #0F9D58;
+    color: white;
+  }
 
-.surveyQuestions{
-  font-size: 24px;
-  cursor: pointer;
-  background-color: #afcdf5;
-  font-family: verdana;
-  color: black;
-  font-size: 14px;  
-  padding-top: 3px;
-  padding: 2px;
-  width: 80%;
+  .submitSurveyButton {
+    margin: 1em;
+  }
 
-  border-width: 1px;
-  border-radius:10px;
-  margin-bottom: 5px;
-  
-}
+  .surveyQuestions{
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #afcdf5;
+    font-family: verdana;
+    color: black;
+    font-size: 14px;  
+    padding-top: 3px;
+    padding: 2px;
+    width: 80%;
 
-@media screen and (max-height: 45px) {
-  .sidenav {padding-top: 1v ffffffffffffffcccfffffffffc5px;}
-  .sidenav a {font-size: 18px;}
-}
+    border-width: 1px;
+    border-radius:10px;
+    margin-bottom: 5px;
+    
+  }
+
+  @media screen and (max-height: 45px) {
+    .sidenav {padding-top: 1v ffffffffffffffcccfffffffffc5px;}
+    .sidenav a {font-size: 18px;}
+  }
