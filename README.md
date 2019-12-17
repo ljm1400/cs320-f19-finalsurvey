@@ -9,5 +9,9 @@
     * cd to project root directory (cs320-f19-finalsurvey) after downloading -> npm install
     * cd backend -> npm install
 2. **npm run dev** in the root directory. This command will run both the frontend and backend concurrently
+3. Manager login: Austin_Cowan@bluesorbetsecurity.com<br />
+password: cowanau<br />
+Employee login: Marlee_Benson@bluesorbetsecurity.com<br />
+   password: besonma
 
   
