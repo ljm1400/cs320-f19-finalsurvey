@@ -301,9 +301,10 @@ class GivenSurveys extends Component {
       })
       return closedSurveys
     }
-    let headerAnswers = ["#", "Questions", "Type", "Category", "Answers"]
+    let headerAnswers = ["#", "Question", "Type", "Category", "Answers"]
     let headerTrueFalse = ["T/F Question", "True Count", "False Count"]
     let headerSlider = ["Average Value /100", "#Strong Disagree","#Somewhat Disagree", "#No Opinion", "#Somewhat Agree", "#Strongly Agree"]
+    let headerMC = ["MC Question","Option 1, Option 2", "Option 3", "Option 4"]
     let headerCategories = ["Category", "Answers"]
 
     return (

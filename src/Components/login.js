@@ -116,7 +116,7 @@ class LoginModal extends Component {
             <br></br>
             <br></br>
             <div style={{marginLeft: '9rem'}}>
-              <Button className="buttons" onClick={this.toggle} href='#'>Get start</Button>
+              <Button className="buttons" onClick={this.toggle} href='#'>Login</Button>
             </div>
           </CardBody>
         </Card>
