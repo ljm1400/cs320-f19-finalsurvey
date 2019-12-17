@@ -195,6 +195,13 @@
     color: white;
   }
 
+  .loginPanel {
+    width: 600px;
+    margin-top: 120px;
+    position: relative;
+    border: 5px #0F9D58;
+  }
+
   .submitSurveyButton {
     margin: 1em;
   }

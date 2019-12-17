@@ -9,7 +9,11 @@ import {
   FormGroup,
   Label,
   Input,
-  Alert
+  Alert,
+  Card,
+  CardImg,
+  CardText,
+  CardBody
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -101,15 +105,21 @@ class LoginModal extends Component {
 
   render() {
     return (
-      <div className="header">
+      <div>
         {this.renderRedirect()}
-        <img className="fullLogo" src={fullLogo}></img>
-        <h2>
-          Welcome to Final-Surveys
-        </h2>
-        <Button onClick={this.toggle} href='#'>
-          Login
-        </Button>
+        <Card className="loginPanel">
+          <CardImg top width="100%" src={fullLogo} />
+          <CardBody>
+            <br></br>
+            <br></br>
+            <CardText tag="h2">Welcome to Final-Surveys!</CardText>
+            <br></br>
+            <br></br>
+            <div style={{marginLeft: '9rem'}}>
+              <Button className="buttons" onClick={this.toggle} href='#'>Get start</Button>
+            </div>
+          </CardBody>
+        </Card>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
