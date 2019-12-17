@@ -36,9 +36,11 @@ class TakingSurvey extends Component {
   }
 
   setUser (){
-    this.setState({
-      surveyAnswers: [this.state.user._id]
-    })
+    if(this.state.user._id != null) {
+      this.setState({surveyAnswers: [this.state.user._id]})
+    } else {
+      this.setState({surveyAnswers: [this.state.user.id]})
+    }
   }
 
   initUser(){

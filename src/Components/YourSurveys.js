@@ -21,7 +21,7 @@ class YourSurveys extends Component {
       check: false,
       updatedManagerClosedList: false,
       render: false,
-      
+
       openSurveyIdList: [],
       openSurveyDataList: [],
       closedSurveyIdList: [],
@@ -145,7 +145,7 @@ class YourSurveys extends Component {
     survey.answers.forEach((ansArr) => {
       if (user._id == ansArr[0] || (user.id != null && user.id == ansArr[0])) {
         console.log(user.id)
-        console.log(ansArr[0])
+        console.log('ansarr' + ansArr[0])
         found = true
         return false // breaks foreach loop, doesn't return out of function
       }
@@ -158,7 +158,7 @@ class YourSurveys extends Component {
     axios.post('http://localhost:5000/users/updateboth/', 
     {openSurveys: this.state.openSurveyIdList, closedSurveys: this.state.closedSurveyIdList }, 
     {params:{employeeId: manager.employeeId, companyId: manager.companyId}})
-      .then(res => console.log("Updated Manager Survey Information: " + res.data))
+      .then(res => console.log("Updated Manager Survey Information moving open survey to closed survey " + res.data))
     this.setState({updatedManagerClosedList: true})
   }
 
