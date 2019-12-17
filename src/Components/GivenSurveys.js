@@ -49,11 +49,13 @@ class GivenSurveys extends Component {
       )
     })
 
+    console.log(openSurveyDataList)
     // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
     Promise.all(requests).then((val) => {
       this.setState({ openSurveyDataList: openSurveyDataList })
     })
   }
+
   getClosedSurveyData = (closedSurveyList) => {
       let surveyDataList = []
       let requests = []
@@ -234,6 +236,7 @@ class GivenSurveys extends Component {
       </>
     ) 
   }
+
   generateAnalytics(headerTrueFalse,survey, headerCategories, headerSlider) {
     return (
       <>
@@ -276,9 +279,9 @@ class GivenSurveys extends Component {
     }
 
     function isExpired(survey) {
-      let today = utils.formatDate(new Date())
-      let closedDate = utils.formatDate(new Date(survey.close_date))
-      if (closedDate < today) {
+      let today = new Date()
+      let closedDate = new Date(survey.close_date)
+      if(closedDate.getTime() < today.getTime()) {
         return true
       }
       return false
@@ -287,9 +290,12 @@ class GivenSurveys extends Component {
     function renderOpenSurveys(surveys) {
       let openSurveys = surveys.filter((survey) => {
         if (survey === null) {  return null }
+        if(isExpired(survey)) console.log(survey)
         if (!isExpired(survey))
           return survey
       })
+      console.log("--------")
+      console.log(openSurveys)
       return openSurveys
     }
 
