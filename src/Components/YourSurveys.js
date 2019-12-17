@@ -21,10 +21,12 @@ class YourSurveys extends Component {
       check: false,
       updatedManagerClosedList: false,
       render: false,
+      
       openSurveyIdList: [],
       openSurveyDataList: [],
       closedSurveyIdList: [],
       closedSurveyDataList:[],
+
       renderOpen: [],
       renderClosed:[],
       manager: null,
@@ -110,18 +112,24 @@ class YourSurveys extends Component {
       }
   }
 
+   isExpired(survey) {
+    let today = new Date()
+    let closedDate = new Date(survey.close_date)
+    if(closedDate.getTime() < today.getTime()) {
+      return true
+    }
+    return false
+  }
+
   checkOpenForExpired(){
     let closed = this.state.closedSurveyIdList;
-    let open = this.state.openSurveyDataList;
+    let currOpen = this.state.openSurveyDataList;
     let newOpen = []
-    let today = utils.formatDate(new Date())
        
-    open.map((survey) => {
+    currOpen.map((survey) => {
       if(survey!== null){
-        let closeDate = utils.formatDate(new Date(survey.close_date))
-        if(closeDate < today){
+        if(this.isExpired(survey))
           closed.push(survey._id)
-        }
         else{
           newOpen.push(survey._id)
         }
@@ -136,11 +144,12 @@ class YourSurveys extends Component {
     let found = false
     survey.answers.forEach((ansArr) => {
       if (user._id == ansArr[0] || (user.id != null && user.id == ansArr[0])) {
+        console.log(user.id)
+        console.log(ansArr[0])
         found = true
         return false // breaks foreach loop, doesn't return out of function
       }
     })
-    console.log(found)
     return found
   }
 

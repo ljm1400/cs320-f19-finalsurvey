@@ -48,7 +48,7 @@ class GivenSurveys extends Component {
           })
       )
     })
-
+    console.log("------Open survey data-----")
     console.log(openSurveyDataList)
     // Need to use Promise.all() to make sure setState will update the surveyDataList after all requests finished
     Promise.all(requests).then((val) => {
@@ -123,7 +123,7 @@ class GivenSurveys extends Component {
           })
           console.log(numTrue)
           let numFalse = totalAnswers - numTrue
-          console.log('trigger2')
+
           return (
             <tr>
               <td>{ques.name}</td>
@@ -257,15 +257,6 @@ class GivenSurveys extends Component {
           </tbody>
         </table>
 
-
-          <br></br>
-        <h4>Categories</h4>
-        <table id='surveys'>
-          <tbody>
-            <tr>{this.randerTableHeader(headerCategories)}</tr>
-
-          </tbody>
-        </table>
         <br></br>
       </>
     )
@@ -278,46 +269,47 @@ class GivenSurveys extends Component {
       this.setState({ gotSurveyData: true });
     }
 
+    // TODO: Need to check manager's given surveys to move to closed surveys
     function isExpired(survey) {
       let today = new Date()
       let closedDate = new Date(survey.close_date)
-      if(closedDate.getTime() < today.getTime()) {
+      if(closedDate < today) {
         return true
       }
       return false
     }
 
+
     function renderOpenSurveys(surveys) {
-      let openSurveys = surveys.filter((survey) => {
-        if (survey === null) {  return null }
-        if(isExpired(survey)) console.log(survey)
-        if (!isExpired(survey))
-          return survey
+      surveys.map((survey) => {
+        if(isExpired(survey)) 
+          afterCheckClosedSurveys.push(survey)
+        else
+          afterCheckOpenSurveys.push(survey)
       })
-      console.log("--------")
-      console.log(openSurveys)
-      return openSurveys
+
+      console.log("---after check expire open surveys-----")
+      console.log(afterCheckOpenSurveys)
+      console.log("---after check expire closed surveys-----")
+      console.log(afterCheckClosedSurveys)
     }
 
-    function renderClosedSurveys(surveys) {
-      let closedSurveys = surveys.filter((survey) => {
-        if (survey === null) {  return null }
-        if (isExpired(survey))
-          return survey
-      })
-      return closedSurveys
-    }
+
+    let afterCheckOpenSurveys = []
+    let afterCheckClosedSurveys =[]
+
     let headerAnswers = ["#", "Question", "Type", "Category", "Answers"]
     let headerTrueFalse = ["T/F Question", "True Count", "False Count"]
     let headerSlider = ["Average Value /100", "#Strong Disagree","#Somewhat Disagree", "#No Opinion", "#Somewhat Agree", "#Strongly Agree"]
     let headerMC = ["MC Question","Option 1, Option 2", "Option 3", "Option 4"]
     let headerCategories = ["Category", "Answers"]
 
+
     return (
       <div className="header">
         <h2>Open Surveys</h2>
         <div>
-          {renderOpenSurveys(this.state.openSurveyDataList).map((survey) => {
+          {this.state.openSurveyDataList.map((survey) => {
             if(survey == null) return  <></>
             return <>
               <Collapsible
@@ -336,7 +328,7 @@ class GivenSurveys extends Component {
         <br></br>
         <h2>Closed Surveys</h2>
         <div>
-          {renderClosedSurveys(this.state.closedSurveyDataList).map((survey) => {
+          {this.state.closedSurveyDataList.map((survey) => {
             if(survey == null) return  <></>
             return <>
               <Collapsible
