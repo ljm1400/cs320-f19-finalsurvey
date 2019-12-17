@@ -32,6 +32,7 @@ function CreateSurvey(props) {
     const questionNameRef = useRef()
     const categoryRef = useRef()
     const typeRef = useRef()
+    var Options = []
 
     var propTypes = {
         auth: PropTypes.object.isRequired
@@ -52,11 +53,11 @@ function CreateSurvey(props) {
     }, [questions])
 
 
-    function handleAddQuestion(e) {
+    function handleAddQuestion(e)  {
         const quesNum = questionNum
         const name = questionNameRef.current.value
         const type = typeRef.current.value
-        const options = ["satisfied", "not satisfied"]
+        const options = Options
         const category = categoryRef.current.value
 
         if (name === '') return
@@ -72,10 +73,11 @@ function CreateSurvey(props) {
                 category: category,
                 complete: false
             }
+            console.log(obj);
             prevQuestions.push(obj);
             return prevQuestions
         })
-        console.log(questions)
+        
         document.getElementById('ques').value = '';
     }
 
@@ -91,28 +93,23 @@ function CreateSurvey(props) {
         }
     }
 
-    function handleClearQuestions() {
+    function getOptions(options) {
+        Options = options
     }
 
     function handleSubmit() {
-        alert('You have submitted the survey');
         if (questions.length === 0) {
             console.info("Please add 1 question")
             return false;
         }
-        // let questionList = [];
-        // Object.keys(questions).forEach(function(key) {
-        //     console.log(questions[key])
-        //     questionList.push(questions[key]);
-        // })
+        alert('You have submitted the survey');
+ 
 
         // set the state's values
         state.title_survey = surveyTitle.current.value;
         state.questions = questions;
         state.issued_by = user.employeeId
         state.close_date = close_date;
-        console.log('FINAL STATE')
-        console.log(state);
 
         axios.post("http://localhost:5000/surveys/add", state)
             .then(res =>
@@ -120,7 +117,6 @@ function CreateSurvey(props) {
             )
 
         questions.map(q => q.complete = true)
-        handleClearQuestions();
     }
 
 
@@ -165,31 +161,16 @@ function CreateSurvey(props) {
                 </label>
 
                 <br></br>
-
                 <label style={{ fontSize: 20 }}>Question
-                        <input id="ques" ref={questionNameRef} type="text" style={{ margin: 10, fontSize: 20 }} />
+                        <textarea rows="2" cols="40" id="ques" ref={questionNameRef} style={{ margin: 10, fontSize: 20 }} />               
                 </label>
-                <label style={{ fontSize: 20 }}>Category
-                        <input ref={categoryRef} type="text" style={{ margin: 10, fontSize: 20 }} />
-                </label>
-                {/* <br></br>
-
-                <label style={{ fontSize: 20 }}>Multiple choice
-                            <input type="radio" value="m" onChange={handleRadio} checked={radio === 'm'} style={{ margin: 10 }} />
-                </label>
-                <label style={{ fontSize: 20 }}>True/False
-                            <input type="radio" value="tr" onChange={handleRadio} checked={radio === 'tr'} style={{ margin: 10 }} />
-                </label>
-                <label style={{ fontSize: 20 }}>Text
-                            <input type="radio" value="t" onChange={handleRadio} checked={radio === 't'} style={{ margin: 10, fontSize: 20 }} />
-                </label>
-                <label style={{ fontSize: 20 }}>Slider
-                            <input type="radio" value="s" onChange={handleRadio} checked={radio === 's'} style={{ margin: 10 }} />
-                </label> */}
 
                 <br></br>
-                
+                <label style={{ fontSize: 20 }}>Category
+                        <input ref={categoryRef} placeholder="N/A" type="text" style={{ margin: 10, fontSize: 20 }} />
+                </label>
 
+                <br></br>
                 <label style={{ fontSize: 20, margin:10 }}>Type:  
                     <select name="questionType" ref={typeRef} style={{margin:10}}>
                         <option value="True False">True / False</option>
@@ -198,19 +179,15 @@ function CreateSurvey(props) {
                         <option value="Slider">Slider</option>
                     </select>
                 </label>
-                
 
                 <br></br>
 
                 <button type="button" style={{ fontSize: 20, margin: 10, backgroundColor: 'white' }} onClick={handleAddQuestion}>Add Question</button>
                 <br></br>
-                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio} />
+                <QuestionList questions={questions} toggleQuestion={toggleQuestion} radio={radio} getOptions = {getOptions} />
                 <br></br>
                 <input type="submit" value="Submit Survey"></input>
             </form>
-
-
-
         </div>
     )
 }

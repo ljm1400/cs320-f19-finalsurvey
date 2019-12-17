@@ -4,31 +4,31 @@ import Question from './Question'
 
 
 function randerTableHeader() {
-  let header = ["Question", "Type", "Category", "Option"]
+  let header = ["Question", "Type", "Category", "Delete"]
   return header.map((key, index) => {
     return <th key={index}>{key}</th>
   })
 }
 
-function randerTableItems(questions, toggleQuestion, radio) {
+function randerTableItems(questions, toggleQuestion, radio, getOptions) {
   return (
     questions.map(question => {
       return (
         <tr>
-          <Question key={question.id} toggleQuestion={toggleQuestion} question={question} radio={radio} />
+          <Question key={question.id} toggleQuestion={toggleQuestion} question={question} radio={radio} getOptions = {getOptions}/>
         </tr>
       )
     })
   )
 }
 
-export default function QuestionList({ questions, toggleQuestion, radio }) {
+export default function QuestionList({ questions, toggleQuestion, radio, getOptions }) {
   return (
     <div>
       <table id='surveys'>
         <tbody>
           <tr>{randerTableHeader()}</tr>
-          {randerTableItems(questions, toggleQuestion, radio)}
+          {randerTableItems(questions, toggleQuestion, radio, getOptions)}
         </tbody>
       </table>
     </div>
