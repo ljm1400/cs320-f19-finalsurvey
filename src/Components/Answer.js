@@ -103,7 +103,7 @@ export default class Answer extends React.Component {
     handleSlider(event, value){
         let answer = ""
         if(value === -1){
-            answer = SLIDER_VALUES.ZERO
+            answer = SLIDER_VALUES.ONE
         }
         if(value === 0){
             answer = SLIDER_VALUES.ONE

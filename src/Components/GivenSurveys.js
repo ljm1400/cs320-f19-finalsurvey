@@ -189,9 +189,9 @@ class GivenSurveys extends Component {
           <br></br>
           <strong>Total Answers: {totalAnsLength}</strong>
           <p><b>Average Response: {this.determineAverageResponse(averageNum)}</b></p>
-          <p>Strongly Disagree: {stDisCount} Somewhat Disagree: {soDisCnt}</p>
+          <p>Strongly Disagree: {stDisCount} --- Somewhat Disagree: {soDisCnt}</p>
           <p>No Opinion: {noOpinionCnt}</p>
-          <p>Somewhat Agree: {soAgreeCnt} Strongly Agree: {stAgreeCnt}</p>
+          <p>Somewhat Agree: {soAgreeCnt} --- Strongly Agree: {stAgreeCnt}</p>
           <BarChart 
             ylabel='Count'
             width={this.state.width}
