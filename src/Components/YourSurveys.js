@@ -65,41 +65,49 @@ class YourSurveys extends Component {
   getOpenSurveyData = () => {
       let surveyDataList = []
       let requests = []
+      if(!this.state.openSurveyIdList){
+        this.setState({openSurveyDataList: []})
+      }
+      else{
+        this.state.openSurveyIdList.forEach(function(survey) {
+            requests.push(
+              axios.get('http://localhost:5000/surveys/'+ survey)
+            .then(survey => {
+              surveyDataList.push(survey.data)
+            }).catch(function (error) {
+              console.log('Failed to get survey' + error);
+            })
+        )})
 
-      this.state.openSurveyIdList.forEach(function(survey) {
-          requests.push(
-            axios.get('http://localhost:5000/surveys/'+ survey)
-          .then(survey => {
-            surveyDataList.push(survey.data)
-          }).catch(function (error) {
-            console.log('Failed to get survey' + error);
-          })
-      )})
-
-       // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
-      Promise.all(requests).then((val) => {
-        this.setState({openSurveyDataList: surveyDataList})
-      })
+        // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
+        Promise.all(requests).then((val) => {
+          this.setState({openSurveyDataList: surveyDataList})
+        })
+      }
   }
 
   getClosedSurveyData = () => {
       let surveyDataList = []
       let requests = []
+      if(!this.state.openSurveyIdList){
+        this.setState({openSurveyDataList: []})
+      }
+      else{
+        this.state.closedSurveyIdList.forEach(function(survey) {
+            requests.push(
+              axios.get('http://localhost:5000/surveys/'+ survey)
+            .then(survey => {
+              surveyDataList.push(survey.data)
+            }).catch(function (error) {
+              console.log('Failed to get survey' + error);
+            })
+        )})
 
-      this.state.closedSurveyIdList.forEach(function(survey) {
-          requests.push(
-            axios.get('http://localhost:5000/surveys/'+ survey)
-          .then(survey => {
-            surveyDataList.push(survey.data)
-          }).catch(function (error) {
-            console.log('Failed to get survey' + error);
-          })
-      )})
-
-       // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
-      Promise.all(requests).then((val) => {
-        this.setState({closedSurveyDataList: surveyDataList})
-      })
+        // Need to use Promise.all() to make sure setState will update the surveyDataList AFTER all requests finished
+        Promise.all(requests).then((val) => {
+          this.setState({closedSurveyDataList: surveyDataList})
+        })
+      }
   }
 
   checkOpenForExpired(){
@@ -185,13 +193,11 @@ class YourSurveys extends Component {
       }
     }
     
-
-
-      if(this.state.openSurveyIdList.length === 0) {
-        return <div className="header">
-          <h1>You have no open surveys to complete</h1>
-        </div>
-      }
+    if(this.state.openSurveyDataList.length === 0) {
+      return <div className="header">
+        <h1>You have no open surveys to complete</h1>
+      </div>
+    }
       
     return (
         <div className="header">
