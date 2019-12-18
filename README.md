@@ -2,14 +2,18 @@
 
 ## Setup
 * Pull down code or download as zip
-* Download node just once: https://nodejs.org/en/download/
+* Download node: https://nodejs.org/en/download/
 
 ## Running the app
-1. **npm install** in the root dir and backend dir  
-2. **npm run dev** this command will now run both the frontend and backend concurrently
+1. **npm install** in the root directory and in the backend directory to install all node modules from the package.json
+    * cd to project root directory (cs320-f19-finalsurvey) after downloading -> npm install
+    * cd backend -> npm install
+2. **npm run dev** in the root directory. This command will run both the frontend and backend concurrently
+3. Manager login: Austin_Cowan@bluesorbetsecurity.com<br />
+password: cowanau<br /><br />
+Employee 1 login: Marlee_Benson@bluesorbetsecurity.com<br />
+password: besonma<br /><br />
+Employee 2 login: Nevaeh_Koch@bluesorbetsecurity.com<br />
+password: kochne
 
   
-## Dev Team notes
-* Backend express serves data through routes to the front end react
-* create own branches to separate out work
-* https://medium.com/javascript-in-plain-english/full-stack-mongodb-react-node-js-express-js-in-one-simple-app-6cc8ed6de274

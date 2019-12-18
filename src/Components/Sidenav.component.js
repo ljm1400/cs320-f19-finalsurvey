@@ -7,6 +7,7 @@ import './CreateSurvey.js';
 import './GivenSurveys.js';
 import Logout from './logout';
 import { Redirect } from 'react-router'
+import smallLogo from '../res/fs-logo.png'
 
 class Sidenav extends Component {
 
@@ -25,7 +26,8 @@ class Sidenav extends Component {
   
     return (
       <>
-        <div className="sidenav">            
+        <div className="sidenav">    
+            <img src={smallLogo}></img>        
             <p><strong>{user ? `${user.firstName}` : ''}</strong></p>
             <p> {user ? `${user.companyName}`: ''}</p>
             <p>{isManager?'Manager' : 'Employee'}</p>

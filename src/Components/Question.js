@@ -1,47 +1,55 @@
 import React, {useState} from 'react'
 import '../css/style.css'
 
-export default function Question({ question,toggleQuestion, radio }) {
+export default function Question({ question,toggleQuestion, radio, getOptions}) {
   
   // var [a,b] = useState('radio');
   // a = radio;
   function handleQuestionClick() {
     toggleQuestion(question.id, 'remove')
   }
+  let options = []
 
-  // function handleTrueFalse(e){
-  //   let a = e.target.value;
-  // }
+  function handleMC(e){
+    let a = e.target.value;
 
-  // var a = 1;
+    if(e.target.name === "option1"){
+      options[0] = a
+    }
+    if(e.target.name === "option2"){
+      options[1] = a
+    }
+    if(e.target.name === "option3"){
+      options[2] = a
+    }
+    if(e.target.name === "option4"){
+      options[3] = a
+    }
+  }
+
   function Question(){
-      if(question.type === 'True False'){
-        // slider
-        return <></>
-      }
-      else if(question.type === 'Multiple Choice'){
-        // multiple choice
-        return <label className="radioButtons">
-          Option 1<input style={{margin:10}} type="input"></input> <br></br>
-          Option 2<input style={{margin:10}} type="input"></input> <br></br>
-          Option 3<input style={{margin:10}} type="input"></input> <br></br>
-          Option 4<input style={{margin:10}} type="input"></input> <br></br>
-        </label>
-      }
-      else if(question.type === 'Slider'){
-        return <label className="radioButtons">
-          Low End:<input style={{margin:10}} type="input" defaultValue="Very Unhappy"></input> <br></br>
-          High End:<input style={{margin:10}} type="input" defaultValue="Very Happy"></input> <br></br>
-        </label>
-      
-      }
-      else{
-        // text
-        // need to return label for the question type
-        return <></>
-        //return <p style={{margin:20, fontSize:15}}>Text Question</p>
-        //<input style={{margin:20, fontSize:15}} type="text"/>
-      }
+    if(question.type === 'Multiple Choice'){
+      return <label>
+        Option 1<input style={{margin:10}} name = "option1" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+        Option 2<input style={{margin:10}} name = "option2" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+        Option 3<input style={{margin:10}} name = "option3" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+        Option 4<input style={{margin:10}} name = "option4" onChange = {e =>handleMC(e)} type="input"></input> <br></br>
+      </label>
+    }
+    else if(question.type === 'Slider'){
+      return <>
+        <input type="range" name="points" value="3" min="1" max="5" step="1" list="ticks"></input>
+        <datalist id="ticks">
+          <option>1</option>
+          <option>3</option>
+          <option>5</option>
+        </datalist>
+        <p>1)Strongly Disagree 3) No opinion 5)Strongly Agree</p>
+      </>
+    }
+    else{
+      return <></>
+    }
   }
 
   return (
@@ -57,7 +65,9 @@ export default function Question({ question,toggleQuestion, radio }) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
         <button type="button" onClick={handleQuestionClick}><i className="fa fa-trash"></i></button>
       </td>
+      {question.options = options}
     </>
+    
   )
 
   /**

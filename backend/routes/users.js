@@ -73,3 +73,21 @@ router.route('/update').post((req, res) => {
 });
 
 module.exports = router;
+
+router.route('/updateboth').post((req, res) => {
+  const {employeeId, companyId} = req.query;
+
+
+  User.findOne( {employeeId, companyId})
+  .then(user =>{
+    user.openSurveys = req.body.openSurveys;
+    user.closedSurveys = req.body.closedSurveys;
+
+    user.save()
+      .then(() => res.json('User updated!'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  })
+  .catch(err => res.status(400).json('Error: ' + err));
+});
+
+module.exports = router;
