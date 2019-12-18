@@ -16,7 +16,7 @@ password: besonma<br /><br />
 Employee 2 login: Nevaeh_Koch@bluesorbetsecurity.com<br />
 password: kochne
 
-## Issues
+## Issues Not Solved
 * Deleting a question in creating a survey will not reorder question numbers and cause issues unless deleting the last question in the list
 * Employee submitting survey may not see their survey move to completed at first, must refresh the page to see it update
 * Slider value value not default set, must move it at least once to set a value
