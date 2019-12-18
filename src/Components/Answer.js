@@ -43,12 +43,19 @@ export default class Answer extends React.Component {
             four: false
         }
         this.togglePanel = this.togglePanel.bind(this);
-        
     }
     
+    componentDidMount() {
+        // let questionType = this.state.questionObj.type
+        // if(this.state.answer == null && questionType == "Slider") {
+        //     this.handleSlider(50)
+        // }
+    }
+
     handleChange(value) {
         this.state.changeAnswers(value, this.state.index)
     }
+
     handleCheckBoxChange(value) {
         if(value == "True") {
             this.setState({
@@ -100,7 +107,7 @@ export default class Answer extends React.Component {
         this.state.changeAnswers(value, this.state.index)
     }
 
-    handleSlider(event, value){
+    handleSlider(value){
         let answer = ""
         if(value === -1){
             answer = SLIDER_VALUES.ONE
@@ -180,16 +187,20 @@ export default class Answer extends React.Component {
            </div>
         } 
         else if(questionType == "Slider") {
-            return<div><Slider
-                valueLabelFormat={this.valueLabelFormat}
-                getAriaValueText={this.valuetext}
-                aria-labelledby="discrete-slider-restrict"
-                step={null}
-                valueLabelDisplay="off"
-                marks={marks}
-                onChange= { (event, value) => this.handleSlider(event,  value) }
-            />
-            <label>1: Strongly Disagree,  3: No Opinion, 5: Strongly Agree</label>
+            return<div>
+                <Slider
+                    valueLabelFormat={this.valueLabelFormat}
+                    getAriaValueText={this.valuetext}
+                    aria-labelledby="discrete-slider-restrict"
+                    step={null}
+                    defaultValue="50"
+                    valueLabelDisplay="off"
+                    marks={marks}
+                    onChange= { (event, value) => this.handleSlider(value) }
+                />
+            <p>1: Strongly Disagree 2: Somewhat Disagree</p>
+            <p>3: No Opinion</p>
+            <p>4: Somewhat Agree 5: Strongly Agree</p>    
             </div>
         }
     }

@@ -183,10 +183,11 @@ class GivenSurveys extends Component {
         {text: "StronglyA", value: stAgreeCnt}
       ];
       const margin = {top: 20, right: 20, bottom: 30, left: 40};
+
       return (
         <div ref="root">
-          <strong>Question#{ques.num} {ques.name}</strong>
-          <br></br>
+          <strong className="questionTitle">Question#{ques.num} {ques.name}</strong>
+          <br></br><br></br>
           <strong>Total Answers: {totalAnsLength}</strong>
           <p><b>Average Response: {this.determineAverageResponse(averageNum)}</b></p>
           <p>Strongly Disagree: {stDisCount} --- Somewhat Disagree: {soDisCnt}</p>
