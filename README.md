@@ -1,7 +1,7 @@
 # Final Survey Documentation
 
 ## Setup
-* Pull down code or download as zip
+* Clone code or download as zip
 * Download node: https://nodejs.org/en/download/
 
 ## Running the app
