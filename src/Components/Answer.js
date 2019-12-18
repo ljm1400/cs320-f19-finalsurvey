@@ -73,28 +73,28 @@ export default class Answer extends React.Component {
                 four: false
             })
         }
-        if(this.state.questionObj.options[1] && value === this.state.questionObj.options[1]){
+        else if(this.state.questionObj.options[1] && value === this.state.questionObj.options[1]){
             this.setState({
-                one: true,
+                one: false,
                 two: true,
                 three: false,
                 four: false
             })
         }
-        if(this.state.questionObj.options[2] && value === this.state.questionObj.options[2]){
+        else if(this.state.questionObj.options[2] && value === this.state.questionObj.options[2]){
             this.setState({
-                one: true,
+                one: false,
                 two: false,
                 three: true,
                 four: false
             })
         }
-        if(this.state.questionObj.options[3] && value === this.state.questionObj.options[3]){
+        else if(this.state.questionObj.options[3] && value === this.state.questionObj.options[3]){
             this.setState({
-                one: true,
+                one: false,
                 two: false,
-                three: true,
-                four: false
+                three: false,
+                four: true
             })
         }
         this.state.changeAnswers(value, this.state.index)
@@ -143,23 +143,40 @@ export default class Answer extends React.Component {
         } 
         else if(questionType === "True False") {
             return <div>
-            <label><input type="checkbox" checked={this.state.tr} name="TR" class="radio" value="True" onChange={e=>this.handleCheckBoxChange(e.target.value)}/>True</label>
-            <label><input type="checkbox" checked={this.state.fa} name="FA" class="radio" value="False" onChange={e=>this.handleCheckBoxChange(e.target.value)}/>False</label>
+            <label className="myCheckbox"><input type="checkbox" 
+            checked={this.state.tr} name="TR" class="radio" value="True" 
+            onChange={e=>this.handleCheckBoxChange(e.target.value)}/>True</label>
+
+            <label className="myCheckbox"><input type="checkbox" 
+            checked={this.state.fa} name="FA" class="radio" value="False" 
+            onChange={e=>this.handleCheckBoxChange(e.target.value)}/>False</label>
           </div>
         } 
         else if(questionType === "Multiple Choice") {
            return <div>
-            {this.state.questionObj.options[0] ?
-            <label><input type="checkbox" checked={this.state.one} name="one" class="radio" 
-            value={this.state.questionObj.options[0]} onChange={e=>this.handleMC(e.target.value)}/>
-            {this.state.questionObj.options[0]}</label>: ""}
+                {this.state.questionObj.options[0] ?
+                <label className="myCheckbox"><input type="checkbox" checked={this.state.one} name="one" 
+                class="radio" value={this.state.questionObj.options[0]} 
+                onChange={e=>this.handleMC(e.target.value)}/>
+                {this.state.questionObj.options[0]}</label>: ""}
 
-            {this.state.questionObj.options[1] ?
-            <label><input type="checkbox" checked={this.state.two} name="two" class="radio" value={this.state.questionObj.options[1]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[1]}</label>: ""}
-            {this.state.questionObj.options[2] ?
-            <label><input type="checkbox" checked={this.state.three} name="three" class="radio" value={this.state.questionObj.options[2]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[3]}</label>: ""}
-            {this.state.questionObj.options[3] ?
-            <label><input type="checkbox" checked={this.state.four} name="four" class="radio" value={this.state.questionObj.options[3]} onChange={e=>this.handleMC(e.target.value)}/>{this.state.questionObj.options[4]}</label>: ""}
+                {this.state.questionObj.options[1] ?
+                <label className="myCheckbox"><input type="checkbox" checked={this.state.two} name="two" 
+                class="radio" value={this.state.questionObj.options[1]} 
+                onChange={e=>this.handleMC(e.target.value)}/>
+                {this.state.questionObj.options[1]}</label>: ""}
+
+                {this.state.questionObj.options[2] ?
+                <label className="myCheckbox"><input type="checkbox" checked={this.state.three} name="three" 
+                class="radio" value={this.state.questionObj.options[2]} 
+                onChange={e=>this.handleMC(e.target.value)}/>
+                {this.state.questionObj.options[2]}</label>: ""}
+
+                {this.state.questionObj.options[3] ?
+                <label className="myCheckbox"><input type="checkbox" checked={this.state.four} name="four" 
+                class="radio" value={this.state.questionObj.options[3]} 
+                onChange={e=>this.handleMC(e.target.value)}/>
+                {this.state.questionObj.options[3]}</label>: ""}
            </div>
         } 
         else if(questionType == "Slider") {

@@ -9,6 +9,11 @@
     background-color:   #dfe3ee;
   }
 
+  .myCheckbox  {
+    padding:.5em;
+
+  }
+
   h4 {
     text-align: left;
     padding-left: 2em;
